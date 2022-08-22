@@ -6,12 +6,12 @@ la [BalaBox], ainsi que la documentation y afférente.
 ## Le service d'identification
 
 Le service d'identification de la [BalaBox] permet aux élèves de
-s'identifier avant d'accéder à l'un des services offert par
-celle-ci. Cette phase d'identification permet d'offrir à l'enseignant
-plusieurs fonctionnalités intéressantes, comme la création d'un
-annuaire de classe à partir de la liste des élèves qui se sont
-identifiés, la constitution de groupes de travail et la gestion des
-absences.
+s'identifier à travers une interface Web avant d'accéder à l'un des
+services offert par celle-ci. Cette phase d'identification permet
+d'offrir à l'enseignant plusieurs fonctionnalités intéressantes, comme
+la création d'un annuaire de classe à partir de la liste des élèves
+qui se sont identifiés, la constitution de groupes de travail et la
+gestion des absences.
 
 ## Fonctionnalités offertes par le service d'identification
 
@@ -26,6 +26,20 @@ Le service d'identification offre les fonctionnalités suivantes:
 1. outil de gestion des absences à partir de l'annuaire de classe
 1. gestion l'ursupation d'identification (i.e. détection de multiples connexions avec le même identifiant)
 
+## Mise en œuvre du service d'identification
+
+Le service d'identification est composé de 3 parties: une API REST,
+une interface Web élève d'identification et une interface Web
+enseignant d'administration permettant de créer un annuaire de classe,
+de gérer les absences, de créer des groupes, etc.
+
+L'API REST, qui expose toutes les fonctionnalités présentées
+précédemment, est utilisée par les interfaces Web élève et enseignant,
+mais aussi par d'autres services de la [BalaBox] afin de connaître
+quels sont les élèves connectés/identifiés.
+
+L'API REST offre un accès sécurisé aux fonctionnalités qu'elle expose
+à travers un mécanisme de jetons.
 
 [balabox]: https://balabox.gitlab.io/balabox/
 [moodlebox]: https://moodlebox.net
