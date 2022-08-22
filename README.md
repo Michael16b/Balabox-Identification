@@ -17,10 +17,7 @@ absences.
 
 Le service d'identification offre les fonctionnalités suivantes:
 
-1. création d'un annuaire de classe par
-  * saisie des noms et prénoms des élèves
-  * import d'une liste existante (fichier CSV)
-  * import des comptes Moodle de la MoodleBox
+1. création d'un annuaire de classe par saisie des noms et prénoms des élèves, import d'une liste existante (fichier CSV) et import des comptes Moodle de la MoodleBox
 1. modification d'un annuaire de classe
 1. suppression d'un annuaire de classe
 1. association d'un élève, ou groupe d'élèves, à un terminal mobile à travers une interface "élève" simple
