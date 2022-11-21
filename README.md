@@ -1,7 +1,7 @@
 # BalaBox : Service d'identification
 
 Ce dépôt contient le code source du service d'identification intégré à
-la [BalaBox], ainsi que la documentation y afférente.
+la [BalaBox], ainsi que la documentation yafférente.
 
 ## Le service d'identification
 
@@ -43,3 +43,37 @@ L'API REST offre un accès sécurisé aux fonctionnalités qu'elle expose
 
 [balabox]: https://balabox.gitlab.io/balabox/
 [moodlebox]: https://moodlebox.net
+
+
+# PHP : Installer les extensions 
+Version de PHP : 7.4
+Extensions à activer : 
+- iconv
+- mbstring
+- curl
+- openssl
+- xmlrpc
+- soap 
+- ctype
+- tokenizer
+- zip
+- gd
+- simplexml
+- spl
+- pcre
+- dom
+- xml
+- intl
+- json
+
+L'extension correspondant à la base de données est également requise.
+
+
+Comment activer une extension ?
+Dans le fichier php.ini, enlever le ";" devant extension=* afin d'enlever le commentaire
+L'étoile représente le nm de l'extension
+
+Une fois les extensions installées, relancer le serveur Web.
+
+Lancer un serveur Web local php : php -S locahost:8000
+Pour y accéder, aller à l'adresse entrée.
