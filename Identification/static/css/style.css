@@ -1,0 +1,15 @@
+body {
+    box-sizing: border-box;
+    background-color: #FFFFFF;
+}
+  
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+.custom-img {
+    border: 0px !important;
+    box-shadow: 0 0 0 0 !important;
+}

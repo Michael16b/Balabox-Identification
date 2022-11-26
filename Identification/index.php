@@ -11,7 +11,7 @@ require_once (CONTROLLERS_DIR.'/ApplicationController.php');
 
 
 // Add routes here
-ApplicationController::getInstance()->addRoute('connect', CONTROLLERS_DIR.'/connect.php');
+ApplicationController::getInstance()->addRoute('seeConfig', CONTROLLERS_DIR.'/seeConfig.php');
 
 // Process the request
 ApplicationController::getInstance()->process();
