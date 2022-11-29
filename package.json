@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://gitlab.com/balabox/identification/issues"
   },
-  "homepage": "https://gitlab.com/balabox/identification#readme"
+  "homepage": "https://gitlab.com/balabox/identification#readme",
+  "dependencies": {
+    "semantic-ui": "^2.5.0"
+  }
 }
