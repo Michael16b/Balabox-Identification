@@ -26,7 +26,7 @@
  .pure-button-primary{ 
     border-radius: 4px !important;
     background-color : #B05500 !important;
-    margin-top: 1em;
+    margin: 0.75em;
 }
 
 .pure-button-txt{
