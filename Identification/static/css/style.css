@@ -1,3 +1,5 @@
+/* Page de connexion */
+
 .center-container{
     position: absolute;
     left: 50%;
@@ -13,17 +15,31 @@
 }
 
 .pure-form-stacked input{
-    display: inline-block !important;
+    display : inline-block !important;
+    margin: 0.4em 0 !important;
+ }
+
+ .pure-form fieldset{
+    padding: 1em 0.75em !important;
  }
 
  .pure-button-primary{ 
     border-radius: 4px !important;
     background-color : #B05500 !important;
+    margin-top: 1em;
 }
-
 
 .pure-button-txt{
     border-radius: 4px !important;
     background-color : white !important;
     color : #B05500 !important;
-  }
+}
+
+.pure-button-txt:hover{
+    background-image: none !important;
+}
+
+.logo-acc{
+    max-width: 60% !important;
+    display: inline-block !important;
+}
