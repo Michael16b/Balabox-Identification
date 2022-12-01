@@ -4,7 +4,7 @@ require(__ROOT__.'/controllers/Controller.php');
 class ConnectController extends Controller{
 
     public function get($request){
-        $this->render('main_prof',[]);
+        $this->render('connect_prof',[]);
     }
 
     public function post($request){
