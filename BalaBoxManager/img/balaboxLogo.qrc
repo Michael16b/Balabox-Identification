@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="balaboxLogo">
+    <file>logo_balabox.png</file>
+  </qresource>
+</RCC>
