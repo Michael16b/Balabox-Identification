@@ -12,10 +12,10 @@ include __ROOT__."/views/header.html";
                             <img src="../static/img/logo_balabox.png" class="img-fluid" width="200px" alt="profile">
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="num" placeholder="Numéro associé">
+                            <input type="text" class="form-control" name="num" placeholder="Numéro associé" required>
                         </div>
                         <div class="mb-3">
-                            <input type="password" class="form-control" id="password" placeholder="Mot de passe">
+                            <input type="password" class="form-control" name="password" placeholder="Mot de passe" required>
                         </div>
                         <div class="text-center">
                             <button type="submit" class="btn px-5 mb-3 w-100  btn-primary">Connexion</button>

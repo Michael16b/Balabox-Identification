@@ -8,7 +8,7 @@ class ConnectController extends Controller{
     }
 
     public function post($request){
-        $this->render('connect_info',['firstname' => $request['firstname'], 'lastname' => $request['lastname']]);
+        $this->render('connect_info',['idprof' => $request['idprof'], 'password' => $request['password'], 'num' => null]);
     }
 }
 

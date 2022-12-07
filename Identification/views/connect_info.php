@@ -2,9 +2,10 @@
 
 include __ROOT__."/views/header.html";
 
-echo "Lastname =". $data['lastname'];
+echo "Identifiant prof =". $data['idprof'];
 echo "<br>";
-echo "Firstname =". $data['firstname'];
+echo "Numéro téléphone élève =". $data['num'];
+echo "<br>";
+echo "mdp =". $data['password'];
 
-include __ROOT__."/views/footer.html";
 ?>

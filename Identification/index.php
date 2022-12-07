@@ -13,6 +13,7 @@ require_once (CONTROLLERS_DIR.'/ApplicationController.php');
 // Add routes here
 ApplicationController::getInstance()->addRoute('seeConfig', CONTROLLERS_DIR.'/seeConfig.php');
 ApplicationController::getInstance()->addRoute('connect_Prof', CONTROLLERS_DIR.'/connect_Prof.php');
+ApplicationController::getInstance()->addRoute('connect', CONTROLLERS_DIR.'/connect.php');
 
 // Process the request
 ApplicationController::getInstance()->process();
