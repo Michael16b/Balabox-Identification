@@ -75,5 +75,5 @@ L'étoile représente le nm de l'extension
 
 Une fois les extensions installées, relancer le serveur Web.
 
-Lancer un serveur Web local php : php -S locahost:8000
+Lancer un serveur Web local php : php -S localhost:8080
 Pour y accéder, aller à l'adresse entrée.
