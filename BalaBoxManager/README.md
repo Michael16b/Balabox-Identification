@@ -31,3 +31,10 @@ Fonctionne UNIQUEMENT SOUS Python 3.9
 
 - [Python 3.9](https://www.python.org/downloads/release/python-3913/)
 - [Qt designer](https://build-system.fman.io/static/public/files/Qt%20Designer%20Setup.exe)
+
+
+## X. Erreur courant
+
+Python3 est introuvable alors qu'il est installé sur le PC.
+[Version vidéo](https://www.youtube.com/watch?v=Ii1uyGyZ2Rw&ab_channel=Foxxpy-Math%C3%A9matiquesetalgorithmie)
+[Version Web](https://www.nbshare.io/notebook/462254290/How-To-Add-Python-To-Windows-10-PATH/)
