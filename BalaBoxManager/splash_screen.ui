@@ -350,7 +350,7 @@ QProgressBar::chunk{
   </widget>
  </widget>
  <resources>
-  <include location="../../OneDrive - Université Bretagne Sud/Bureau/Michael 16b/Cours/BUT2/Semestre 3/Balabox/Projet/identification/BalaBoxManager/img/balaboxLogo.qrc"/>
+  <include location="img/balaboxLogo.qrc"/>
  </resources>
  <connections/>
 </ui>

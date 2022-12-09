@@ -24,7 +24,7 @@
        </font>
       </property>
       <property name="text">
-       <string>MY APP - ADD HERE YOUR WIDGETS</string>
+       <string>BALABOX - MAIN MENU</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
