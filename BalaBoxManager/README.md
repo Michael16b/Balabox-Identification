@@ -10,10 +10,24 @@ L'application devra permettre à toutes les sous-équipes de pouvoir installer s
 L'utilisateur devra cependant garantir une excellente connexion internet pour pouvoir télécharger de manière très rapide les 2 fichiers.
 
 
-## 2. Comment faire fonctionner l'application sous Python
 
-Pour faire fonctionner l'application sous python, il faudra installer quelques modules
+
+## 2. Comment faire fonctionner l'application sous Python 3.9
+
+Pour faire fonctionner l'application sous python, il faudra installer 2 modules
+
+NE FONCTIONNE PAS SUR LA VERSION 3.10
 
 ```bat
-pip install
+pip install pyqt5 pyqt5-tools  --use-feature=2020-resolver
 ```
+
+
+## 3. Convertir un fichier .UI en .py
+Fonctionne UNIQUEMENT SOUS Python 3.9
+
+
+## X. Modifier le design de l'application
+
+- [Python 3.9](https://www.python.org/downloads/release/python-3913/)
+- [Qt designer](https://build-system.fman.io/static/public/files/Qt%20Designer%20Setup.exe)
