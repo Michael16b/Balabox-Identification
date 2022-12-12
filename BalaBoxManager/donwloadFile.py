@@ -1,9 +1,19 @@
-import urllib.request
+import requests
+import shutil
+from tqdm.auto import tqdm
 
-url  = 'https://upload.wikimedia.org/wikipedia/commons/b/b6/Image_created_with_a_mobile_phone.png'
-print("Downloading file from %s" % url)
 
-filename, headers = urllib.request.urlretrieve(url, filename="test.png")
 
-print("Downloaded file to %s" % filename)
-print("Headers: %s" % headers)
+def downloadFile(url, filename):
+    with requests.get(url, stream=True) as r:
+        total_length = int(r.headers.get("Content-Length"))
+        with tqdm.wrapattr(r.raw, "read", total=total_length, desc="")as raw:
+            with open(filename, "wb") as output:
+                shutil.copyfileobj(raw, output)
+                
+
+
+
+downloadFile("http://misc.finxol.io/moodlebox.gz", "moodlebox.gz")
+
+

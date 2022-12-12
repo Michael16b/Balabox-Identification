@@ -5,7 +5,7 @@ import time
 
 def addAllModule():
     os.system("python -m pip install pyqt5 pyqt5-tools  --use-feature=2020-resolver")
-    os.system("python -m pip install easygui PySide2")
+    os.system("python -m pip install easygui PySide2 tqdm requests")
     
 
 
@@ -37,8 +37,8 @@ def QRCtoPY() :
     print('pyrcc5 ' +  QRC_src + " -o " + QRC_to_PY)
 
 #UItoPY()
-# addAllModule()
-QRCtoPY()
+#addAllModule()
+# QRCtoPY()
 
     
 
