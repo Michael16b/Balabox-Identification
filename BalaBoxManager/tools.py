@@ -16,7 +16,7 @@ def UItoPY() :
     #time.sleep(2)
     #pyUIC_src = easygui.fileopenbox()
     
-    pyUIC_src = "C:\Users\Micha\AppData\Local\Programs\Python\Python39\Scripts\pyuic5.exe"
+    pyUIC_src = r"C:\Users\Micha\AppData\Local\Programs\Python\Python39\Scripts\pyuic5.exe"
     print("Where is your .ui file ?")
     time.sleep(2)
     UI_src = easygui.fileopenbox()
