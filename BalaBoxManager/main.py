@@ -1,114 +1,39 @@
-################################################################################
-##
-## BY: WANDERSON M.PIMENTA
-## PROJECT MADE WITH: Qt Designer and PySide2
-## V: 1.0.0
-##
-################################################################################
+import donwloadFile
 
-import sys
-import platform
-from PySide2 import QtCore, QtGui, QtWidgets
-from PySide2.QtCore import (QCoreApplication, QPropertyAnimation, QDate, QDateTime, QMetaObject, QObject, QPoint, QRect, QSize, QTime, QUrl, Qt, QEvent)
-from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont, QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter, QPixmap, QRadialGradient)
-from PySide2.QtWidgets import *
-
-## ==> SPLASH SCREEN
-from ui_splash_screen import Ui_SplashScreen
-
-## ==> MAIN WINDOW
-from ui_main import Ui_MainWindow
-
-
-
-
-## ==> GLOBALS
-counter = 0
-
-# YOUR APPLICATION
-class MainWindow(QMainWindow):
-    def __init__(self):
-        QMainWindow.__init__(self)
-        self.ui = Ui_MainWindow()
-        self.ui.setupUi(self)
-
-        # MAIN WINDOW LABEL
-        QtCore.QTimer.singleShot(1500, lambda: self.ui.label.setText("<strong>AAA</strong> aaa"))
-        QtCore.QTimer.singleShot(1500, lambda: self.setStyleSheet("background-color: #222; color: #FFF"))
+def main():
+    print("Do you want to download The Virtual Machine of Moodle with Debian 11 ? Size = 5.14 Gb (y/n)")
+    answerVM = input()
+    print("Do you want to download VirtualBox ? Size = 100 Mb (y/n)")
+    answerVB = input()
+    
+    print("Do you want to download data of Ms Auriel in .img format ? Size = 1.5 Gb BUT YOU NEED 60 Gb in your PC (y/n)")
+    answerMsAuriel = input()
+    
+    if answerVM == "y":
+        print("I'm downloading the Virtual Machine of Moodle with Debian 11. Please wait...")
+        donwloadFile.download("http://terminale-colbert-lorient.fr/download/8052/?tmstv=1669851024", "Moodlebox.ova")
+        
+    if answerVB == "y":
+        print("Do you want to download VirtualBox for Windows or Linux or Mac ? (w/l/m)")
+        inputOS = input()
+        if (inputOS == "w"):
+            print("I'm downloading VirtualBox for Windows. Please wait...")
+            donwloadFile.download("https://download.virtualbox.org/virtualbox/6.1.26/VirtualBox-6.1.26-145957-Win.exe", "VirtualBox.exe")
+        elif (inputOS == "l"):
+            print("I'm downloading VirtualBox for Linux. Please wait...")
+            donwloadFile.download("https://download.virtualbox.org/virtualbox/6.1.26/VirtualBox-6.1.26-145957-Linux_amd64.run", "VirtualBox.run")
+        elif (inputOS == "m"):
+            print("I'm downloading VirtualBox for Mac. Please wait...")
+            donwloadFile.download("https://download.virtualbox.org/virtualbox/6.1.26/VirtualBox-6.1.26-145957-OSX.dmg", "VirtualBox.dmg")
+        else:
+            print("Error : You must choose w, l or m")
+    
+    if (answerMsAuriel == "y"):
+        print("I'm downloading data of Ms Auriel in .img format. Please wait...")
+        donwloadFile.download("http://misc.finxol.io/moodlebox.gz", "MoodeboxData.gz")
+    
 
 
-# SPLASH SCREEN
-class SplashScreen(QMainWindow):
-    def __init__(self):
-        QMainWindow.__init__(self)
-        self.ui = Ui_SplashScreen()
-        self.ui.setupUi(self)
-
-        ## UI ==> INTERFACE CODES
-        ########################################################################
-
-        ## REMOVE TITLE BAR
-        self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
-        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
-
-
-        ## DROP SHADOW EFFECT
-        self.shadow = QGraphicsDropShadowEffect(self)
-        self.shadow.setBlurRadius(20)
-        self.shadow.setXOffset(0)
-        self.shadow.setYOffset(0)
-        self.shadow.setColor(QColor(0, 0, 0, 60))
-        self.ui.dropShadowFrame.setGraphicsEffect(self.shadow)
-
-        ## QTIMER ==> START
-        self.timer = QtCore.QTimer()
-        self.timer.timeout.connect(self.progress)
-        # TIMER IN MILLISECONDS
-        self.timer.start(35)
-
-        # CHANGE DESCRIPTION
-
-        # Initial Text
-        self.ui.label_description.setText("<strong>BIENVENUE</strong> SUR L'APPLICATION")
-
-        # Change Texts
-        QtCore.QTimer.singleShot(1500, lambda: self.ui.label_description.setText("<strong>CHARGEMENT</strong> DE LA BASE DE DONNEES"))
-        QtCore.QTimer.singleShot(3000, lambda: self.ui.label_description.setText("<strong>CHARGEMENT</strong> DE L'INTERFACE"))
-
-
-        ## SHOW ==> MAIN WINDOW
-        ########################################################################
-        self.show()
-        ## ==> END ##
-
-    ## ==> APP FUNCTIONS
-    ########################################################################
-    def progress(self):
-
-        global counter
-
-        # SET VALUE TO PROGRESS BAR
-        self.ui.progressBar.setValue(counter)
-
-        # CLOSE SPLASH SCREE AND OPEN APP
-        if counter > 100:
-            # STOP TIMER
-            self.timer.stop()
-
-            # SHOW MAIN WINDOW
-            self.main = MainWindow()
-            self.main.show()
-
-            # CLOSE SPLASH SCREEN
-            self.close()
-
-        # INCREASE COUNTER
-        counter += 1
-
-
-
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    window = SplashScreen()
-    sys.exit(app.exec_())
+main()
+        
+    
