@@ -151,8 +151,8 @@ class Ui_SplashScreen(object):
         self.label_description.setText(_translate("SplashScreen", "<strong>APP</strong> DESCRIPTION"))
         self.label_loading.setText(_translate("SplashScreen", "Chargement..."))
         self.label_credits.setText(_translate("SplashScreen", "<html><head/><body><p><span style=\" font-weight:600;\">Crée par le </span>Groupe Identification</p></body></html>"))
-import balaboxLogo_rc
-
+## IMPORT IMAGES
+import img.balaboxLogo
 
 if __name__ == "__main__":
     import sys
