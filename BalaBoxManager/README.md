@@ -14,13 +14,12 @@ L'utilisateur devra cependant garantir une excellente connexion internet pour po
 
 ## 2. Comment faire fonctionner l'application sous Python 3.9
 
-Pour faire fonctionner l'application sous python, il faudra installer 2 modules
+Pour faire fonctionner l'application sous python, il faudra installer quelques modules
 
 NE FONCTIONNE PAS SUR LA VERSION 3.10
 
-```bat
-pip install pyqt5 pyqt5-tools  --use-feature=2020-resolver
-```
+
+Vous pouvez utiliser la fonction addAllModule() disponible sur tools.py
 
 
 ## 3. Convertir un fichier .UI en .py

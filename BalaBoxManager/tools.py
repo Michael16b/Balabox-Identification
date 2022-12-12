@@ -9,13 +9,7 @@ def addAllModule():
     
 
 
-def UItoPY() :
-    #print("We need pyuic5.exe to convert .ui to .py")
-    #print("Find pyuic5.exe in your python installation folder")
-    #print(r"Example : C:\Users\Micha\AppData\Local\Programs\Python\Python39\Scripts\pyuic5.exe")
-    #time.sleep(2)
-    #pyUIC_src = easygui.fileopenbox()
-    
+def UItoPY() :  
     pyUIC_src = r"C:\Users\Micha\AppData\Local\Programs\Python\Python39\Scripts\pyuic5.exe"
     print("Where is your .ui file ?")
     time.sleep(2)
@@ -38,7 +32,7 @@ def QRCtoPY() :
 
 #UItoPY()
 #addAllModule()
-# QRCtoPY()
+#QRCtoPY()
 
     
 
