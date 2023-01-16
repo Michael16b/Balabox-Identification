@@ -1,7 +1,7 @@
 # BalaBox : Service d'identification
 
 Ce dépôt contient le code source du service d'identification intégré à
-la [BalaBox], ainsi que la documentation yafférente.
+la [BalaBox], ainsi que la documentation y afférente.
 
 ## Le service d'identification
 
@@ -24,7 +24,6 @@ Le service d'identification offre les fonctionnalités suivantes:
 1. création de comptes Moodle à partir de l'annuaire avec génération automatique des mots de passe.
 1. création, modification et suppression de groupes d'élèves
 1. outil de gestion des absences à partir de l'annuaire de classe
-1. gestion l'ursupation d'identification (i.e. détection de multiples connexions avec le même identifiant)
 
 ## Mise en œuvre du service d'identification
 
@@ -46,6 +45,7 @@ L'API REST offre un accès sécurisé aux fonctionnalités qu'elle expose
 
 
 # PHP : Installer les extensions 
+
 Version de PHP : 7.4
 Extensions à activer : 
 - iconv
@@ -77,3 +77,11 @@ Une fois les extensions installées, relancer le serveur Web.
 
 Lancer un serveur Web local php : php -S localhost:8080
 Pour y accéder, aller à l'adresse entrée.
+
+# Balabox Manager
+
+Nous avons crée une machine virtuelle simulant la raspberry pi
+de Balabox. Elle peut s'avérer utile pour tester les
+fonctionnalités de nos applications.
+
+Voici le lien pour la télécharger : https://univubs-my.sharepoint.com/:u:/g/personal/besily_e2202632_etud_univ-ubs_fr/EQ8xu6AI6yBOkiFyQV6U7EABAGski8TPAoBNL3eNOZGEKg?e=AXZvUq
