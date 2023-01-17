@@ -14,6 +14,8 @@ require_once (CONTROLLERS_DIR.'/ApplicationController.php');
 ApplicationController::getInstance()->addRoute('seeConfig', CONTROLLERS_DIR.'/seeConfig.php');
 ApplicationController::getInstance()->addRoute('connect_Prof', CONTROLLERS_DIR.'/connect_Prof.php');
 ApplicationController::getInstance()->addRoute('connect', CONTROLLERS_DIR.'/connect.php');
+ApplicationController::getInstance()->addRoute('sa_classCreate', CONTROLLERS_DIR.'/sa_classCreate.php');
+ApplicationController::getInstance()->addRoute('sa_userCreate', CONTROLLERS_DIR.'/sa_userCreate.php');
 
 // Process the request
 ApplicationController::getInstance()->process();
