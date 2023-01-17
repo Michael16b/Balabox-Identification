@@ -20,9 +20,6 @@ include __ROOT__."/views/header.html";
                         <div class="text-center">
                             <button type="submit" class="btn px-5 mb-3 w-100  btn-primary">Connexion</button>
                         </div>
-                        <div id="changeid" class="form-text text-center text-primary">
-                            <a href="/connect_Prof" class="fw-bold">Je suis professeur</a>
-                        </div>
                     </form>
                 </div>
              </div>
