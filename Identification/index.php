@@ -4,7 +4,7 @@ error_reporting(E_ALL);
 define ("__ROOT__",__DIR__);
 
 // Configuration
-require_once (__ROOT__.'/config2.php');
+require_once (__ROOT__.'/config.php');
 
 // ApplicationController
 require_once (CONTROLLERS_DIR.'/ApplicationController.php');
