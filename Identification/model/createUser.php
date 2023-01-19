@@ -50,6 +50,17 @@ class createUser {
         $DB->update_record('user', $user);
     }
 
+
+    public function addRolesSystemMembers(String $username, String $role): void{
+        global $DB;
+        $user = $DB->get_record('user', array('username' => $username));
+        $role = $DB->get_record('role', array('shortname' => $role));
+        role_assign($role->id, $user->id, context_system::instance());
+    }
+
+
+
+
     
 }
 
