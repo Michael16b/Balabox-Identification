@@ -1,20 +1,18 @@
 <?php
-require(__ROOT__.'/controllers/Controller.php');
-require(__ROOT__.'/config.php');
-require_once (__ROOT__.'/model/UserDB.php');
+//require_once(__ROOT__.'/model/UserDB.php');
+require_once(__ROOT__.'/controllers/Controller.php');
+//require(__ROOT__.'/config.php');
 
 class ConnectController extends Controller{
 
     public function post($request){
         try{
-			//récupération de l'utilisateur
-
-          	// global $DB;
-          	// $user = $DB->get_record('user', array('username' => $request['surname']));
-			
+	/*/	//récupération de l'utilisateur
+          	global $DB;
+          	$user = $userDB->getRecord('user', array('username' => $request['surname']));	
+*/
 			$userdb = new UserDB();
-			$user = $userdb->getUser($request['surname']);
-
+			$user = $userdb->getRecord($request['surname']);
 			$password = $request['password'];
 
 			//vérification de l'existance de l'utilisateur

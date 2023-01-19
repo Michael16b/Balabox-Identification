@@ -1,23 +1,11 @@
 <?php
-require(__ROOT__.'/config.php');
-require_once($CFG->dirroot.'/course/lib.php');
-
+//require(__ROOT__.'/config.php');
+//require_once($CFG->dirroot.'/course/lib.php');
 class UserDB {
 
-    public static function getRecord(array $surname){
+    public function getRecord(string $surname){
         global $DB;
-        return $DB->get_record('user', $surname);
-    }
-
-    
-    public function getUser(String $username): mixed{
-        global $DB;
-        $user = $DB->get_record('user', array('username' => $username));
-        if($user){
-            return true;
-        }else{
-            return false;
-        }
+        return $DB->get_record('user', array('username' => $surname));
     }
 
     public final function RandomPassword() : String {
