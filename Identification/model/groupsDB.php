@@ -35,6 +35,28 @@ class groupsDB {
         groups_add_member($groupdata, $userdata);
     }
 
+    public function deleteMember(String $groupeName, String $username): void{
+        global $DB;
+        $groupdata = $DB->get_record('groups', array('name' => $groupeName));
+        $userdata = $DB->get_record('user', array('username' => $username));
+        groups_remove_member($groupdata, $userdata);
+    }
+
+    public function getGroups(String $groupeName): void{
+        global $DB;
+        $groupdata = $DB->get_record('groups', array('name' => $groupeName));
+        return $groupdata;
+    }
+
+    public function getMembers(String $groupeName): void{
+        global $DB;
+        $groupdata = $DB->get_record('groups', array('name' => $groupeName));
+        $members = groups_get_members($groupdata->id);
+        return $members;
+    }
+
+    
+
     
 
     
