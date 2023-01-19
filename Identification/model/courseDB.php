@@ -35,6 +35,22 @@ class courseDB {
         $DB->update_record('course', $course);
     }
 
+    public function addRolesMembers(String $shortName, String $username, String $role): void{
+        global $DB;
+        $course = $DB->get_record('course', array('shortname' => $shortName));
+        $user = $DB->get_record('user', array('username' => $username));
+        $role = $DB->get_record('role', array('shortname' => $role));
+        role_assign($role->id, $user->id, context_course::instance($course->id));
+    }
+
+    public function deleteRolesMembers(String $shortName, String $username, String $role): void{
+        global $DB;
+        $course = $DB->get_record('course', array('shortname' => $shortName));
+        $user = $DB->get_record('user', array('username' => $username));
+        $role = $DB->get_record('role', array('shortname' => $role));
+        role_unassign($role->id, $user->id, context_course::instance($course->id));
+    }
+
     
 
     
