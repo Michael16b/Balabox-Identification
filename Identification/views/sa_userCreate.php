@@ -8,8 +8,9 @@ include __ROOT__."/views/header.html";
         <div class="container-fluid">
             <img src="../static/img/logo_balabox.png" alt="Logo"  height="30" class="d-inline-block align-text-top">
             <form class="justify-content-start ">
+                <a href="sa_courseCreate"><button class="btn btn-outline-success me-2" type="button">Créer un cours</button></a>
                 <a href="sa_classCreate"><button class="btn btn-outline-success me-2" type="button">Créer une classe</button></a>
-                <button class="btn btn-sm btn-outline-secondary" type="button">Créer un utilisateur</button>
+                <a href="sa_userCreate"><button class="btn btn-sm btn-outline-secondary" type="button">Créer un utilisateur</button></a>
             </form>
         </div>
     </nav>
@@ -23,19 +24,23 @@ include __ROOT__."/views/header.html";
 
         <div class="container-fluid">
             <div class="row">
+                <div class="col mx-3 d-flex align-items-center">
+                    <!-- CSV -->
+                    <div class="col mx-3 card my-5 shadow-sm p-3 mb-5 bg-body rounded">
+                        <form form action="/sa_userCreate" method="post">
+                            <!-- DIFFERENCIER LE FORMULAIRE DE L'AUTRE AVEC UN ATTRIBUT CACHE  -->
+                            <input type="hidden" name="csvForm" value="1">
 
-                <!-- CSV -->
-                <div class="col mx-3 card my-5 shadow-sm p-3 mb-5 bg-body rounded ">
-                    <form form action="/sa_userCreate" method="post">
-                        <!-- DIFFERENCIER LE FORMULAIRE DE L'AUTRE AVEC UN ATTRIBUT CACHE  -->
-                        <input type="hidden" name="csvForm" value="1">
-                        <p class="fs-5 text-center">Avec un fichier CSV</p>
-                        <div class="form-group my-5">
-                            <p for="csvFile">Selectionnez un fichier CSV</p>
-                            <input type="file" class="form-control-file" name="csvFile" accept=".csv" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Confirmer</button>
-                    </form>
+                            <p class="fs-5 text-center">Avec un fichier CSV</p>
+                            <div class="form-group my-5">
+                                <label for="formFile" class="form-label">Selectionnez un fichier CSV</label>
+                                <input class="form-control" type="file" id="csvFile" name="csvFile" accept=".csv" required>
+                            </div>
+                            <div class="text-center my-5">
+                                <button type="submit" class="btn btn-primary">Confirmer</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
 
                 <!-- MANUEL -->
@@ -43,40 +48,33 @@ include __ROOT__."/views/header.html";
                     <form form action="/sa_userCreate" method="post">
                         <!-- DIFFERENCIER LE FORMULAIRE DE L'AUTRE AVEC UN ATTRIBUT CACHE  -->
                         <input type="hidden" name="oneUserForm" value="1">
+                        
                         <p class="fs-5 text-center">Un seul utilisateur</p>
-                        <div class="input-group mb-3">
-                        <span class="input-group-text" id="newUserNom">Nom</span>
-                        <input
-                            type="text"
-                            class="form-control"
-                            aria-label="Sizing example input"
-                            aria-describedby="newUserNom"
-                            name="newUserNom"
-                            required
-                        />
+
+                        <!-- NOM -->
+                        <div class="mb-3 my-5">
+                            <label for="newUserNom" class="form-label">Nom</label>
+                            <input type="text" class="form-control" id="newUserNom" name="newUserNom" aria-describedby="nom" required>
                         </div>
-                        <div class="input-group mb-3">
-                        <span class="input-group-text" id="newUserPrenom" >Prénom</span>
-                        <input
-                            type="text"
-                            class="form-control"
-                            aria-label="Sizing example input"
-                            aria-describedby="newUserPrenom"
-                            name="newUserPrenom"
-                            required
-                        />
+                    
+                        <!-- PRENOM -->
+                        <div class="mb-3">
+                            <label for="newUserPrenom" class="form-label">Prénom</label>
+                            <input type="text" class="form-control" id="newUserPrenom" name="newUserPrenom" aria-describedby="prénom" required>
                         </div>
 
-                        <div class="input-group mb-3">
-                        <label class="input-group-text" for="newUserRole">Rôle</label>
-                        <select class="form-select" name="newUserRole">
-                            <option value="Eleve">Elève</option>
-                            <option value="Professeur">Professeur</option>
-                        </select>
+                        <!-- ROLE -->
+                        <div class="mb-3">
+                            <label for="newUserRole" class="form-label">Rôle</label>
+                            <select class="form-select" aria-label="rôle de l'utilisateur" name="newUserRole">
+                                <option selected value="Eleve">Elève</option>
+                                <option value="Professeur">Professeur</option>
+                            </select>
                         </div>
 
-
-                        <button type="submit" class="btn btn-primary">Confirmer</button>
+                        <div class="text-center my-5">
+                            <button type="submit" class="btn btn-primary">Confirmer</button>
+                        </div>
                     </form>
                 </div>
             </div>

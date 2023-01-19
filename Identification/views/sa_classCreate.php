@@ -8,7 +8,8 @@ include __ROOT__."/views/header.html";
         <div class="container-fluid">
             <img src="../static/img/logo_balabox.png" alt="Logo"  height="30" class="d-inline-block align-text-top">
             <form class="justify-content-start ">
-                <button class="btn btn-outline-success me-2" type="button">Créer une classe</button>
+                <a href="sa_courseCreate"><button class="btn btn-outline-success me-2" type="button">Créer un cours</button></a>
+                <a href="sa_classCreate"><button class="btn btn-outline-success me-2" type="button">Créer une classe</button></a>
                 <a href="sa_userCreate"><button class="btn btn-sm btn-outline-secondary" type="button">Créer un utilisateur</button></a>
             </form>
         </div>
@@ -21,11 +22,13 @@ include __ROOT__."/views/header.html";
             <label class="fs-4 align-middle">Créer une classe</label>
         </div>
         <form form action="/sa_classCreate" method="post">
-            <div class="form-group my-5">
-                <p for="csvFile">Selectionnez un fichier CSV</p>
-                <input type="file" class="form-control-file" name="csvFile" accept=".csv" required>
+            <div class="mb-3 my-5">
+                <label for="formFile" class="form-label">Selectionnez un fichier CSV</label>
+                <input class="form-control" type="file" id="csvFile" name="csvFile" accept=".csv" required>
             </div>
-            <button type="submit" class="btn btn-primary">Confirmer</button>
+            <div class="text-center my-5">
+                <button type="submit" class="btn btn-primary">Confirmer</button>
+            </div>
         </form>
     </div>
 

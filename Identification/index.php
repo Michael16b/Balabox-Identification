@@ -16,6 +16,7 @@ ApplicationController::getInstance()->addRoute('connect_Prof', CONTROLLERS_DIR.'
 ApplicationController::getInstance()->addRoute('connect', CONTROLLERS_DIR.'/connect.php');
 ApplicationController::getInstance()->addRoute('sa_classCreate', CONTROLLERS_DIR.'/sa_classCreate.php');
 ApplicationController::getInstance()->addRoute('sa_userCreate', CONTROLLERS_DIR.'/sa_userCreate.php');
+ApplicationController::getInstance()->addRoute('sa_courseCreate', CONTROLLERS_DIR.'/sa_courseCreate.php');
 
 // Process the request
 ApplicationController::getInstance()->process();
