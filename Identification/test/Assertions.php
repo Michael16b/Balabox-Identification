@@ -2,6 +2,25 @@
 
 class Assertions {
 
+
+    function assertTrue($condition) {
+        if (!$condition) {
+            throw new Exception('Assertion failed: Expected true, got false');
+        }
+    }
+    
+    function assertFalse($condition) {
+        if ($condition) {
+            throw new Exception('Assertion failed: Expected false, got true');
+        }
+    }
+    
+    function assertNotEmpty($variable) {
+        if (empty($variable)) {
+            throw new Exception('Assertion failed: Expected variable to be not empty, got empty');
+        }
+    }
+
     function assertEquals($expected, $actual, $delta = 0.0001) {
         if (is_float($expected) && is_float($actual)) {
             if (abs($expected - $actual) > $delta) {
@@ -93,6 +112,9 @@ class Assertions {
             }
         }
     }
+
+
+
     
 
 }
