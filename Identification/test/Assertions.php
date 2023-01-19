@@ -78,9 +78,9 @@ class Assertions {
     }
 
 
-    function expectException($class, $message = null, $code = null) {
+    function expectException($class, $message = null, $code = null, $function) {
         try {
-            $this->call();
+            $function();
         } catch (Exception $e) {
             if (!($e instanceof $class)) {
                 throw $e;
