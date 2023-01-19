@@ -33,6 +33,8 @@ class UserDAO {
         $user->lang = 'fr';
         $user->timecreated = time();
         $user->timemodified = time();
+
+        $user->id = user_create_user($user);
         }
     }
 ?>
