@@ -76,6 +76,23 @@ class Assertions {
             throw new Exception("Assertion failed: expected not null value but got '$actual'");
         }
     }
+
+
+    function expectException($class, $message = null, $code = null) {
+        try {
+            $this->call();
+        } catch (Exception $e) {
+            if (!($e instanceof $class)) {
+                throw $e;
+            }
+            if ($message !== null && $e->getMessage() !== $message) {
+                throw $e;
+            }
+            if ($code !== null && $e->getCode() !== $code) {
+                throw $e;
+            }
+        }
+    }
     
 
 }
