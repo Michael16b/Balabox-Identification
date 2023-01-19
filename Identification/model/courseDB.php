@@ -2,8 +2,7 @@
 require_once('config.php');
 require_once($CFG->dirroot.'/course/lib.php');
 
-class createCourse {
-    private static UserDAO $dao;
+class courseDB {
 
     private function __construct() {}
 
