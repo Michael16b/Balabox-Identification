@@ -21,7 +21,7 @@ class UserDAO {
         return implode($pass); //turn the array into a string
     }
 
-    public final function addUser(String $firstName, String $lastName): void{
+    public function addUser(String $firstName, String $lastName): void{
         $user = new stdClass();
         $user->firstname =  $firstName;
         $user->lastname = $lastName;
@@ -36,5 +36,23 @@ class UserDAO {
 
         $user->id = user_create_user($user);
         }
+
+
+    public function deleteUser(String $username): void{
+        global $DB;
+        $DB->delete_records('user', array('username' => $username));
     }
+
+    public function updateUser(String $username, String $firstName, String $lastName): void{
+        global $DB;
+        $user = $DB->get_record('user', array('username' => $username));
+        $user->firstname = $firstName;
+        $user->lastname = $lastName;
+        $DB->update_record('user', $user);
+    }
+
+    
+}
+
+
 ?>
