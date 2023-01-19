@@ -51,7 +51,7 @@ class courseDB {
         role_unassign($role->id, $user->id, context_course::instance($course->id));
     }
 
-    public function addRolesMembers(String $shortName, String $username, String $role): void{
+    public function addRolesMember(String $shortName, String $username, String $role): void{
         global $DB;
         $course = $DB->get_record('course', array('shortname' => $shortName));
         $user = $DB->get_record('user', array('username' => $username));
