@@ -10,7 +10,7 @@ class UserDB {
     }
 
     
-    public function checkUser(String $username): bool{
+    public function getUser(String $username): mixed{
         global $DB;
         $user = $DB->get_record('user', array('username' => $username));
         if($user){

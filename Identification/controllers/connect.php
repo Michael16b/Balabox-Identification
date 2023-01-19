@@ -13,7 +13,7 @@ class ConnectController extends Controller{
           	// $user = $DB->get_record('user', array('username' => $request['surname']));
 			
 			$userdb = new UserDB();
-			$user = $userdb->getRecord(array('username' => $request['surname']));
+			$user = $userdb->getUser($request['surname']);
 
 			$password = $request['password'];
 
