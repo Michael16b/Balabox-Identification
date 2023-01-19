@@ -2,6 +2,7 @@
 
 class groupsDBTest extends Assertions
 {
+    // A ameliorer
     private $groupsDB;
 
     public function setUp(): void
