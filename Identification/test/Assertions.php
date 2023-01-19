@@ -69,6 +69,15 @@ class Assertions {
             throw new Exception("Assertion failed: expected null but got '$actual'");
         }
     }
+
+
+    function assertNotNull($actual) {
+        if (is_null($actual)) {
+            throw new Exception("Assertion failed: expected not null value but got '$actual'");
+        }
+    }
+    
+
 }
 
 
