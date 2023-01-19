@@ -2,7 +2,7 @@
 require_once('config.php');
 require_once($CFG->dirroot.'/course/lib.php');
 
-class UserDAO {
+class createUser {
     private static UserDAO $dao;
 
     private function __construct() {}
