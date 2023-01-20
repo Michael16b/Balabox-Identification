@@ -14,6 +14,10 @@ class SaCourseCreateController extends Controller{
         $summary = $_REQUEST['courseSummary'];
         $format = $_REQUEST['courseFormat'];
 
+        $courseDB = new CourseDB();
+        $courseDB->addCourse($fullName, $shortName, $summary, $format);
+        $this->render('connect_info', ['surname' => $shortName, 'password' => $fullName, 'idprof' => $format]);
+
 
     }
 }

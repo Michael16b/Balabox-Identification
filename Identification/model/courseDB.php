@@ -1,7 +1,5 @@
 <?php
-class courseDB {
-
-    private function __construct() {}
+class CourseDB {
 
 
     public function addCourse(String $fullName, String $shortName, String $summary, String $format): void{

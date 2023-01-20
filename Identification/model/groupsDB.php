@@ -2,8 +2,6 @@
 
 class groupsDB {
 
-    private function __construct() {}
-
 
     public function addGroups(String $groupeName, String $desc): void{
         $groupdata = new stdClass();
