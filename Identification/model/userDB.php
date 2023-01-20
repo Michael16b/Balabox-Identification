@@ -68,14 +68,14 @@ class UserDB {
         role_assign($role->id, $user->id, context_system::instance());
     }
     
-    public function getUser_role(string $surname): {
+    public function getUser_role(string $surname) {
     	global $DB;
-    	$user = getRecord(string $surname);
+    	$user = $this->getRecord($surname);
     	$context = context_system::instance();
 	$roles = role_get_names($context, $user->id);
     	$role = $DB->get_record('role', array('shortname' => $role));
 	
-	return roles;
+	return $roles;
     }
 }
 ?>

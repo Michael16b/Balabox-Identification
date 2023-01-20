@@ -5,10 +5,6 @@ class ConnectController extends Controller{
 
     public function post($request){
         try{
-	/*/	//récupération de l'utilisateur
-          	global $DB;
-          	$user = $userDB->getRecord('user', array('username' => $request['surname']));	
-*/
 			$userdb = new UserDB();
 			$user = $userdb->getRecord($request['surname']);
 			$password = $request['password'];
@@ -18,7 +14,7 @@ class ConnectController extends Controller{
 
 				//vérification du mot de passe
 				if(password_verify($password, $user->password)){
-					$userRole = userdb->getUser_role();	
+					$userRole = $userdb->getUser_role($user->username);
 					$this-> render('/connect_info',['surname' =>$request['surname'] , 'password' => $password, 'idprof' => $userRole]);
 				}else{
 					$this-> render('/main',[]);

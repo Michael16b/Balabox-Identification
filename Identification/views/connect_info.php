@@ -2,7 +2,8 @@
 
 include __ROOT__."/views/header.html";
 
-echo "Identifiant prof =".$data['idprof'];
+echo "Identifiant prof =";
+var_dump($data['idprof']);
 echo "<br>";
 echo "Numéro téléphone élève =". $data['surname'];
 echo "<br>";

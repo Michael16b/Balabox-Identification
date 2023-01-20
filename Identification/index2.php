@@ -7,9 +7,9 @@ define ("__ROOT__",__DIR__);
 require (__ROOT__.'/model/userDB.php');
 require (__ROOT__.'/model/courseDB.php');
 require (__ROOT__.'/model/groupsDB.php');
-require_once(__ROOT__.'user/lib.php');
+require_once(__ROOT__.'/user/lib.php');
 require_once (__ROOT__.'/config2.php');
-// require_once (__ROOT__.'/config.php');
+require_once (__ROOT__.'/config.php');
 // ApplicationController
 require_once (CONTROLLERS_DIR.'/ApplicationController.php');
 
