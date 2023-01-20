@@ -24,8 +24,9 @@ class UserDB {
         $user = $DB->get_record('user', array('username' => $username));
         $i = 1;
         while ($user != false) {
-            $username = $username + $i;
-            $user = $DB->get_record('user', array('username' => $username));
+            $TMPusername = $username + $i;
+            $user = $DB->get_record('user', array('username' => $TMPusername));
+            $i += 1;
         }
 
         return $username;
