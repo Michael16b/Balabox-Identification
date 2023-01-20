@@ -22,9 +22,25 @@ include __ROOT__."/views/header.html";
             <label class="fs-4 align-middle">Créer une classe</label>
         </div>
         <form form action="/sa_classCreate" method="post">
+
+
+            <!-- // DEBUT TEST /////////////////////////////////////////////////////// -->
+            <div class="mb-3 my-5">
+                <label for="className" class="form-label">Nom de la classe</label>
+                <input type="text" class="form-control" id="className" name="className" aria-describedby="nom" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="classSummary" class="form-label">Description</label>
+                <textarea class="form-control" id="classSummary" name="classSummary"  rows="3"></textarea>
+            </div>
+
+            <!-- // FIN TEST /////////////////////////////////////////////////////// -->
+
+            <!-- FINAL  PENSER A REMETTRE REQUIRED SUR INPUT CSV-->
             <div class="mb-3 my-5">
                 <label for="formFile" class="form-label">Selectionnez un fichier CSV</label>
-                <input class="form-control" type="file" id="csvFile" name="csvFile" accept=".csv" required>
+                <input class="form-control" type="file" id="csvFile" name="csvFile" accept=".csv" > 
             </div>
             <div class="text-center my-5">
                 <button type="submit" class="btn btn-primary">Confirmer</button>
