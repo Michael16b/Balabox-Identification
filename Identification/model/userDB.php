@@ -1,6 +1,4 @@
 <?php
-//require(__ROOT__.'/config.php');
-//require_once($CFG->dirroot.'/course/lib.php');
 class UserDB {
 
     public function getRecord(string $surname){
