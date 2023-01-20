@@ -1,7 +1,5 @@
 <?php
-//require_once(__ROOT__.'/model/UserDB.php');
 require_once(__ROOT__.'/controllers/Controller.php');
-//require(__ROOT__.'/config.php');
 
 class ConnectController extends Controller{
 
@@ -20,7 +18,8 @@ class ConnectController extends Controller{
 
 				//vérification du mot de passe
 				if(password_verify($password, $user->password)){
-					$this-> render('/connect_info',['surname' =>$request['surname'] , 'password' => $password, 'idprof' => null]);
+					$userRole = userdb->getUser_role();	
+					$this-> render('/connect_info',['surname' =>$request['surname'] , 'password' => $password, 'idprof' => $userRole]);
 				}else{
 					$this-> render('/main',[]);
 					echo  " mot de passe incorrect";

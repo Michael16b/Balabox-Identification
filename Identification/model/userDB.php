@@ -67,6 +67,15 @@ class UserDB {
         $role = $DB->get_record('role', array('shortname' => $role));
         role_assign($role->id, $user->id, context_system::instance());
     }
-
+    
+    public function getUser_role(string $surname): {
+    	global $DB;
+    	$user = getRecord(string $surname);
+    	$context = context_system::instance();
+	$roles = role_get_names($context, $user->id);
+    	$role = $DB->get_record('role', array('shortname' => $role));
+	
+	return roles;
+    }
 }
 ?>
