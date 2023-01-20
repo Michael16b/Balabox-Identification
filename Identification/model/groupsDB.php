@@ -42,13 +42,13 @@ class groupsDB {
         groups_remove_member($groupdata, $userdata);
     }
 
-    public function getGroups(String $groupeName): void{
+    public function getGroups(String $groupeName): String{
         global $DB;
         $groupdata = $DB->get_record('groups', array('name' => $groupeName));
         return $groupdata;
     }
 
-    public function getMembers(String $groupeName): void{
+    public function getMembers(String $groupeName): String{
         global $DB;
         $groupdata = $DB->get_record('groups', array('name' => $groupeName));
         $members = groups_get_members($groupdata->id);
