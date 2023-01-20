@@ -1,10 +1,10 @@
 <?php
 require(__ROOT__.'/controllers/Controller.php');
 
-class SeeConfigController extends Controller{
+class ConfirmController extends Controller{
 
     public function get($request){
-        $this->render('seeconfig',[]);
+        $this->render('confirm',[]);
     }
 }
 

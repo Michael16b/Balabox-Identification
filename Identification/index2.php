@@ -6,7 +6,7 @@ define ("__ROOT__",__DIR__);
 // Configuration
 require (__ROOT__.'/model/userDB.php');
 require_once (__ROOT__.'/config2.php');
-require_once (__ROOT__.'/config.php');
+// require_once (__ROOT__.'/config.php');
 // ApplicationController
 require_once (CONTROLLERS_DIR.'/ApplicationController.php');
 
@@ -17,6 +17,7 @@ ApplicationController::getInstance()->addRoute('connect_Prof', CONTROLLERS_DIR.'
 ApplicationController::getInstance()->addRoute('connect', CONTROLLERS_DIR.'/connect.php');
 ApplicationController::getInstance()->addRoute('sa_classCreate', CONTROLLERS_DIR.'/sa_classCreate.php');
 ApplicationController::getInstance()->addRoute('sa_userCreate', CONTROLLERS_DIR.'/sa_userCreate.php');
+ApplicationController::getInstance()->addRoute('confirm', CONTROLLERS_DIR.'/confirm.php');
 
 // Process the request
 ApplicationController::getInstance()->process();
