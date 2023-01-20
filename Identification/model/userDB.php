@@ -19,11 +19,23 @@ class UserDB {
         return implode($pass); //turn the array into a string
     }
 
+    public function checkUserName(String $username) : String {
+        global $DB;
+        $user = $DB->get_record('user', array('username' => $username));
+        $i = 1;
+        while ($user != false) {
+            $username = $username + $i;
+            $user = $DB->get_record('user', array('username' => $username));
+        }
+
+        return $username;
+    }
+
     public function addUser(String $firstName, String $lastName): void{
         $user = new stdClass();
         $user->firstname =  $firstName;
         $user->lastname = $lastName;
-        $user->username = substr($firstName,0,1) + $lastName;
+        $user->username = $this->checkUserName(substr($firstName,0,1) + $lastName);
         $user->password = $this->RandomPassword();
         $user->email = $firstName + "." + $lastName + "@gmail.com" ;
         $user->auth = 'manual';
