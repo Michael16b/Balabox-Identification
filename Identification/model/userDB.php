@@ -37,7 +37,7 @@ class UserDB {
         $user->lastname = $lastName;
         $user->username = $this->checkUserName(substr($firstName,0,1) + $lastName);
         $user->password = $this->RandomPassword();
-        $user->email = $firstName + "." + $lastName + "@gmail.com" ;
+        $user->email = $firstName + "." + $lastName + "@balabox.home" ;
         $user->auth = 'manual';
         $user->confirmed = 1;
         $user->lang = 'fr';
