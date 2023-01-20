@@ -16,10 +16,9 @@ class SaCourseCreateController extends Controller{
 
         $courseDB = new CourseDB();
         $courseDB->addCourse($fullName, $shortName, $summary, $format);
-        $this->render('connect_info', ['surname' => $shortName, 'password' => $fullName, 'idprof' => $format]);
 
+        $this->render('confirm', ['nom' => 'cours']);
 
     }
 }
-
 ?> 

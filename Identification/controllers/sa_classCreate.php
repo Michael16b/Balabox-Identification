@@ -8,7 +8,7 @@ class SaClassCreateController extends Controller{
     }
 
     public function post($request){
-        
+        $this->render('confirm',['nom' => 'classe']);
     }
 }
 

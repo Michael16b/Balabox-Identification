@@ -15,7 +15,7 @@ class SaUserCreateController extends Controller{
 
             $userdb = new UserDB();
 			$user = $userdb->addUser($_REQUEST['newUserPrenom'], $_REQUEST['newUserNom']);
-            $this->render('connect_info',['surname' => $_REQUEST['newUserNom'], 'password' => $_REQUEST['newUserPrenom'], 'idprof' => $_REQUEST['newUserRole']]);
+            $this->render('confirm',['nom' => 'utilisateur']);
         } else {
             // Afficher une erreur car aucun formulaire valide n'a été soumis
         }
