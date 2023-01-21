@@ -6,15 +6,18 @@ class UserDB {
         return $DB->get_record('user', array('username' => $surname));
     }
 
+
+    
     public final function RandomPassword() : String {
-        $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-        $pass = array(); //remember to declare $pass as an array
-        $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+        $alphabet = '!@#$%^&*()_+-=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+        $pass = array();
+        $alphaLength = strlen($alphabet) - 1;
         for ($i = 0; $i < 8; $i++) {
             $n = rand(0, $alphaLength);
             $pass[] = $alphabet[$n];
         }
-        return implode($pass); //turn the array into a string
+        $pass[rand(0,7)] = $alphabet[rand(0,15)]; // on ajoute un caractère spécial au hasard 
+        return implode($pass);
     }
 
     public function checkUserName(String $username) : String {
@@ -67,15 +70,6 @@ class UserDB {
         $role = $DB->get_record('role', array('shortname' => $role));
         role_assign($role->id, $user->id, context_system::instance());
     }
-    
-    public function getUser_role(string $surname) {
-    	global $DB;
-    	$user = $this->getRecord($surname);
-    	$context = context_system::instance();
-	$roles = role_get_names($context, $user->id);
-    	$role = $DB->get_record('role', array('shortname' => $role));
-	
-	return $roles;
-    }
+
 }
 ?>
