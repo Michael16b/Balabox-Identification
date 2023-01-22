@@ -27,11 +27,12 @@ include __ROOT__."/views/header.html";
                 <div class="col mx-3 d-flex align-items-center">
                     <!-- CSV -->
                     <div class="col mx-3 card my-5 shadow-sm p-3 mb-5 bg-body rounded">
-                        <form form action="/sa_userCreate" method="post">
-                            <!-- DIFFERENCIER LE FORMULAIRE DE L'AUTRE AVEC UN ATTRIBUT CACHE  -->
+                        
+                        <form form action="/sa_userCreate" method="post" enctype="multipart/form-data">
+                            <!-- ATTRIBUT CACHE PERMETTANT DE DIFFERENCIER LES DEUX FORMULAIRES -->
                             <input type="hidden" name="csvForm" value="1">
 
-                            <p class="fs-5 text-center">Avec un fichier CSV</p>
+                            <p class="fs-5 text-center">Un ou plusieurs utilisateurs avec un fichier CSV</p>
                             <div class="form-group my-5">
                                 <label for="formFile" class="form-label">Selectionnez un fichier CSV</label>
                                 <input class="form-control" type="file" id="csvFile" name="csvFile" accept=".csv" required>
@@ -45,7 +46,7 @@ include __ROOT__."/views/header.html";
 
                 <!-- MANUEL -->
                 <div class="col mx-3 card my-5 shadow-sm p-3 mb-5 bg-body rounded ">
-                    <form form action="/sa_userCreate" method="post">
+                    <form form action="/sa_userCreate" method="post" enctype="multipart/form-data">
                         <!-- DIFFERENCIER LE FORMULAIRE DE L'AUTRE AVEC UN ATTRIBUT CACHE  -->
                         <input type="hidden" name="oneUserForm" value="1">
                         
