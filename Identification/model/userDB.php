@@ -48,6 +48,7 @@ class UserDB {
         $user->timemodified = time();
 
         $user->id = user_create_user($user);
+        role_assign(4, $user->id, context_system::instance());
 
         return ($user->username . " " . $password);
         }
@@ -74,10 +75,10 @@ class UserDB {
         role_assign($role->id, $user->id, context_system::instance());
     }
     
-        public function getUser_role(string $username) {
+    public function getUser_role(string $username) {
     	global $DB;
     	$user = $this->getRecord($username);
-	$roles =$DB->get_record('role_assignments', array('userid' => $user->id));
+	    $roles =$DB->get_record('role_assignments', array('userid' => $user->id));
     	return  $roles->roleid;
     }
 

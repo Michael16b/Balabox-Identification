@@ -14,28 +14,31 @@ class ConnectController extends Controller{
 
 				//vérification du mot de passe
 				if(password_verify($password, $user->password)){
-					$userRole = $userdb->getUser_role($user->username);
+					$userRole = $userdb->getUser_role($request['username']);
 					// démarrage de la session
 					session_start();
 					//définition des variables de session
 					$_SESSION['idRole'] = $userRole;
 					switch ($userRole){
 						case 1:
-							$this-> render('/sa_classCreate',['surname' =>$request['surname'] , 'password' => $password, 'role' => $userRole]);
+							$this-> render('/sa_classCreate',['username' =>$request['username'] , 'password' => $password, 'role' => $userRole]);
 							break;
 						case 2:
-							$this-> render('/connect_info',['surname' =>$request['surname'] , 'password' => $password, 'role' => $userRole]);
+							$this-> render('/connect_info',['username' =>$request['username'] , 'password' => $password, 'role' => $userRole]);
 							break;
 						case 3:
-							$this-> render('/connect_info',['surname' =>$request['surname'] , 'password' => $password, 'role' => $userRole]);
+							$this-> render('/connect_info',['username' =>$request['username'] , 'password' => $password, 'role' => $userRole]);
 							break;
 						case 4:
-							$this-> render('/connect_info',['surname' =>$request['surname'] , 'password' => $password, 'role' => $userRole]);
+							$this-> render('/connect_info',['username' =>$request['username'] , 'password' => $password, 'role' => $userRole]);
 							break;
 						case 5:
-							$this-> render('/connect_info',['surname' =>$request['surname'] , 'password' => $password, 'role' => $userRole]);
+							$this-> render('/connect_info',['username' =>$request['username'] , 'password' => $password, 'role' => $userRole]);
 							break;
 					}
+					echo $userRole;
+					$this-> render('/connect_info',['username' =>$request['username'] , 'password' => $password, 'role' => $userRole]);
+
 				
 				}else{
 					$this-> render('/main',[]);
