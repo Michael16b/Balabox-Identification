@@ -7,7 +7,6 @@ class UserDB {
     }
 
 
-    
     public final function RandomPassword() : String {
         $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()_+-=';
         $pass = array();
@@ -71,6 +70,13 @@ class UserDB {
         $user = $DB->get_record('user', array('username' => $username));
         $role = $DB->get_record('role', array('shortname' => $role));
         role_assign($role->id, $user->id, context_system::instance());
+    }
+    
+        public function getUser_role(string $username) {
+    	global $DB;
+    	$user = $this->getRecord($username);
+	$roles =$DB->get_record('role_assignments', array('userid' => $user->id));
+    	return  $roles->roleid;
     }
 
 }
