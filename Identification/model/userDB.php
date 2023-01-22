@@ -1,15 +1,15 @@
 <?php
 class UserDB {
 
-    public function getRecord(string $surname){
+    public function getRecord(string $username){
         global $DB;
-        return $DB->get_record('user', array('username' => $surname));
+        return $DB->get_record('user', array('username' => $username));
     }
 
 
     
     public final function RandomPassword() : String {
-        $alphabet = '!@#$%^&*()_+-=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+        $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()_+-=';
         $pass = array();
         $alphaLength = strlen($alphabet) - 1;
         for ($i = 0; $i < 8; $i++) {
@@ -17,6 +17,8 @@ class UserDB {
             $pass[] = $alphabet[$n];
         }
         $pass[rand(0,7)] = $alphabet[rand(0,15)]; // on ajoute un caractère spécial au hasard 
+        $pass[rand(0,7)] = $alphabet[rand(26,35)]; // on ajoute un chiffre au hasard 
+        $pass[rand(0,7)] = $alphabet[rand(52,61)]; // on ajoute une lettre majuscule au hasard 
         return implode($pass);
     }
 
@@ -37,7 +39,8 @@ class UserDB {
         $user = new stdClass();
         $user->firstname =  $firstName;
         $user->lastname = $lastName;
-        $user->username = $this->checkUserName(substr($firstName,0,1) + $lastName);
+        $firstName = 
+        $user->username = $this->checkUserName(strtolower(substr($firstName,0,1) + $lastName));
         $user->password = $this->RandomPassword();
         $user->email = $firstName + "." + $lastName + "@balabox.home" ;
         $user->auth = 'manual';

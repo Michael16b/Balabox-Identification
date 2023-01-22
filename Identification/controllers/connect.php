@@ -6,7 +6,7 @@ class ConnectController extends Controller{
     public function post($request){
         try{
 			$userdb = new UserDB();
-			$user = $userdb->getRecord($request['surname']);
+			$user = $userdb->getRecord($request['username']);
 			$password = $request['password'];
 
 			//vérification de l'existance de l'utilisateur

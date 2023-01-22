@@ -95,9 +95,11 @@ class SaUserCreateController extends Controller{
 
             // Traitement pour le formulaire 1 utilisateur
 			$user = $userdb->addUser($_REQUEST['newUserPrenom'], $_REQUEST['newUserNom']);
+            $username = substr($_REQUEST['newUserPrenom'],0,1) + $_REQUEST['newUserNom'];
+            $userList = $userdb->getRecord($username);
 
-            // TEMPORAIRE////////////////////////////////////////////////////////////////////////////////////////////////////
-            $this->render('connect_info',['surname' => $_REQUEST['newUserNom'], 'password' => $_REQUEST['newUserPrenom'], 'idprof' => $_REQUEST['newUserRole']]);
+
+            $this->render('connect_info',['surname' => $username, 'password' => $userList->password, 'idprof' => $_REQUEST['newUserRole']]);
         }
     }
 }
