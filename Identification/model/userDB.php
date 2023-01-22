@@ -39,7 +39,6 @@ class UserDB {
         $user = new stdClass();
         $user->firstname =  $firstName;
         $user->lastname = $lastName;
-        $firstName = 
         $user->username = $this->checkUserName(strtolower(substr($firstName,0,1) + $lastName));
         $user->password = $this->RandomPassword();
         $user->email = $firstName + "." + $lastName + "@balabox.home" ;
