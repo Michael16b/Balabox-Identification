@@ -1,13 +1,20 @@
 <?php
 require(__ROOT__.'/controllers/Controller.php');
+require(__ROOT__.'/static/assets/FPDF/fpdf.php');
 
 class SaUserCreateController extends Controller{
 
     public function get($request){
-        $this->render('sa_userCreate',[]);
+        // session_start();
+        // if($_SESSION['idRole'] != 1){
+        //     $this->render('/',[]);
+        // }else{
+            $this->render('sa_userCreate',[]);
+        // }
     }
 
     public function post($request){
+        session_start();
         $userdb = new UserDB();
 
         if (isset($_POST['csvForm'])) {
@@ -41,17 +48,39 @@ class SaUserCreateController extends Controller{
                         // Fermer et supprimer le fichier
                         fclose($file);
                         unlink("static/uploads/".$file_name);
-    
+                        
+                        /////////////////////////DEBUT A TESTER : PARTIE PDF UNIQUEMENT///////////////////////////////////////////////////////////////
+                        //créer le fichier PDF
+                        $pdf = new FPDF();
+                        $pdf->AddPage();
+                        $pdf->SetFont('Arial','B',16);
+
+                        $pdf->Cell(25,10,'Rôle');
+                        $pdf->Cell(25,10,'Nom');
+                        $pdf->Cell(25,10,'Prénom');
+                        $pdf->Cell(25,10,'Mot de passe');
+                        $pdf->Ln();
+
                         // Utiliser les informations stockées dans le tableau $data pour insérer les utilisateurs 1 à 1
                         foreach ($data as $line) {
                             list($nom, $prenom, $role) = explode(";", $line[0]);
                             // Insérer dans la bdd (rôle n'est pas encore traité)
                             $user = $userdb->addUser($prenom,$nom);
 
-                            // TEMPORAIRE//////////////////////////////////////////////////////////////////////////
-                            $this->render('connect_info',['surname' => $nom, 'password' =>$prenom, 'idprof' => $role]);
+                            //importer dans le fichier PDF
+                            $pdf->Cell(25,10,$role);
+                            $pdf->Cell(25,10,$nom);
+                            $pdf->Cell(25,10,$prenom);
+                            $pdf->Cell(25,10,$user->password);
+                            $pdf->Ln();
+
                         }
-                        
+
+                        //donner le pdf à la prochaine vue pour le téléchargement
+                        $pdf_content = $pdf->Output('','S');
+                        $this->render('sa_download', ['pdf_content' => $pdf_content]);
+
+                        ///////////////////////// FIN A TESTER///////////////////////////////////////////////////////////////
 
                     }catch(Exception $e){
                         $this->render('sa_error',['message' => $e->getMessage()]);

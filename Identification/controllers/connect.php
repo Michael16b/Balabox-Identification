@@ -15,6 +15,13 @@ class ConnectController extends Controller{
 				//vérification du mot de passe
 				if(password_verify($password, $user->password)){
 					$userRole = $userdb->getUser_role($user->username);
+
+					// démarrage de la session
+					session_start();
+
+					 //définition des variables de session
+					$_SESSION['idRole'] = $userRole;
+
 					$this-> render('/connect_info',['surname' =>$request['surname'] , 'password' => $password, 'idprof' => $userRole]);
 				}else{
 					$this-> render('/main',[]);
