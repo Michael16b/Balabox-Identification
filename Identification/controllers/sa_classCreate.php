@@ -24,7 +24,7 @@ class SaClassCreateController extends Controller{
             } else {
                 // Déplacez le fichier uploadé vers le répertoire de destination
                 move_uploaded_file($file_tmp,"static/uploads/".$file_name);
-                
+
                 try{
                     // Ouvrir le fichier CSV
                     $file = fopen("static/uploads/".$file_name, "r");
@@ -46,23 +46,22 @@ class SaClassCreateController extends Controller{
                     unlink("static/uploads/".$file_name);
 
                     // Créer l'objet UserDB pour entrer des données dans la bdd Moodle
-                    $userdb = new UserDB();
+                    $groupDB = new GroupsDB();
 
                     // A VERIFIER : Créer la classe/////////////////////////////////////////////////
-                    $user = $userdb->addGroups($_REQUEST['newClassName'], $_REQUEST['newClassSummary']);
+                    $idGroup = $groupDB->addGroups($_REQUEST['newClassName'], $_REQUEST['newClassSummary']);
 
                     // Utiliser les informations stockées dans le tableau $data pour insérer les utilisateurs 1 à 1
                     foreach ($data as $line) {
-                        list($nom, $prenom) = explode(";", $line[0]);
-                        
+                        list($username) = explode(";", $line[0]);
+
                         // TEMPORAIRE//////////////////////////////////////////////////////////////////////////
                         // echo $nom . " " . $prenom . " " . $_REQUEST['newClassName'] . "<br>";
 
                         // A VERIFIER : Entrer les utilisateurs dans leur classe//////////////////////////////////
                         // REMPLACER LES ??
-                        $user = $userdb->addMember($_REQUEST['newClassName'], ?????);
+                        $groupDB->addMember($idGroup, $username);
                     }
-                    
 
                 }catch(Exception $e){
                     $this->render('sa_error',['message' => $e->getMessage()]);
@@ -71,7 +70,7 @@ class SaClassCreateController extends Controller{
             }
         } else{
             $this->render('sa_error',['message' => 'Erreur lors de la récupération du fichier.']);
-        } 
+        }
 
     }
 }

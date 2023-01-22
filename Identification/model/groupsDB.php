@@ -1,15 +1,15 @@
 <?php
 
-class groupsDB {
+class GroupsDB {
 
 
-    public function addGroups(String $groupeName, String $desc): void{
+    public function addGroups(String $groupeName, String $desc, integer $courseid): integer{
         $groupdata = new stdClass();
         $groupdata->name = $groupeName;
-        $groupdata->courseid = 10;
+        $groupdata->courseid = $courseid;
         $groupdata->description = $desc;
 
-        $groupid = groups_create_group($groupdata);
+        return groups_create_group($courseid, $groupdata);
         }
 
     public function deleteGroups(String $groupeName): void{
@@ -50,12 +50,6 @@ class groupsDB {
         $members = groups_get_members($groupdata->id);
         return $members;
     }
-
-    
-
-    
-
-    
 }
 
 

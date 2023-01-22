@@ -28,14 +28,14 @@ class SaUserCreateController extends Controller{
                 } else {
                     // Déplacez le fichier uploadé vers le répertoire de destination
                     move_uploaded_file($file_tmp,"static/uploads/".$file_name);
-                    
+
                     try{
                         // Ouvrir le fichier CSV
                         $file = fopen("static/uploads/".$file_name, "r");
-    
+
                         // Initialiser un tableau pour stocker les informations
                         $data = array();
-    
+
                         // Parcourir chaque ligne du fichier sauf la première (contenant les informations des colonnes)
                         $line_counter = 0;
                         while (($line = fgetcsv($file)) !== false) {
@@ -48,7 +48,6 @@ class SaUserCreateController extends Controller{
                         // Fermer et supprimer le fichier
                         fclose($file);
                         unlink("static/uploads/".$file_name);
-                        
                         /////////////////////////DEBUT A TESTER : PARTIE PDF UNIQUEMENT///////////////////////////////////////////////////////////////
                         //créer le fichier PDF
                         $pdf = new FPDF();
