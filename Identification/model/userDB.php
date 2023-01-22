@@ -25,22 +25,24 @@ class UserDB {
         global $DB;
         $user = $DB->get_record('user', array('username' => $username));
         $i = 1;
+        $TMPusername = $username;
         while ($user != false) {
-            $TMPusername = $username + $i;
+            $TMPusername = $username . $i;
             $user = $DB->get_record('user', array('username' => $TMPusername));
             $i += 1;
+
         }
 
-        return $username;
+        return $TMPusername;
     }
 
-    public function addUser(String $firstName, String $lastName): void{
+    public function addUser(String $firstName, String $lastName) : String{
         $user = new stdClass();
         $user->firstname =  $firstName;
         $user->lastname = $lastName;
-        $user->username = $this->checkUserName(strtolower(substr($firstName,0,1) + $lastName));
+        $user->username = $this->checkUserName(strtolower(substr($firstName,0,1) . $lastName));
         $user->password = $this->RandomPassword();
-        $user->email = $firstName + "." + $lastName + "@balabox.home" ;
+        $user->email = $firstName."." . $lastName . "@balabox.home" ;
         $user->auth = 'manual';
         $user->confirmed = 1;
         $user->lang = 'fr';
@@ -48,6 +50,8 @@ class UserDB {
         $user->timemodified = time();
 
         $user->id = user_create_user($user);
+
+        return json_encode($user);
         }
 
 

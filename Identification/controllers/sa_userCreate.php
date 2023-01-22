@@ -97,8 +97,9 @@ class SaUserCreateController extends Controller{
             $username = substr($_REQUEST['newUserPrenom'],0,1) + $_REQUEST['newUserNom'];
             $userList = $userdb->getRecord($username);
 
+            echo $user;
 
-            $this->render('connect_info',['surname' => $username, 'password' => $userList->password, 'idprof' => $_REQUEST['newUserRole']]);
+            $this->render('connect_info',['username' => $username, 'password' => $userList->password, 'idprof' => $user]); //$_REQUEST['newUserRole']
         }
     }
 }
