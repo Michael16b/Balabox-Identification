@@ -3,7 +3,7 @@
 Ce dépôt contient le code source du service d'identification intégré à
 la [BalaBox], ainsi que la documentation y afférente.
 
-## Le service d'identification
+# Le service d'identification
 
 Le service d'identification de la [BalaBox] permet aux élèves de
 s'identifier à travers une interface Web avant d'accéder à l'un des
@@ -22,15 +22,13 @@ Le service d'identification offre les fonctionnalités suivantes:
 1. suppression d'un annuaire de classe
 1. association d'un élève, ou groupe d'élèves, à un terminal mobile à travers une interface "élève" simple
 1. création de comptes Moodle à partir de l'annuaire avec génération automatique des mots de passe.
-1. création, modification et suppression de groupes d'élèves
-1. outil de gestion des absences à partir de l'annuaire de classe
 
 ## Mise en œuvre du service d'identification
 
 Le service d'identification est composé de 3 parties: une API REST,
 une interface Web élève d'identification et une interface Web
 enseignant d'administration permettant de créer un annuaire de classe,
-de gérer les absences, de créer des groupes, etc.
+des utilisateurs, gérer leurs droits...
 
 L'API REST, qui expose toutes les fonctionnalités présentées
 précédemment, est utilisée par les interfaces Web élève et enseignant,
@@ -43,40 +41,78 @@ L'API REST offre un accès sécurisé aux fonctionnalités qu'elle expose
 [balabox]: https://balabox.gitlab.io/balabox/
 [moodlebox]: https://moodlebox.net
 
+# Intégrer ce travail dans la Raspberry Pi
 
-# PHP : Installer les extensions 
+Afin d'installer MoodleBox et ce travail dans voptre REaspoberry Pi, faites les commandes suivantes dans un terminal de commande d'ordinateur :
 
-Version de PHP : 7.4
-Extensions à activer : 
-- iconv
-- mbstring
-- curl
-- openssl
-- xmlrpc
-- soap 
-- ctype
-- tokenizer
-- zip
-- gd
-- simplexml
-- spl
-- pcre
-- dom
-- xml
-- intl
-- json
+#!/bin/bash
+1. Télécharger Moodlebox
+wget https://download.moodlebox.net/moodlebox-latest.img
 
-L'extension correspondant à la base de données est également requise.
+1. Télécharger Raspberry Pi Imager pour Linux
+wget https://downloads.raspberrypi.org/imager/imager.deb
 
+1. Installer Raspberry Pi Imager
+sudo apt install ./imager.deb
 
-Comment activer une extension ?
-Dans le fichier php.ini, enlever le ";" devant extension=* afin d'enlever le commentaire
-L'étoile représente le nm de l'extension
+1. Ouvrir Raspberry Pi Imager
+sudo imager
 
-Une fois les extensions installées, relancer le serveur Web.
+1. Sélectionner l'image Moodlebox et la carte SD
 
-Lancer un serveur Web local php : php -S localhost:8080
-Pour y accéder, aller à l'adresse entrée.
+Faites ensuite ces commandes dans MoodleBox : 
+
+#!/bin/bash
+1.Utiliser un terminal de commande et connectez-vous en ssh à MoodleBox
+
+ssh moodlebox@moodlebox
+1. Mettre le mot de passe : Moodlebox4$
+sudo -i
+
+1. Créer un fichier de configuration par défaut pour Nginx
+sudo touch /etc/nginx/sites-available/default
+
+1. Ajouter le contenu à partir de la configuration fournie
+sudo echo "# Default server configuration
+#
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    ssl_certificate /etc/nginx/ssl/moodlebox.pem;
+    ssl_certificate_key /etc/nginx/ssl/moodlebox.key;
+
+    root /var/www/moodle;
+
+    index index2.php index.php index.html index.htm index.nginx-debian.html;
+
+    server_name moodlebox;
+
+    location / {
+        try_files $uri $uri/ /index2.php;
+    }
+
+    location /dataroot/ {
+        internal;
+        alias /var/www/moodledata/;
+    }
+
+    location ~ [^/].php(/|$) {
+        include fastcgi_params;
+        fastcgi_split_path_info    ^(.+.php)(/.+)$;
+        fastcgi_read_timeout    300;
+        fastcgi_pass    unix:/var/run/php/php7.4-fpm.sock;
+        fastcgi_index    index.php;
+        fastcgi_param    PATH_INFO    $fastcgi_path_info;
+        fastcgi_param    SCRIPT_FILENAME    $document_root$fastcgi_script_name;
+        fastcgi_param    PHP_VALUE "max_execution_time=300\n upload_max_filesize=50M\n post_max_size=50M";
+        client_max_body_size    50M;
+    }
+
+} " | sudo tee -a /etc/nginx/sites-available/default
+
 
 # Balabox Manager
 
