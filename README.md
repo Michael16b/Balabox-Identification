@@ -43,50 +43,50 @@ L'API REST offre un accès sécurisé aux fonctionnalités qu'elle expose
 
 # Intégrer ce travail dans la Raspberry Pi
 
-Afin d'installer MoodleBox et ce travail dans voptre REaspoberry Pi, faites les commandes suivantes dans un terminal de commande d'ordinateur :
-
+## Afin d'installer MoodleBox et ce travail dans voptre Raspoberry Pi, faites les commandes suivantes dans un terminal de commande d'ordinateur :
 ```
 #!/bin/bash
 ```
-- Télécharger Moodlebox
+
+### Télécharger Moodlebox
 wget https://download.moodlebox.net/moodlebox-latest.img
 
-- Télécharger Raspberry Pi Imager pour Linux
+### Télécharger Raspberry Pi Imager pour Linux
 wget https://downloads.raspberrypi.org/imager/imager.deb
 
-- Installer Raspberry Pi Imager
+### Installer Raspberry Pi Imager
 ```
 sudo apt install ./imager.deb
 ```
-
-- Ouvrir Raspberry Pi Imager
+### Ouvrir Raspberry Pi Imager
 ```
 sudo imager
 ```
 
-- Sélectionner l'image Moodlebox et la carte SD
+### Sélectionner l'image Moodlebox et la carte SD
 
-Faites ensuite ces commandes dans MoodleBox : 
 
+## Faites ensuite ces commandes dans MoodleBox : 
 ```
 #!/bin/bash
 ```
-- Utiliser un terminal de commande et connectez-vous en ssh à MoodleBox
 
+### Utiliser un terminal de commande et connectez-vous en ssh à MoodleBox
 ```
 ssh moodlebox@moodlebox
 ```
-- Mettre le mot de passe : Moodlebox4$
+
+### Mettre le mot de passe : Moodlebox4$
 ```
 sudo -i
 ```
 
-- Créer un fichier de configuration par défaut pour Nginx
+### Créer un fichier de configuration par défaut pour Nginx
 ```
 sudo touch /etc/nginx/sites-available/default
 ```
 
-- Ajouter le contenu à partir de la configuration fournie
+### Ajouter le contenu à partir de la configuration fournie
 ```
 sudo echo "# Default server configuration
 #
@@ -127,6 +127,33 @@ server {
     }
 
 } " | sudo tee -a /etc/nginx/sites-available/default
+```
+
+```
+#!/bin/bash
+```
+
+### Téléchargement du fichier zip
+wget https://gitlab.com/balabox/identification/-/archive/raspberry/identification-raspberry.zip
+
+###  Déplacement du fichier zip dans le dossier var/www/moodle
+```
+mv identification-raspberry.zip /var/www/moodle/
+```
+
+### Accès au dossier var/www/moodle
+```
+cd /var/www/moodle/
+```
+
+### Décompression du fichier zip
+```
+unzip identification-raspberry.zip
+```
+
+### Suppression du fichier zip
+```
+rm identification-raspberry.zip
 ```
 
 # Balabox Manager
