@@ -7,11 +7,7 @@ class SaUserCreateController extends Controller{
     public function get($request){
         session_start();
         if($_SESSION['idRole'] != 1){
-<<<<<<< HEAD
             $this->render('sa_error',['message' => "Vous n'avez pas de permission d'entrer dans cette page"]);
-=======
-            $this->render('/',[]);
->>>>>>> b7904f8302411bfc414d7abc06378a6b3535ac94
         }else{
             $this->render('sa_userCreate',[]);
         }
