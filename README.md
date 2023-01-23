@@ -43,7 +43,7 @@ L'API REST offre un accès sécurisé aux fonctionnalités qu'elle expose
 
 # Intégrer ce travail dans la Raspberry Pi
 
-## Afin d'installer MoodleBox et ce travail dans voptre Raspoberry Pi, faites les commandes suivantes dans un terminal de commande d'ordinateur :
+## Afin d'installer MoodleBox et ce travail dans voptre Raspberry Pi, faites les commandes suivantes dans un terminal de commande d'ordinateur :
 ```
 #!/bin/bash
 
