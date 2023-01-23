@@ -11,7 +11,7 @@ def main():
     
     if answerVM == "y":
         print("I'm downloading the Virtual Machine of Moodle with Debian 11. Please wait...")
-        donwloadFile.download("http://terminale-colbert-lorient.fr/download/8052/?tmstv=1669851024", "Moodlebox.ova")
+        donwloadFile.download("https://misc.finxol.io/balabox.ova", "Moodlebox.ova")
         
     if answerVB == "y":
         print("Do you want to download VirtualBox for Windows or Linux or Mac ? (w/l/m)")
