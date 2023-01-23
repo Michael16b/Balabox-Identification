@@ -14,6 +14,7 @@ class ConnectController extends Controller{
 
 				//vérification du mot de passe
 				if(password_verify($password, $user->password)){
+					role_assign(4, $user->id, context_system::instance());
 					$userRole = $userdb->getUser_role($request['username']);
 					// démarrage de la session
 					session_start();
@@ -36,8 +37,7 @@ class ConnectController extends Controller{
 							$this-> render('/connect_info',['username' =>$request['username'] , 'password' => $password, 'role' => $userRole]);
 							break;
 					}
-					echo $userRole;
-					$this-> render('/connect_info',['username' =>$request['username'] , 'password' => $password, 'role' => $userRole]);
+					//echo $userRole;
 
 				
 				}else{

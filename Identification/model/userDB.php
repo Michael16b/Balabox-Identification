@@ -32,7 +32,7 @@ class UserDB {
         return $TMPusername;
     }
 
-    public function addUser(String $firstName, String $lastName) : String{
+    public function addUser(String $firstName, String $lastName){
         $user = new stdClass();
         $user->firstname =  $firstName;
         $user->lastname = $lastName;
@@ -50,7 +50,10 @@ class UserDB {
         $user->id = user_create_user($user);
         role_assign(4, $user->id, context_system::instance());
 
-        return ($user->username . " " . $password);
+
+        //echo $this->getUser_role($user->username);
+        $userRole = json_encode($this->getUser_role($user->username));
+        return array($user->username, $password,$this->getUser_role($user->username));
         }
 
 
