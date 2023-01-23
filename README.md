@@ -53,10 +53,14 @@ wget https://download.moodlebox.net/moodlebox-latest.img
 wget https://downloads.raspberrypi.org/imager/imager.deb
 
 1. Installer Raspberry Pi Imager
+```
 sudo apt install ./imager.deb
+```
 
 1. Ouvrir Raspberry Pi Imager
+```
 sudo imager
+```
 
 1. Sélectionner l'image Moodlebox et la carte SD
 
@@ -67,12 +71,17 @@ Faites ensuite ces commandes dans MoodleBox :
 
 ssh moodlebox@moodlebox
 1. Mettre le mot de passe : Moodlebox4$
+```
 sudo -i
+```
 
 1. Créer un fichier de configuration par défaut pour Nginx
+```
 sudo touch /etc/nginx/sites-available/default
+```
 
 1. Ajouter le contenu à partir de la configuration fournie
+```
 sudo echo "# Default server configuration
 #
 server {
@@ -112,7 +121,7 @@ server {
     }
 
 } " | sudo tee -a /etc/nginx/sites-available/default
-
+```
 
 # Balabox Manager
 
