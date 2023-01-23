@@ -1,5 +1,5 @@
 <?php
-class UserDBTest extends Assertions
+class userDBTest extends Assertions
 {
     private $userdb;
     private $testUsername = 'johndoe';
