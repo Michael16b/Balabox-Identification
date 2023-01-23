@@ -45,7 +45,9 @@ L'API REST offre un accès sécurisé aux fonctionnalités qu'elle expose
 
 Afin d'installer MoodleBox et ce travail dans voptre REaspoberry Pi, faites les commandes suivantes dans un terminal de commande d'ordinateur :
 
+```
 #!/bin/bash
+```
 1. Télécharger Moodlebox
 wget https://download.moodlebox.net/moodlebox-latest.img
 
@@ -66,7 +68,9 @@ sudo imager
 
 Faites ensuite ces commandes dans MoodleBox : 
 
+```
 #!/bin/bash
+```
 1.Utiliser un terminal de commande et connectez-vous en ssh à MoodleBox
 
 ssh moodlebox@moodlebox
