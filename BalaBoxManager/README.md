@@ -36,11 +36,28 @@ Après installation pour utiliser Balabox Manager, il faut lancer la commande su
 python3 main.py
 ```
 
+## 3. Monter l'image de la Raspberry Pi provenant de la cliente
 
+```bash
+#!/bin/bash
 
+# Vérifiez que l'utilisateur est root
+if [ "$EUID" -ne 0 ]
+  then echo "S'il vous plaît exécuter en tant que root"
+  exit
+fi
 
-## 3. Convertir un fichier .UI en .py
-Fonctionne UNIQUEMENT SOUS Python 3.9
+# Nom du fichier image
+img_file=image.img
+
+# Demandez à l'utilisateur de saisir le nom de la carte SD
+read -p "Entrez le nom de la carte SD (ex: /dev/sdb): " sd_card
+
+# Monter l'image sur la carte SD
+dd bs=4M if=$img_file of=$sd_card conv=fsync
+
+echo "Image montée avec succès sur la carte SD!"
+```
 
 
 ## 4. Pour les Développeurs : Modifier le design de l'application

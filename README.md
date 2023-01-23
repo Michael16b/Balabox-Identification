@@ -58,9 +58,9 @@ sudo apt install ./imager.deb
 
 # Ouvrir Raspberry Pi Imager
 sudo imager
-
-# Sélectionner l'image Moodlebox et la carte SD
 ```
+
+Sur l'application, sélectionner l'image Moodlebox et la carte SD.
 
 
 ## Faites ensuite ces commandes dans MoodleBox : 
@@ -138,10 +138,6 @@ unzip identification-raspberry.zip
 rm identification-raspberry.zip
 ```
 
-# Balabox Manager
+# Application interne : Balabox Manager
 
-Nous avons crée une machine virtuelle simulant la raspberry pi
-de Balabox. Elle peut s'avérer utile pour tester les
-fonctionnalités de nos applications.
-
-Voici le lien pour la télécharger : https://univubs-my.sharepoint.com/:u:/g/personal/besily_e2202632_etud_univ-ubs_fr/EQ8xu6AI6yBOkiFyQV6U7EABAGski8TPAoBNL3eNOZGEKg?e=AXZvUq
+Pour optimiser notre temps et éviter d'avoir besoin en permanence de la raspberry pi, nous avons créé une application interne qui permet de gérer la raspberry pi à travers une Virtual Machine. Et permet d'avoir accès au données de la cliente sans avoir besoin de la raspberry pi.
