@@ -48,43 +48,45 @@ Afin d'installer MoodleBox et ce travail dans voptre REaspoberry Pi, faites les 
 ```
 #!/bin/bash
 ```
-1. Télécharger Moodlebox
+- Télécharger Moodlebox
 wget https://download.moodlebox.net/moodlebox-latest.img
 
-1. Télécharger Raspberry Pi Imager pour Linux
+- Télécharger Raspberry Pi Imager pour Linux
 wget https://downloads.raspberrypi.org/imager/imager.deb
 
-1. Installer Raspberry Pi Imager
+ Installer Raspberry Pi Imager
 ```
 sudo apt install ./imager.deb
 ```
 
-1. Ouvrir Raspberry Pi Imager
+ Ouvrir Raspberry Pi Imager
 ```
 sudo imager
 ```
 
-1. Sélectionner l'image Moodlebox et la carte SD
+ Sélectionner l'image Moodlebox et la carte SD
 
 Faites ensuite ces commandes dans MoodleBox : 
 
 ```
 #!/bin/bash
 ```
-1.Utiliser un terminal de commande et connectez-vous en ssh à MoodleBox
+- Utiliser un terminal de commande et connectez-vous en ssh à MoodleBox
 
+```
 ssh moodlebox@moodlebox
-1. Mettre le mot de passe : Moodlebox4$
+```
+- Mettre le mot de passe : Moodlebox4$
 ```
 sudo -i
 ```
 
-1. Créer un fichier de configuration par défaut pour Nginx
+- Créer un fichier de configuration par défaut pour Nginx
 ```
 sudo touch /etc/nginx/sites-available/default
 ```
 
-1. Ajouter le contenu à partir de la configuration fournie
+- Ajouter le contenu à partir de la configuration fournie
 ```
 sudo echo "# Default server configuration
 #
