@@ -1,4 +1,4 @@
-Le groupe identification du prjet Balabox est composé des membres suivants : 
+Le groupe identification du projet Balabox est composé des membres suivants : 
 
 - Thomas POULAIN
 - Michaël BESILY
