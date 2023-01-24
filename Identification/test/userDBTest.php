@@ -30,13 +30,6 @@ class userDBTest extends Assertions
         $this->assertEquals($this->testUsername, $record->username);
     }
 
-    public function testGetUser()
-    {
-        // Test the getUser method
-        $result = $this->userdb->getUser($this->testUsername);
-        $this->assertTrue($result);
-    }
-
     public function testRandomPassword()
     {
         // Test the RandomPassword method
@@ -52,7 +45,7 @@ class userDBTest extends Assertions
         $lastName = 'Doe';
         $username = substr($firstName,0,1) . $lastName;
         $this->userdb->addUser($firstName, $lastName);
-        $user = $this->userdb->getUser($username);
+        $user = $this->userdb->getRecord( array('username' => $username));
         $this->assertTrue($user);
         // Clean up by deleting the test user
         $this->userdb->deleteUser($username);
