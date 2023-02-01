@@ -22,7 +22,8 @@ class userDBTest extends Assertions
     }
 
     public function testGetRecord()
-    {
+    {   
+        $this->setUp();
         // Test the getRecord method
         $surname = array('lastname' => $this->testLastName);
         $record = $this->userdb->getRecord($surname);
@@ -31,7 +32,8 @@ class userDBTest extends Assertions
     }
 
     public function testRandomPassword()
-    {
+    {   
+        $this->setUp();
         // Test the RandomPassword method
         $password = $this->userdb->RandomPassword();
         $this->assertNotEmpty($password);
@@ -40,6 +42,7 @@ class userDBTest extends Assertions
 
     public function testAddUser()
     {
+        $this->setUp();
         // Test the addUser method
         $firstName = 'Jane';
         $lastName = 'Doe';
@@ -53,6 +56,7 @@ class userDBTest extends Assertions
 
     public function testDeleteUser()
     {
+        $this->setUp();
         // Test the deleteUser method
         $this->userdb->deleteUser($this->testUsername);
         $user = $this->userdb->getUser($this->testUsername);
