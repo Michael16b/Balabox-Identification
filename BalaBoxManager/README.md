@@ -12,12 +12,19 @@ L'utilisateur devra cependant garantir une excellente connexion internet pour po
 
 ## 2. Installation de Python
 
+Tout d'abord, il faut installer Python et lui permette d'exécuter des scripts Python. Pour cela, il faut exécuter la commande suivante :
 
-Après installation pour utiliser Balabox Manager, il faut lancer la commande suivante dans le dossier où se trouve le fichier main.py :
+```bash
+./installPython.sh
+```
+
+
+Après l'installation pour utiliser Balabox Manager, il faut lancer la commande suivante dans le dossier où se trouve le fichier main.py :
 
 ```bash
 python3 main.py
 ```
+Et voilà, l'application est lancée !
 
 ## 3. Monter l'image de la Raspberry Pi provenant de la cliente
 
@@ -30,8 +37,8 @@ if [ "$EUID" -ne 0 ]
   exit
 fi
 
-# Nom du fichier image
-img_file=image.img
+# Demander le nom de l'image et sa localisation
+read -p "Entrez le nom de l'image (ex: /home/user/Downloads/image.img): " img_file
 
 # Demandez à l'utilisateur de saisir le nom de la carte SD
 read -p "Entrez le nom de la carte SD (ex: /dev/sdb): " sd_card
