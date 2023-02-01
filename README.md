@@ -43,21 +43,10 @@ L'API REST offre un accès sécurisé aux fonctionnalités qu'elle expose
 
 # Intégrer ce travail dans la Raspberry Pi
 
-## Afin d'installer MoodleBox et ce travail dans voptre Raspberry Pi, faites les commandes suivantes dans un terminal de commande d'ordinateur :
-```
-#!/bin/bash
-
-# Télécharger Moodlebox
-wget https://download.moodlebox.net/moodlebox-latest.img
-
-# Télécharger Raspberry Pi Imager pour Linux
-wget https://downloads.raspberrypi.org/imager/imager.deb
-
-# installer Raspberry Pi Imager
-sudo apt install ./imager.deb
-
-# Ouvrir Raspberry Pi Imager
-sudo imager
+## Afin d'installer MoodleBox et ce travail dans voptre Raspberry Pi, faites la commande suivante dans un terminal de commande d'ordinateur :
+```bash
+chmod u=rwx downloadMoodleBox.sh
+./downloadMoodleBox.sh
 ```
 
 Sur l'application, sélectionner l'image Moodlebox et la carte SD.
