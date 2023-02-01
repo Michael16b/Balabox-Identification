@@ -4,32 +4,42 @@ class groupsDBTest extends Assertions
 {
     // A ameliorer
     private $groupsDB;
+    private $testGroupName = "Test Group";
+    private $testDescription = "Test Description";
+
 
     public function setUp(): void
     {
         $this->groupsDB = new groupsDB();
+
+    }
+
+    public function tearDown(): void
+    {
+        $this->groupsDB->deleteGroups($this->testGroupName);
     }
 
     public function testAddGroups()
     {
-        $groupName = "Test Group";
-        $desc = "Test Description";
-        $this->groupsDB->addGroups($groupName, $desc);
+        $this->setUp();
+        $this->groupsDB->addGroups($this->testGroupName, $this->testDescription);
 
-        $group = $this->groupsDB->getGroups($groupName);
-        $this->assertEquals($groupName, $group->name);
+        $group = $this->groupsDB->getGroups($this->testGroupName);
+        $this->assertEquals($this->testGroupName, $group->name);
         $this->assertEquals(10, $group->courseid);
-        $this->assertEquals($desc, $group->description);
+        $this->assertEquals($this->testDescription, $group->description);
+        $this->tearDown();
     }
 
     public function testDeleteGroups()
     {
-        $groupName = "Test Group";
-        $this->groupsDB->addGroups($groupName, "Test Description");
-        $this->groupsDB->deleteGroups($groupName);
+        $this->setUp();
+        $this->groupsDB->addGroups($this->testGroupName, $this->testDescription);
+        $this->groupsDB->deleteGroups($this->testGroupName);
 
-        $group = $this->groupsDB->getGroups($groupName);
+        $group = $this->groupsDB->getGroups($this->testGroupName);
         $this->assertNull($group);
+        $this->tearDown();
     }
 
     public function testUpdateGroups()
