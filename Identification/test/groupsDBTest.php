@@ -63,18 +63,19 @@ class groupsDBTest extends Assertions
 
         $members = $this->groupsDB->getMembers($this->testGroupName);
         $this->assertContains($this->testUser, $members);
+        $this->tearDown();
     }
 
     public function testDeleteMember()
     {
-        $groupName = "Test Group";
-        $username = "testuser";
-        $this->groupsDB->addGroups($groupName, "Test Description");
-        $this->groupsDB->addMember($groupName, $username);
-        $this->groupsDB->deleteMember($groupName, $username);
+        $this->setUp();
+        $this->groupsDB->addGroups($this->testGroupName, $this->testDescription);
+        $this->groupsDB->addMember($this->testGroupName, $this->testUser);
+        $this->groupsDB->deleteMember($this->testGroupName, $this->testUser);
 
-        $members = $this->groupsDB->getMembers($groupName);
-        $this->assertNotContains($username, $members);
+        $members = $this->groupsDB->getMembers($this->testGroupName);
+        $this->assertNotContains($this->testUser, $members);
+        $this->tearDown();
     }
 }
 
