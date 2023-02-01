@@ -52,28 +52,21 @@ chmod u=rwx downloadMoodleBox.sh
 Sur l'application, sélectionner l'image Moodlebox et la carte SD.
 
 
-## Faites ensuite ces commandes dans MoodleBox : 
-```
+## Faites ensuite ces commandes pour installer MoodleBox : 
+
+```bash
 chmod u=rwx installMoodleBox.sh
 ./installMoodleBox.sh
 ```
-#!/bin/bash
 
-# Téléchargement du fichier zip
-wget https://gitlab.com/balabox/identification/-/archive/raspberry/identification-raspberry.zip
+## Pour installer le service d'identification, faites la commande suivante :
 
-# Déplacement du fichier zip dans le dossier var/www/moodle
-mv identification-raspberry.zip /var/www/moodle/
-
-# Accès au dossier var/www/moodle
-cd /var/www/moodle/
-
-# Décompression du fichier zip
-unzip identification-raspberry.zip
-
-# Suppression du fichier zip
-rm identification-raspberry.zip
+```bash
+chmod u=rwx installIdentification.sh
+./installIdentification.sh
 ```
+
+
 
 # Application interne : Balabox Manager
 
