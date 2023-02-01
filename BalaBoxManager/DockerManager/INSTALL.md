@@ -26,3 +26,51 @@ TriggeredBy: ● docker.socket
          CGroup: /system.slice/docker.service
                  └─1000 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
 ```
+
+
+
+## 2. Création de l'image Docker
+
+Pour créer l'image Docker, nous allons procéder en 2 temps :
+
+- Téléchargement de Moodle
+Désormais vous devez installer Moodle sur votre machine. Pour cela, il faut exécuter la commande suivante :
+
+```bash
+chmod u=rwx downloadMoodle.sh
+./downloadMoodle.sh
+```
+Il faut que Moodle soit installé sur le même repertoire que le Dockerfile.
+
+- Création de l'image Docker
+
+Pour créer l'image Docker, il faut exécuter la commande suivante :
+
+```bash
+docker build -t moodle .
+```
+Vérifier que l'image Docker est bien créée en exécutant la commande suivante :
+
+```bash
+docker images
+```
+Vous devriez voir quelque chose comme ceci :
+
+```bash
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+moodle              latest              1d2b3c4d5e6f        1 minute ago        1.2GB
+```
+
+## 3. Lancement de l'image Docker
+
+Pour lancer l'image Docker, il faut exécuter la commande suivante :
+
+```bash
+docker run -d -p 80:80 moodle
+```
+
+Félicitations ! Vous avez lancé l'image Docker de Moodle.
+
+
+
+
