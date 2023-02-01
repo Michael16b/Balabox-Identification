@@ -22,6 +22,7 @@ class groupsDBTest extends Assertions
 
     public function testAddGroups()
     {
+        var_dump("testAddGroups");
         $this->setUp();
         $this->groupsDB->addGroups($this->testGroupName, $this->testDescription);
 
@@ -30,10 +31,12 @@ class groupsDBTest extends Assertions
         $this->assertEquals(10, $group->courseid);
         $this->assertEquals($this->testDescription, $group->description);
         $this->tearDown();
+        var_dump("testAddGroups : OK");
     }
 
     public function testDeleteGroups()
     {
+        var_dump("testDeleteGroups");
         $this->setUp();
         $this->groupsDB->addGroups($this->testGroupName, $this->testDescription);
         $this->groupsDB->deleteGroups($this->testGroupName);
@@ -41,10 +44,12 @@ class groupsDBTest extends Assertions
         $group = $this->groupsDB->getGroups($this->testGroupName);
         $this->assertNull($group);
         $this->tearDown();
+        var_dump("testDeleteGroups : OK");
     }
 
     public function testUpdateGroups()
     {
+        var_dump("testUpdateGroups");
         $this->setUp();
         $newDesc = "New Test Description";
         $this->groupsDB->addGroups($this->testGroupName, $this->testDescription);
@@ -53,10 +58,12 @@ class groupsDBTest extends Assertions
         $group = $this->groupsDB->getGroups($this->testGroupName);
         $this->assertEquals($newDesc, $group->description);
         $this->tearDown();
+        var_dump("testUpdateGroups : OK");
     }
 
     public function testAddMember()
     {
+        var_dump("testAddMember");
         $this->setUp();
         $this->groupsDB->addGroups($this->testGroupName, $this->testDescription);
         $this->groupsDB->addMember($this->testGroupName, $this->testUser);
@@ -64,10 +71,12 @@ class groupsDBTest extends Assertions
         $members = $this->groupsDB->getMembers($this->testGroupName);
         $this->assertContains($this->testUser, $members);
         $this->tearDown();
+        var_dump("testAddMember : OK");
     }
 
     public function testDeleteMember()
     {
+        var_dump("testDeleteMember");
         $this->setUp();
         $this->groupsDB->addGroups($this->testGroupName, $this->testDescription);
         $this->groupsDB->addMember($this->testGroupName, $this->testUser);
@@ -76,6 +85,7 @@ class groupsDBTest extends Assertions
         $members = $this->groupsDB->getMembers($this->testGroupName);
         $this->assertNotContains($this->testUser, $members);
         $this->tearDown();
+        var_dump("testDeleteMember : OK");
     }
 }
 
