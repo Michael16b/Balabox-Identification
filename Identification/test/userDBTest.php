@@ -5,7 +5,6 @@ class userDBTest extends Assertions
     private $testUsername = 'johndoe';
     private $testFirstName = 'John';
     private $testLastName = 'Doe';
-    private $testRole = 'student';
 
     protected function setUp()
     {
