@@ -11,26 +11,26 @@ def main():
     
     if answerVM == "y":
         print("I'm downloading the Virtual Machine of Moodle with Debian 11. Please wait...")
-        donwloadFile.download("https://misc.finxol.io/balabox.ova", "Moodlebox.ova")
+        downloadFile.download("https://misc.finxol.io/balabox.ova", "Moodlebox.ova")
         
     if answerVB == "y":
         print("Do you want to download VirtualBox for Windows or Linux or Mac ? (w/l/m)")
         inputOS = input()
         if (inputOS == "w"):
             print("I'm downloading VirtualBox for Windows. Please wait...")
-            donwloadFile.download("https://download.virtualbox.org/virtualbox/6.1.26/VirtualBox-6.1.26-145957-Win.exe", "VirtualBox.exe")
+            downloadFile.download("https://download.virtualbox.org/virtualbox/6.1.26/VirtualBox-6.1.26-145957-Win.exe", "VirtualBox.exe")
         elif (inputOS == "l"):
             print("I'm downloading VirtualBox for Linux. Please wait...")
-            donwloadFile.download("https://download.virtualbox.org/virtualbox/6.1.26/VirtualBox-6.1.26-145957-Linux_amd64.run", "VirtualBox.run")
+            downloadFile.download("https://download.virtualbox.org/virtualbox/6.1.26/VirtualBox-6.1.26-145957-Linux_amd64.run", "VirtualBox.run")
         elif (inputOS == "m"):
             print("I'm downloading VirtualBox for Mac. Please wait...")
-            donwloadFile.download("https://download.virtualbox.org/virtualbox/6.1.26/VirtualBox-6.1.26-145957-OSX.dmg", "VirtualBox.dmg")
+            downloadFile.download("https://download.virtualbox.org/virtualbox/6.1.26/VirtualBox-6.1.26-145957-OSX.dmg", "VirtualBox.dmg")
         else:
             print("Error : You must choose w, l or m")
     
     if (answerMsAuriel == "y"):
         print("I'm downloading data of Ms Auriel in .img format. Please wait...")
-        donwloadFile.download("http://misc.finxol.io/moodlebox.gz", "MoodeboxData.gz")
+        downloadFile.download("http://misc.finxol.io/moodlebox.gz", "MoodeboxData.gz")
     
 
 
