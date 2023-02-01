@@ -15,6 +15,7 @@ L'utilisateur devra cependant garantir une excellente connexion internet pour po
 Tout d'abord, il faut installer Python et lui permette d'exécuter des scripts Python. Pour cela, il faut exécuter la commande suivante :
 
 ```bash
+chmod u=rwx installPython.sh
 ./installPython.sh
 ```
 
@@ -29,6 +30,7 @@ Et voilà, l'application est lancée !
 ## 3. Monter l'image de la Raspberry Pi provenant de la cliente
 
 ```bash
+chmod u=rwx mountImage.sh
 ./mountImage.sh
 ```
 
