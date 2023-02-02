@@ -43,100 +43,30 @@ L'API REST offre un accès sécurisé aux fonctionnalités qu'elle expose
 
 # Intégrer ce travail dans la Raspberry Pi
 
-## Afin d'installer MoodleBox et ce travail dans voptre Raspberry Pi, faites les commandes suivantes dans un terminal de commande d'ordinateur :
-```
-#!/bin/bash
-
-# Télécharger Moodlebox
-wget https://download.moodlebox.net/moodlebox-latest.img
-
-# Télécharger Raspberry Pi Imager pour Linux
-wget https://downloads.raspberrypi.org/imager/imager.deb
-
-# installer Raspberry Pi Imager
-sudo apt install ./imager.deb
-
-# Ouvrir Raspberry Pi Imager
-sudo imager
+## Afin d'installer MoodleBox et ce travail dans voptre Raspberry Pi, faites la commande suivante dans un terminal de commande d'ordinateur :
+```bash
+chmod u=rwx downloadMoodleBox.sh
+./downloadMoodleBox.sh
 ```
 
 Sur l'application, sélectionner l'image Moodlebox et la carte SD.
 
 
-## Faites ensuite ces commandes dans MoodleBox : 
-```
-#!/bin/bash
+## Faites ensuite ces commandes pour installer MoodleBox : 
 
-# Utiliser un terminal de commande et connectez-vous en ssh à MoodleBox
-
-ssh moodlebox@moodlebox
-# Mettre le mot de passe : Moodlebox4$
-sudo -i
-
-
-# Créer un fichier de configuration par défaut pour Nginx
-sudo touch /etc/nginx/sites-available/default
-
-# Ajouter le contenu à partir de la configuration fournie
-sudo echo "# Default server configuration
-#
-server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-
-    listen 443 ssl;
-    listen [::]:443 ssl;
-    ssl_certificate /etc/nginx/ssl/moodlebox.pem;
-    ssl_certificate_key /etc/nginx/ssl/moodlebox.key;
-
-    root /var/www/moodle;
-
-    index index2.php index.php index.html index.htm index.nginx-debian.html;
-
-    server_name moodlebox;
-
-    location / {
-        try_files $uri $uri/ /index2.php;
-    }
-
-    location /dataroot/ {
-        internal;
-        alias /var/www/moodledata/;
-    }
-
-    location ~ [^/].php(/|$) {
-        include fastcgi_params;
-        fastcgi_split_path_info    ^(.+.php)(/.+)$;
-        fastcgi_read_timeout    300;
-        fastcgi_pass    unix:/var/run/php/php7.4-fpm.sock;
-        fastcgi_index    index.php;
-        fastcgi_param    PATH_INFO    $fastcgi_path_info;
-        fastcgi_param    SCRIPT_FILENAME    $document_root$fastcgi_script_name;
-        fastcgi_param    PHP_VALUE "max_execution_time=300\n upload_max_filesize=50M\n post_max_size=50M";
-        client_max_body_size    50M;
-    }
-
-} " | sudo tee -a /etc/nginx/sites-available/default
+```bash
+chmod u=rwx installMoodleBox.sh
+./installMoodleBox.sh
 ```
 
+## Pour installer le service d'identification, faites la commande suivante :
+
+```bash
+chmod u=rwx installIdentification.sh
+./installIdentification.sh
 ```
-#!/bin/bash
 
-# Téléchargement du fichier zip
-wget https://gitlab.com/balabox/identification/-/archive/raspberry/identification-raspberry.zip
 
-# Déplacement du fichier zip dans le dossier var/www/moodle
-mv identification-raspberry.zip /var/www/moodle/
-
-# Accès au dossier var/www/moodle
-cd /var/www/moodle/
-
-# Décompression du fichier zip
-unzip identification-raspberry.zip
-
-# Suppression du fichier zip
-rm identification-raspberry.zip
-```
 
 # Application interne : Balabox Manager
 
