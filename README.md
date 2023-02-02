@@ -70,4 +70,4 @@ chmod u=rwx installIdentification.sh
 
 # Application interne : Balabox Manager
 
-Pour optimiser notre temps et éviter d'avoir besoin en permanence de la raspberry pi, nous avons créé une application interne qui permet de gérer la raspberry pi à travers une Virtual Machine. Et permet d'avoir accès au données de la cliente sans avoir besoin de la raspberry pi.
+Pour optimiser notre temps et éviter d'avoir besoin en permanence de la raspberry pi, nous avons créé une application interne qui sera découpée en deux parties : Balabox Machine Manager et Docker Manager. La présentation de ces deux parties est décrite dans ce [lien](https://gitlab.com/balabox/identification/-/tree/main/BalaBoxManager).
