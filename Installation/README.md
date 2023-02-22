@@ -16,7 +16,7 @@ The user will have to guarantee an excellent internet connection to be able to d
 
 ## 2. Installation of Docker
 
-Pour installer Docker, référer vous au fichier : [INSTALL.md](INSTALL.md).
+To install Docker, refer to the : [INSTALL.md](INSTALL.md).
 
 
 Moodle setup for Docker, build on [Alpine Linux](http://www.alpinelinux.org/).
