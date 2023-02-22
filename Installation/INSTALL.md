@@ -1,29 +1,26 @@
 ## How to install Moodle in a Docker container
 
-
-
 # 1. Installation of Alpine Linux on the Raspberry Pi
 
-Sur votre Machine Linux, lancer le script suivant permettant de télécharger et d'installer Alpine Linux sur la Raspberry Pi 4B+ et 3B+.
+On your Linux Machine, run the following script to download and install Alpine Linux on the Raspberry Pi 4B+ and 3B+.
 
 ```bash	
 chmod u=rwx installAlpineLinux.sh
 ./installAlpineLinux.sh
 ```
-
-Après cela vous pouvez débrancher la carte SD de votre machine Linux et la mettre dans la Raspberry Pi 4B+ et 3B+.
-Vous pouvez maintenant démarrer la Raspberry Pi 4B+ et 3B+ et se connecter en tant que l'utilisateur root, sans mot de passe par défaut.
+After that you can unplug the SD card from your Linux machine and put it in the Raspberry Pi 4B+ and 3B+.
+You can now boot the Raspberry Pi 4B+ and 3B+ and log in as the root user, without a default password.
 
 # 2. Installation of Identification & Docker
 
-Désormais vous pouvez installer Docker et notre projet sur la Raspberry Pi 4B+ et 3B+.
-Connectez-vous à la Raspberry Pi en SSH ou en console via un clavier et un écran.
-
+Now you can install Docker and our project on the Raspberry Pi 4B+ and 3B+.
+Connect to the Raspberry Pi via SSH or console via keyboard and monitor.
 
 ```bash	
 chmod u=rwx installDocker.sh
 ./installDocker.sh
 ```
+
 Login on the system using the provided credentials (ENV vars)
 
 ## Configuration
