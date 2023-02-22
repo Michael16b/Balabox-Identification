@@ -43,29 +43,7 @@ L'API REST offre un accès sécurisé aux fonctionnalités qu'elle expose
 
 # Intégrer ce travail dans la Raspberry Pi
 
-## Afin d'installer MoodleBox et ce travail dans voptre Raspberry Pi, faites la commande suivante dans un terminal de commande d'ordinateur :
-```bash
-chmod u=rwx downloadMoodleBox.sh
-./downloadMoodleBox.sh
-```
-
-Sur l'application, sélectionner l'image Moodlebox et la carte SD.
-
-
-## Faites ensuite ces commandes pour installer MoodleBox : 
-
-```bash
-chmod u=rwx installMoodleBox.sh
-./installMoodleBox.sh
-```
-
-## Pour installer le service d'identification, faites la commande suivante :
-
-```bash
-chmod u=rwx installIdentification.sh
-./installIdentification.sh
-```
-
+N'hésitez pas à consulter le [README](https://gitlab.com/balabox/identification/-/blob/main/Installation/README.md) de la partie Installation pour installer le service d'identification et le docker dans votre Raspberry Pi.
 
 
 # Application interne : Balabox Manager
