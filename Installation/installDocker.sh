@@ -1,5 +1,16 @@
 #!/bin/bash
 
+# Installation des paquets nécessaires
+
+apk update
+apk add docker
+addgroup username docker
+rc-update add docker default
+service docker start
+rc-update add cgroups
+apk add docker-compose
+
+
 # Téléchargement du fichier zip
 wget https://gitlab.com/balabox/identification/-/archive/raspberry/identification-raspberry.zip
 
