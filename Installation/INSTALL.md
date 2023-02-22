@@ -19,15 +19,11 @@ Vous pouvez maintenant démarrer la Raspberry Pi 4B+ et 3B+ et se connecter en t
 Désormais vous pouvez installer Docker et notre projet sur la Raspberry Pi 4B+ et 3B+.
 Connectez-vous à la Raspberry Pi en SSH ou en console via un clavier et un écran.
 
-```bash	
-wget 
-
 
 ```bash	
-chmod u=rwx installIdentification.sh
-./installIdentification.sh
+chmod u=rwx installDocker.sh
+./installDocker.sh
 ```
-
 Login on the system using the provided credentials (ENV vars)
 
 ## Configuration
