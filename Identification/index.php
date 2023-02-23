@@ -17,12 +17,12 @@ if (!isset($_SESSION)){
 
 // Configuration
 require (__ROOT__.'/model/userDB.php');
-require (__ROOT__.'/model/courseDB.php');
 require (__ROOT__.'/model/groupsDB.php');
 require (__ROOT__.'/model/tokenGenerator.php');
-require_once(__ROOT__.'/user/lib.php');
+require (__ROOT__.'/model/usersConnected.php');
+//require_once(__ROOT__.'/user/lib.php');
 require_once (__ROOT__.'/config2.php');
-require_once (__ROOT__.'/config.php');
+//require_once (__ROOT__.'/config.php');
 // ApplicationController
 require_once (CONTROLLERS_DIR.'/ApplicationController.php');
 
