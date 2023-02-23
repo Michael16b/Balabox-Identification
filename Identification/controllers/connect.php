@@ -11,12 +11,13 @@ class ConnectController extends Controller{
         try{
 
 			// test //
+			$role = 4;
 			$_SESSION['username'] = $request['username'];
 			$_SESSION['password'] = $request['password'];
-			$_SESSION['role'] = 1;
+			$_SESSION['role'] = $role;
 
 			$uc = new UsersConnected();
-			$uc->newConnection($request['username'], 1);
+			$uc->newConnection($request['username'], $role);
 			$this-> render('/connect_info',[]);
 			
 			//fin test //
