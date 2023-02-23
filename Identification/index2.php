@@ -25,7 +25,7 @@ ApplicationController::getInstance()->addRoute('sa_userCreate', CONTROLLERS_DIR.
 ApplicationController::getInstance()->addRoute('sa_confirm', CONTROLLERS_DIR.'/sa_confirm.php');
 ApplicationController::getInstance()->addRoute('sa_error', CONTROLLERS_DIR.'/sa_error.php');
 ApplicationController::getInstance()->addRoute('sa_download', CONTROLLERS_DIR.'/sa_download.php');
-
+ApplicationController::getInstance()->addRoute('disconnect', CONTROLLERS_DIR.'/disconnect.php');
 // Process the request
 ApplicationController::getInstance()->process();
 
