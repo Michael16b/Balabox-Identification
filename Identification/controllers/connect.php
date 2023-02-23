@@ -7,9 +7,27 @@ class ConnectController extends Controller{
 		$this-> render('/main',[]);
 	}
 
+	public function connection($role){
+		switch ($role){
+			case 1:
+				$this-> render('/sa_classCreate',[]);
+				break;
+			case 2:
+				$this-> render('/connect_info',[]);
+				break;
+			case 3:
+				$this-> render('/connect_info',[]);
+				break;
+			case 4:
+				$this-> render('/connect_info',[]);
+				break;
+			case 5:
+				$this-> render('/connect_info',[]);
+				break;
+		}
+	}
     public function post($request){
         try{
-
 			// test //
 			$role = 1;
 			$_SESSION['username'] = $request['username'];
@@ -21,7 +39,7 @@ class ConnectController extends Controller{
 			$this-> render('/sa_classCreate',[]);
 			
 			//fin test //
-/*
+	/*
 			//recuperation de l'utilisateur
 			$userdb = new UserDB();
 			$user = $userdb->getRecord($request['username']);
@@ -39,26 +57,7 @@ class ConnectController extends Controller{
 					$_SESSION['role'] = $userRole;
 					$_SESSION['username'] = $username;
 					$_SESSION['password'] = $password;
-					switch ($userRole){
-						case 1:
-							$this-> render('/sa_classCreate',[]);
-							break;
-						case 2:
-							$this-> render('/connect_info',[]);
-							break;
-						case 3:
-							$this-> render('/connect_info',[]);
-							break;
-						case 4:
-							$this-> render('/connect_info',[]);
-							break;
-						case 5:
-							$this-> render('/connect_info',[]);
-							break;
-					}
-					//echo $userRole;
-
-				
+					$this->connection($userRole);
 				}else{
 					$this-> render('/main',[]);
 					echo  " mot de passe incorrect";

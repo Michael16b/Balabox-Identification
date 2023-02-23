@@ -8,13 +8,8 @@ if (!isset($_SESSION)){
     $cookieLifetime = 3600; // 1 hour
     session_set_cookie_params($cookieLifetime);
     session_start();
-}else{
-    session_destroy();
-    $cookieLifetime = 3600; // 1 hour
-    session_set_cookie_params($cookieLifetime);
-    session_start();
 }
-
+//register_shutdown_function("session_destroy");
 // Configuration
 require (__ROOT__.'/model/userDB.php');
 require (__ROOT__.'/model/groupsDB.php');
