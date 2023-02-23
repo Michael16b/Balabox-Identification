@@ -7,6 +7,7 @@ define ("__ROOT__",__DIR__);
 require (__ROOT__.'/model/userDB.php');
 require (__ROOT__.'/model/courseDB.php');
 require (__ROOT__.'/model/groupsDB.php');
+require (__ROOT__.'/model/tokenGenerator.php');
 require_once(__ROOT__.'/user/lib.php');
 require_once (__ROOT__.'/config2.php');
 require_once (__ROOT__.'/config.php');
@@ -24,7 +25,6 @@ ApplicationController::getInstance()->addRoute('sa_userCreate', CONTROLLERS_DIR.
 ApplicationController::getInstance()->addRoute('sa_confirm', CONTROLLERS_DIR.'/sa_confirm.php');
 ApplicationController::getInstance()->addRoute('sa_error', CONTROLLERS_DIR.'/sa_error.php');
 ApplicationController::getInstance()->addRoute('sa_download', CONTROLLERS_DIR.'/sa_download.php');
-
 
 // Process the request
 ApplicationController::getInstance()->process();
