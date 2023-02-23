@@ -43,13 +43,5 @@ class UsersConnected{
         $list = $list . "]";
         return "[".$list;
     }
-
-    public function on_shudown(){
-        //session closed
-        session_destroy();
-
-        //reboot the logs
-
-    }
 }
 ?>
