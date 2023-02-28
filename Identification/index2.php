@@ -3,10 +3,23 @@ ini_set('display_errors', 'On');
 error_reporting(E_ALL);
 define ("__ROOT__",__DIR__);
 
+//paramètrage de la session
+if (!isset($_SESSION)){
+    $cookieLifetime = 3600; // 1 hour
+    session_set_cookie_params($cookieLifetime);
+    session_start();
+}else{
+    session_destroy();
+    $cookieLifetime = 3600; // 1 hour
+    session_set_cookie_params($cookieLifetime);
+    session_start();
+}
+
 // Configuration
 require (__ROOT__.'/model/userDB.php');
 require (__ROOT__.'/model/courseDB.php');
 require (__ROOT__.'/model/groupsDB.php');
+require (__ROOT__.'/model/tokenGenerator.php');
 require_once(__ROOT__.'/user/lib.php');
 require_once (__ROOT__.'/config2.php');
 require_once (__ROOT__.'/config.php');
@@ -24,7 +37,8 @@ ApplicationController::getInstance()->addRoute('sa_userCreate', CONTROLLERS_DIR.
 ApplicationController::getInstance()->addRoute('sa_confirm', CONTROLLERS_DIR.'/sa_confirm.php');
 ApplicationController::getInstance()->addRoute('sa_error', CONTROLLERS_DIR.'/sa_error.php');
 ApplicationController::getInstance()->addRoute('sa_download', CONTROLLERS_DIR.'/sa_download.php');
-
+ApplicationController::getInstance()->addRoute('authentified', CONTROLLERS_DIR.'/authentified.php');
+ApplicationController::getInstance()->addRoute('disconnect', CONTROLLERS_DIR.'/disconnect.php');
 
 // Process the request
 ApplicationController::getInstance()->process();

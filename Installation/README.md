@@ -14,9 +14,9 @@
 The application should allow the user to install Docker and the image of our application on his machine, in particular the Raspberry Pi 4B+ and 3B+.
 The user will have to guarantee an excellent internet connection to be able to download the files in a very fast way.
 
-## 2. Installation de Docker
+## 2. Installation of Docker
 
-Pour installer Docker, référer vous au fichier : [INSTALL.md](INSTALL.md).
+To install Docker, refer to the : [INSTALL.md](INSTALL.md).
 
 
 Moodle setup for Docker, build on [Alpine Linux](http://www.alpinelinux.org/).
