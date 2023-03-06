@@ -10,6 +10,7 @@ class SaErrorController extends Controller{
         }else{
             $this->render('sa_error',[]);  
         } 
+        $this->render('sa_userCreate',[]);
     }
 }
 

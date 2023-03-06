@@ -10,6 +10,7 @@ class SaConfirmController extends Controller{
         }else{
             $this->render('sa_confirm',[]);
         }
+        $this->render('sa_userCreate',[]);
     }
 }
 
