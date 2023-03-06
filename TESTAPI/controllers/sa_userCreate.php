@@ -11,7 +11,6 @@ class SaUserCreateController extends Controller{
         }else{
             $this->render('sa_userCreate',[]);
         }
-        $this->render('sa_userCreate',[]);
     }
 
     public function post($request){
