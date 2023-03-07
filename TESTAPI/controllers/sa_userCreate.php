@@ -5,7 +5,6 @@ require(__ROOT__.'/static/assets/FPDF/fpdf.php');
 class SaUserCreateController extends Controller{
 
     public function get($request){
-        session_start();
         if($_SESSION['role'] != 1){
             $this->render('sa_error',['message' => "Vous n'avez pas de permission d'entrer dans cette page"]);
         }else{
@@ -14,7 +13,6 @@ class SaUserCreateController extends Controller{
     }
 
     public function post($request){
-        session_start();
         $userdb = new UserDB();
 
         if (isset($_POST['csvForm'])) {
