@@ -9,6 +9,7 @@ if (!isset($_SESSION)){
     session_set_cookie_params($cookieLifetime);
     session_start();
 }
+//register_shutdown_function("session_destroy");
 // Configuration
 require (__ROOT__.'/model/userDB.php');
 require (__ROOT__.'/model/groupsDB.php');
@@ -26,6 +27,7 @@ ApplicationController::getInstance()->addRoute('seeConfig', CONTROLLERS_DIR.'/se
 ApplicationController::getInstance()->addRoute('connect_Prof', CONTROLLERS_DIR.'/connect_Prof.php');
 ApplicationController::getInstance()->addRoute('connect', CONTROLLERS_DIR.'/connect.php');
 ApplicationController::getInstance()->addRoute('sa_classCreate', CONTROLLERS_DIR.'/sa_classCreate.php');
+ApplicationController::getInstance()->addRoute('sa_courseCreate', CONTROLLERS_DIR.'/sa_courseCreate.php');
 ApplicationController::getInstance()->addRoute('sa_userCreate', CONTROLLERS_DIR.'/sa_userCreate.php');
 ApplicationController::getInstance()->addRoute('sa_confirm', CONTROLLERS_DIR.'/sa_confirm.php');
 ApplicationController::getInstance()->addRoute('sa_error', CONTROLLERS_DIR.'/sa_error.php');
