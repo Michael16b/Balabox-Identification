@@ -1,0 +1,37 @@
+FROM arm32v7/php:7.4-apache-buster
+
+# Mise à jour des paquets et installation des dépendances nécessaires
+RUN apt-get update && apt-get install -y \
+    git \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libpng-dev \
+    libxml2-dev \
+    libzip-dev \
+    unzip \
+    zlib1g-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Installation de Moodle
+WORKDIR /var/www/html
+RUN git clone --depth=1 -b MOODLE_39_STABLE git://git.moodle.org/moodle.git .
+RUN chown -R www-data:www-data /var/www/html
+
+# Configuration d'Apache
+RUN a2enmod rewrite
+COPY moodle.conf /etc/apache2/sites-available/
+RUN a2dissite 000-default.conf && a2ensite moodle.conf && a2enmod ssl
+
+# Exposition des ports et configuration de l'environnement
+EXPOSE 80 443
+ENV MOODLE_DOCKER_DB_HOST=172.17.0.1 \
+    MOODLE_DOCKER_DB_USER=moodleuser \
+    MOODLE_DOCKER_DB_PASSWORD=secret \
+    MOODLE_DOCKER_DB_NAME=moodle \
+    MOODLE_DOCKER_WWWROOT=http://localhost \
+    MOODLE_DOCKER_MOODLEDATA=/var/www/moodledata \
+    MOODLE_DOCKER_SKIP_INSTALL=false \
+    MOODLE_DOCKER_PHP=php
+
+# Lancement d'Apache
+CMD ["apache2-foreground"]
