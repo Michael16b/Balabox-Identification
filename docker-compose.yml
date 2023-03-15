@@ -16,8 +16,7 @@ services:
       - 3306:3306
 
   web:
-    build:
-      dockerfile: Dockerfile
+    build: .
     restart: always
     ports:
       - 80:80
