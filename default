@@ -9,14 +9,14 @@ server {
     ssl_certificate /etc/nginx/ssl/moodlebox.pem;
     ssl_certificate_key /etc/nginx/ssl/moodlebox.pem;  # Correction ici
 
-    root /var/www/html/moodle;
+    root /var/www/moodle;
 
-    index index2.php index.php index.html index.htm index.nginx-debian.html;
+    index index.php index2.php index.html index.htm index.nginx-debian.html;
 
     server_name moodle;
 
     location / {
-        try_files $uri $uri/ /index2.php;
+        try_files $uri $uri/ /index.php;
     }
 
     location /dataroot/ {

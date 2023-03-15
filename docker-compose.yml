@@ -5,7 +5,7 @@ services:
     image: nginx:latest
     restart: always
     ports:
-      - "80:80"
+      - "80:8080"
     volumes:
       - ./moodle:/var/www/html/moodle
       - ./Identification:/var/www/html/Identification
@@ -13,12 +13,12 @@ services:
     depends_on:
       - db
     environment:
-      MOODLE_DB_TYPE: mysqli
+      MOODLE_DB_TYPE: MariaDB
       MOODLE_DB_HOST: db
       MOODLE_DB_NAME: moodle
       MOODLE_DB_USER: moodle
-      MOODLE_DB_PASS: moodle
-
+      MOODLE_DB_PASS: Moodlebox4$
+      
   db:
     image: mariadb:latest
     restart: always
