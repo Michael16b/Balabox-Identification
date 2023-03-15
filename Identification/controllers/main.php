@@ -7,9 +7,11 @@ class MainController extends Controller{
         //persistant connection
         if(isset($_SESSION['username'])){
             $connect = new ConnectController();
+            $uc->newConnection($request['username'], $role);
+            $this->connection($userRole);
             $connect->connection($_SESSION['role']);
         }else{
-            $this->render('main',[]);
+            $this->render('connect',[]);
         }
     }
 }
