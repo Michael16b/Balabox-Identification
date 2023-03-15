@@ -3,6 +3,10 @@
 # Construire l'image Docker
 docker build -t balabox-identification:latest .
 
+
+# Lancer Docker
+sudo systemctl start docker
+
 # Lancer les conteneurs Docker avec Docker Compose
 docker-compose up -d
 
