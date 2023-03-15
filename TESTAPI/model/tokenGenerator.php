@@ -55,11 +55,19 @@ class TokenGenerator{
      * @param password the password of the user
      * return the jwt token
      */
-    public function generateToken($role, $username, $password): String{
+    public function generateUserToken($role, $username, $password){
         $payload = [
             'role' => $role,
             'username' => $username,
             'password' => $password
+        ];
+
+        return JWT::encode($payload, $this->privateKey, 'RS256');
+    }
+
+    public function generateUsersToken($username){
+        $payload = [
+            'users' => $username
         ];
 
         return JWT::encode($payload, $this->privateKey, 'RS256');
