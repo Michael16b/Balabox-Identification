@@ -1,37 +1,48 @@
-FROM arm32v7/php:7.4-apache-buster
+ARG ARCH=
+FROM ${ARCH}erseco/alpine-php-webserver:1.13.0
 
-# Mise à jour des paquets et installation des dépendances nécessaires
-RUN apt-get update && apt-get install -y \
-    git \
-    libfreetype6-dev \
-    libjpeg62-turbo-dev \
-    libpng-dev \
-    libxml2-dev \
-    libzip-dev \
-    unzip \
-    zlib1g-dev \
-    && rm -rf /var/lib/apt/lists/*
+LABEL maintainer="Ernesto Serrano <info@ernesto.es>"
 
-# Installation de Moodle
-WORKDIR /var/www/html
-RUN git clone --depth=1 -b MOODLE_39_STABLE git://git.moodle.org/moodle.git .
-RUN chown -R www-data:www-data /var/www/html
+USER root
+COPY --chown=nobody rootfs/ /
 
-# Configuration d'Apache
-RUN a2enmod rewrite
-COPY moodle.conf /etc/apache2/sites-available/
-RUN a2dissite 000-default.conf && a2ensite moodle.conf && a2enmod ssl
+# crond needs root, so install dcron and cap package and set the capabilities
+# on dcron binary https://github.com/inter169/systs/blob/master/alpine/crond/README.md
+RUN apk add --no-cache dcron libcap php8-sodium php8-exif && \
+    chown nobody:nobody /usr/sbin/crond && \
+    setcap cap_setgid=ep /usr/sbin/crond
 
-# Exposition des ports et configuration de l'environnement
-EXPOSE 80 443
-ENV MOODLE_DOCKER_DB_HOST=172.17.0.1 \
-    MOODLE_DOCKER_DB_USER=moodleuser \
-    MOODLE_DOCKER_DB_PASSWORD=secret \
-    MOODLE_DOCKER_DB_NAME=moodle \
-    MOODLE_DOCKER_WWWROOT=http://localhost \
-    MOODLE_DOCKER_MOODLEDATA=/var/www/moodledata \
-    MOODLE_DOCKER_SKIP_INSTALL=false \
-    MOODLE_DOCKER_PHP=php
+USER nobody
 
-# Lancement d'Apache
-CMD ["apache2-foreground"]
+# Change MOODLE_XX_STABLE for new versions
+ENV MOODLE_URL=https://github.com/moodle/moodle/archive/MOODLE_401_STABLE.tar.gz \
+    LANG=en_US.UTF-8 \
+    LANGUAGE=en_US:en \
+    SITE_URL=http://localhost \
+    DB_TYPE=pgsql \
+    DB_HOST=postgres \
+    DB_PORT=5432 \
+    DB_NAME=moodle \
+    DB_USER=moodle \
+    DB_PASS=moodle \
+    DB_PREFIX=mdl_ \
+    SSLPROXY=false \
+    MOODLE_EMAIL=user@example.com \
+    MOODLE_LANGUAGE=en \
+    MOODLE_SITENAME=New-Site \
+    MOODLE_USERNAME=moodleuser \
+    MOODLE_PASSWORD=PLEASE_CHANGEME \
+    SMTP_HOST=smtp.gmail.com \
+    SMTP_PORT=587 \
+    SMTP_USER=your_email@gmail.com \
+    SMTP_PASSWORD=your_password \
+    SMTP_PROTOCOL=tls \
+    MOODLE_MAIL_NOREPLY_ADDRESS=noreply@localhost \
+    MOODLE_MAIL_PREFIX=[moodle] \
+    client_max_body_size=50M \
+    post_max_size=50M \
+    upload_max_filesize=50M \
+    max_input_vars=5000
+
+RUN curl --location $MOODLE_URL | tar xz --strip-components=1 -C /var/www/html/
+
