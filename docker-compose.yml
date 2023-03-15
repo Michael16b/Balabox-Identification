@@ -1,48 +1,39 @@
-version: '2'
+version: '3'
 
 services:
-  postgres:
-    image: postgres:alpine
-    restart: unless-stopped
+  db:
+    image: mariadb
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    restart: always
     environment:
-      - POSTGRES_PASSWORD=moodle
-      - POSTGRES_USER=moodle
-      - POSTGRES_DB=moodle
+      MYSQL_DATABASE: moodle
+      MYSQL_USER: moodleuser
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: secret
     volumes:
-      - "postgres:/var/lib/postgresql/data"
-
-  moodle:
-    #image: erseco/alpine-moodle
-    build: .
-    restart: unless-stopped
-    environment:
-      - LANG=fr_FR.UTF-8
-      - LANGUAGE=fr_FR:fr
-      - SITE_URL=https://moodle.balabox/
-      - DB_TYPE=pgsql
-      - DB_HOST=postgres
-      - DB_PORT=5432
-      - DB_NAME=moodle
-      - DB_USER=moodle
-      - DB_PASS=moodle
-      - DB_PREFIX=mdl_
-      - SSLPROXY=false
-      - MOODLE_EMAIL=user@example.com
-      - MOODLE_LANGUAGE=fr
-      - MOODLE_SITENAME=Balabox
-      - MOODLE_USERNAME=moodleuser
-      - MOODLE_PASSWORD=password
-      - SMTP_HOST=
-      - SMTP_PORT=587
-      - SMTP_USER=test@example.org
-      - SMTP_PASSWORD=none
-      - SMTP_PROTOCOL=tls
-      - MOODLE_MAIL_NOREPLY_ADDRESS=noreply@localhost
-      - MOODLE_MAIL_PREFIX=[moodle]
+      - db_data:/var/lib/mysql
     ports:
-      - "4002:8080"
-    volumes:
-      - "moodledata:/var/www/moodledata"
-      - "moodlehtml:/var/www/html"
+      - 3306:3306
+
+  web:
+    build:
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
     depends_on:
-      - postgres
+      - db
+    environment:
+      MOODLE_DOCKER_DB_HOST: db
+      MOODLE_DOCKER_DB_USER: moodleuser
+      MOODLE_DOCKER_DB_PASSWORD: secret
+      MOODLE_DOCKER_DB_NAME: moodle
+      MOODLE_DOCKER_WWWROOT: http://localhost
+      MOODLE_DOCKER_MOODLEDATA: /var/www/moodledata
+      MOODLE_DOCKER_SKIP_INSTALL: "false"
+      MOODLE_DOCKER_PHP: php
+    image: balabox-identification:latest
+
+volumes:
+  db_data:
