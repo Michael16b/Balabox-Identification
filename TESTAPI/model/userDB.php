@@ -84,6 +84,5 @@ class UserDB {
 	    $roles =$DB->get_record('role_assignments', array('userid' => $user->id));
     	return  $roles->roleid;
     }
-
 }
 ?>
