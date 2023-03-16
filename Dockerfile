@@ -1,7 +1,7 @@
 ARG ARCH=
 FROM ${ARCH}erseco/alpine-php-webserver:latest
 
-LABEL maintainer="BESILY Michaël <besily.e2202632@etud.univ-ubs.fr"
+LABEL maintainer="BESILY Michaël <besily.e2202632@etud.univ-ubs.fr>"
 
 USER root
 COPY --chown=nobody rootfs/ /
@@ -10,7 +10,11 @@ COPY --chown=nobody rootfs/ /
 # sur le binaire dcron https://github.com/inter169/systs/blob/master/alpine/crond/README.md
 RUN apk add --no-cache dcron libcap php81-sodium php81-exif php81-pecl-redis php81-ldap php81-fpm && \
     chown nobody:nobody /usr/sbin/crond && \
-    setcap cap_setgid=ep /usr/sbin/crond
+    setcap cap_setgid=ep /usr/sbin/crond && \
+    mkdir -p /var/log/cron && \
+    touch /var/log/cron/cron.log && \
+    chown nobody:nobody /var/log/cron && \
+    chown nobody:nobody /var/log/cron/cron.log
 
 USER nobody
 
