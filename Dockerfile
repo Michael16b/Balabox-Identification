@@ -10,8 +10,7 @@ COPY --chown=nobody rootfs/ /
 # sur le binaire dcron https://github.com/inter169/systs/blob/master/alpine/crond/README.md
 RUN apk add --no-cache dcron libcap php81-sodium php81-exif php81-pecl-redis php81-ldap php81-fpm && \
     chown nobody:nobody /usr/sbin/crond && \
-    setcap cap_setgid=ep /usr/sbin/crond && \
-    chmod 777  /usr/sbin/crond
+    setcap cap_setgid=ep /usr/sbin/crond
 
 USER nobody
 
@@ -54,6 +53,7 @@ RUN wget -O /tmp/identification-main.tar.gz "https://gitlab.com/balabox/identifi
     rm /tmp/identification-main.tar.gz
 
 RUN chown -R nobody:nobody /var/www/html && \
-    chmod -R 755 /var/www/html
+    chmod -R 755 /var/www/html && \
+    chmod +x /etc/service/cron/run
 
 EXPOSE 80
