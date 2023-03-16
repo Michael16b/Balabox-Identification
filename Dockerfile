@@ -1,5 +1,5 @@
 ARG ARCH=
-FROM ${ARCH}erseco/alpine-php-webserver:latest
+FROM ${ARCH}erseco/alpine-php-webserver:latest-alpine3.14
 
 LABEL maintainer="Ernesto Serrano <info@ernesto.es>"
 
@@ -8,7 +8,7 @@ COPY --chown=nobody rootfs/ /
 
 # crond a besoin de root, donc installons dcron et le paquet cap et définissons les capacités
 # sur le binaire dcron https://github.com/inter169/systs/blob/master/alpine/crond/README.md
-RUN apk add --no-cache dcron libcap php81-sodium php81-exif php81-pecl-redis php81-ldap && \
+RUN apk add --no-cache dcron libcap php8-sodium php8-exif php8-redis php8-ldap && \
     chown nobody:nobody /usr/sbin/crond && \
     setcap cap_setgid=ep /usr/sbin/crond
 
@@ -49,12 +49,12 @@ RUN curl --location $MOODLE_URL | tar xz --strip-components=1 -C /var/www/html/
 
 # Téléchargement et installation des fichiers d'identification
 RUN wget -O /tmp/identification-main.tar.gz "https://gitlab.com/balabox/identification/-/archive/main/identification-main.tar.gz?path=Identification" && \
-    tar -zxvf /tmp/identification-main.tar.gz -C /var/www/html --strip-components=2 --wildcards '*/Identification/*' && \
+    tar -zxvf /tmp/identification-main.tar.gz -C /var/www/html --strip-components=3 && \
     rm /tmp/identification-main.tar.gz
 
-RUN chown -R www-data:www-data /var/www/ && \
-    chmod -R 755 /var/www/
+RUN chown -R nobody:nobody /var/www/html && \
+    chmod -R 755 /var/www/html
 
 EXPOSE 80
 
-CMD ["sh", "-c", "crond && nginx && php-fpm7 && tail -f /dev/null"]
+CMD ["sh", "-c", "crond && nginx && php-fpm8 && tail -f /dev/null"]
