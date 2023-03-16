@@ -11,10 +11,7 @@ COPY --chown=nobody rootfs/ /
 RUN apk add --no-cache dcron libcap php81-sodium php81-exif php81-pecl-redis php81-ldap php81-fpm && \
     chown nobody:nobody /usr/sbin/crond && \
     setcap cap_setgid=ep /usr/sbin/crond && \
-    mkdir -p /var/log/cron && \
-    touch /var/log/cron/cron.log && \
-    chown nobody:nobody /var/log/cron && \
-    chown nobody:nobody /var/log/cron/cron.log
+    chmod 4755 /usr/sbin/crond
 
 USER nobody
 
