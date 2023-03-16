@@ -13,7 +13,6 @@ services:
 
   moodle:
     image: erseco/alpine-moodle
-    build: .
     restart: unless-stopped
     environment:
       - LANG=en_US.UTF-8
@@ -40,7 +39,7 @@ services:
       - MOODLE_MAIL_NOREPLY_ADDRESS=noreply@localhost
       - MOODLE_MAIL_PREFIX=[moodle]
     ports:
-      - 80:8080
+      - 80:80
     volumes:
       - moodledata:/var/www/moodledata
       - moodlehtml:/var/www/html
@@ -48,6 +47,6 @@ services:
       - postgres
 
 volumes:
-  postgres: null
-  moodledata: null
-  moodlehtml: null
+  postgres:
+  moodledata:
+  moodlehtml:

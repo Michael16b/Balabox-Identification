@@ -1,52 +1,31 @@
-version: '2'
+version: '3'
+
 services:
-
-  postgres:
-    image: postgres:alpine
-    restart: unless-stopped
-    environment:
-      - POSTGRES_PASSWORD=moodle
-      - POSTGRES_USER=moodle
-      - POSTGRES_DB=moodle
-    volumes:
-      - postgres:/var/lib/postgresql/data
-
-  moodle:
-    image: erseco/alpine-moodle
-    restart: unless-stopped
-    environment:
-      - LANG=en_US.UTF-8
-      - LANGUAGE=en_US:en
-      - SITE_URL=http://localhost
-      - DB_TYPE=pgsql
-      - DB_HOST=postgres
-      - DB_PORT=5432
-      - DB_NAME=moodle
-      - DB_USER=moodle
-      - DB_PASS=moodle
-      - DB_PREFIX=mdl_
-      - SSLPROXY=false
-      - MOODLE_EMAIL=user@example.com
-      - MOODLE_LANGUAGE=en
-      - MOODLE_SITENAME=New-Site
-      - MOODLE_USERNAME=moodleuser
-      - MOODLE_PASSWORD=PLEASE_CHANGEME
-      - SMTP_HOST=smtp.gmail.com
-      - SMTP_PORT=587
-      - SMTP_USER=your_email@gmail.com
-      - SMTP_PASSWORD=your_password
-      - SMTP_PROTOCOL=tls
-      - MOODLE_MAIL_NOREPLY_ADDRESS=noreply@localhost
-      - MOODLE_MAIL_PREFIX=[moodle]
+  web:
+    image: nginx:latest
+    restart: always
     ports:
-      - 80:80
+      - "80:8080"
     volumes:
-      - moodledata:/var/www/moodledata
-      - moodlehtml:/var/www/html
+      - ./moodle:/var/www/html/moodle
+      - ./Identification:/var/www/html/Identification
+      - ./default.conf:/etc/nginx/conf.d/default.conf
     depends_on:
-      - postgres
-
-volumes:
-  postgres:
-  moodledata:
-  moodlehtml:
+      - db
+    environment:
+      MOODLE_DB_TYPE: MariaDB
+      MOODLE_DB_HOST: db
+      MOODLE_DB_NAME: moodle
+      MOODLE_DB_USER: moodle
+      MOODLE_DB_PASS: Moodlebox4$
+      
+  db:
+    image: mariadb:latest
+    restart: always
+    volumes:
+      - ./data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: moodle
+      MYSQL_USER: moodle
+      MYSQL_PASSWORD: moodle

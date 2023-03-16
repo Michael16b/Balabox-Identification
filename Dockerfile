@@ -6,8 +6,8 @@ LABEL maintainer="Ernesto Serrano <info@ernesto.es>"
 USER root
 COPY --chown=nobody rootfs/ /
 
-# crond needs root, so install dcron and cap package and set the capabilities
-# on dcron binary https://github.com/inter169/systs/blob/master/alpine/crond/README.md
+# crond a besoin de root, donc installons dcron et le paquet cap et définissons les capacités
+# sur le binaire dcron https://github.com/inter169/systs/blob/master/alpine/crond/README.md
 RUN apk add --no-cache dcron libcap php81-sodium php81-exif php81-pecl-redis php81-ldap && \
     chown nobody:nobody /usr/sbin/crond && \
     setcap cap_setgid=ep /usr/sbin/crond
@@ -36,7 +36,7 @@ ENV MOODLE_URL=https://github.com/moodle/moodle/archive/MOODLE_401_STABLE.tar.gz
     SMTP_HOST=smtp.gmail.com \
     SMTP_PORT=587 \
     SMTP_USER=your_email@gmail.com \
-    SMTP_PASSWORD=your_password \
+    SMTP_PASSWORD=your_password \
     SMTP_PROTOCOL=tls \
     MOODLE_MAIL_NOREPLY_ADDRESS=noreply@localhost \
     MOODLE_MAIL_PREFIX=[moodle] \
@@ -47,3 +47,17 @@ ENV MOODLE_URL=https://github.com/moodle/moodle/archive/MOODLE_401_STABLE.tar.gz
 
 RUN curl --location $MOODLE_URL | tar xz --strip-components=1 -C /var/www/html/
 
+# Téléchargement et installation des fichiers d'identification
+RUN wget -O /tmp/identification-main.tar.gz "https://gitlab.com/balabox/identification/-/archive/main/identification-main.tar.gz?path=Identification" && \
+    tar -zxvf /tmp/identification-main.tar.gz -C /var/www/html --strip-components=2 --wildcards '*/Identification/*' && \
+    rm /tmp/identification-main.tar.gz
+
+# Copie du fichier de configuration Nginx dans le répertoire /etc/nginx/sites-available/
+COPY default /etc/nginx/sites-available/
+
+RUN chown -R www-data:www-data /var/www/ && \
+    chmod -R 755 /var/www/
+
+EXPOSE 80
+
+CMD ["sh", "-c", "crond && nginx && php-fpm7 && tail -f /dev/null"]
