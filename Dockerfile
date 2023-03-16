@@ -12,6 +12,8 @@ RUN apk add --no-cache dcron libcap php81-sodium php81-exif php81-pecl-redis php
     chown nobody:nobody /usr/sbin/crond && \
     setcap cap_setgid=ep /usr/sbin/crond
 
+RUN apk add --no-cache php-fpm8
+
 USER nobody
 
 # Change MOODLE_XX_STABLE for new versions
@@ -57,4 +59,4 @@ RUN chown -R nobody:nobody /var/www/html && \
 
 EXPOSE 80
 
-CMD ["sh", "-c", "crond && nginx && php-fpm8 && tail -f /dev/null"]
+CMD ["/bin/sh", "-c", "crond && nginx && php-fpm8 && tail -f /dev/null"]
