@@ -8,11 +8,9 @@ COPY --chown=nobody rootfs/ /
 
 # crond a besoin de root, donc installons dcron et le paquet cap et définissons les capacités
 # sur le binaire dcron https://github.com/inter169/systs/blob/master/alpine/crond/README.md
-RUN apk add --no-cache dcron libcap php81-sodium php81-exif php81-pecl-redis php81-ldap && \
+RUN apk add --no-cache dcron libcap php81-sodium php81-exif php81-pecl-redis php81-ldap php81-fpm && \
     chown nobody:nobody /usr/sbin/crond && \
     setcap cap_setgid=ep /usr/sbin/crond
-
-RUN apk add --no-cache php-fpm8
 
 USER nobody
 
@@ -59,4 +57,4 @@ RUN chown -R nobody:nobody /var/www/html && \
 
 EXPOSE 80
 
-CMD ["/bin/sh", "-c", "crond && nginx && php-fpm8 && tail -f /dev/null"]
+CMD ["/bin/sh", "-c", "crond && php-fpm8 && nginx -g 'daemon off;'"]
