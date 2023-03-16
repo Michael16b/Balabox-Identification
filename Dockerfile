@@ -6,6 +6,8 @@ LABEL maintainer="BESILY Michaël <besily.e2202632@etud.univ-ubs.fr>"
 USER root
 COPY --chown=nobody rootfs/ /
 
+RUN /docker-entrypoint-init.d/02-configure-moodle.sh
+
 # crond a besoin de root, donc installons dcron et le paquet cap et définissons les capacités
 # sur le binaire dcron https://github.com/inter169/systs/blob/master/alpine/crond/README.md
 RUN apk add --no-cache dcron libcap php81-sodium php81-exif php81-pecl-redis php81-ldap php81-fpm && \
