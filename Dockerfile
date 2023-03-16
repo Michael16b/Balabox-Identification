@@ -1,7 +1,7 @@
 ARG ARCH=
 FROM ${ARCH}erseco/alpine-php-webserver:latest
 
-LABEL maintainer="Ernesto Serrano <info@ernesto.es>"
+LABEL maintainer="BESILY Michaël <besily.e2202632@etud.univ-ubs.fr"
 
 USER root
 COPY --chown=nobody rootfs/ /
@@ -13,7 +13,6 @@ RUN apk add --no-cache dcron libcap php81-sodium php81-exif php81-pecl-redis php
     setcap cap_setgid=ep /usr/sbin/crond
 
 USER nobody
-
 
 # Change MOODLE_XX_STABLE for new versions
 ENV MOODLE_URL=https://github.com/moodle/moodle/archive/MOODLE_401_STABLE.tar.gz \
@@ -57,4 +56,3 @@ RUN chown -R nobody:nobody /var/www/html && \
     chmod -R 755 /var/www/html
 
 EXPOSE 80
-
