@@ -1,37 +1,52 @@
-version: '3'
-
+version: '2'
 services:
-  web:
-    build: .
-    restart: always
+
+  postgres:
+    image: postgres:alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=moodle
+      - POSTGRES_USER=moodle
+      - POSTGRES_DB=moodle
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+  moodle:
+    image: erseco/alpine-moodle
+    restart: unless-stopped
+    environment:
+      - LANG=en_US.UTF-8
+      - LANGUAGE=en_US:en
+      - SITE_URL=http://localhost
+      - DB_TYPE=pgsql
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=moodle
+      - DB_USER=moodle
+      - DB_PASS=moodle
+      - DB_PREFIX=mdl_
+      - SSLPROXY=false
+      - MOODLE_EMAIL=user@example.com
+      - MOODLE_LANGUAGE=en
+      - MOODLE_SITENAME=New-Site
+      - MOODLE_USERNAME=moodleuser
+      - MOODLE_PASSWORD=PLEASE_CHANGEME
+      - SMTP_HOST=smtp.gmail.com
+      - SMTP_PORT=587
+      - SMTP_USER=your_email@gmail.com
+      - SMTP_PASSWORD=your_password
+      - SMTP_PROTOCOL=tls
+      - MOODLE_MAIL_NOREPLY_ADDRESS=noreply@localhost
+      - MOODLE_MAIL_PREFIX=[moodle]
     ports:
-      - "80:80"
+      - 80:80
+    volumes:
+      - moodledata:/var/www/moodledata
+      - moodlehtml:/var/www/html
     depends_on:
-      - db
-    environment:
-      MOODLE_DB_TYPE: pgsql # Modification ici
-      MOODLE_DB_HOST: db
-      MOODLE_DB_NAME: moodle
-      MOODLE_DB_USER: moodle
-      MOODLE_DB_PASS: moodle
-      MOODLE_URL: http://localhost # Modification ici
-      SITE_URL: http://localhost # Modification ici
-    volumes:
-      - ./moodle:/var/www/html
-    networks:
-      - moodlenet
+      - postgres
 
-  db:
-    image: postgres:13-alpine # Modification ici
-    restart: always
-    volumes:
-      - ./data:/var/lib/postgresql/data # Modification ici
-    environment:
-      POSTGRES_PASSWORD: moodle # Modification ici
-      POSTGRES_DB: moodle # Modification ici
-      POSTGRES_USER: moodle # Modification ici
-    networks:
-      - moodlenet
-
-networks:
-  moodlenet:
+volumes:
+  postgres:
+  moodledata:
+  moodlehtml:
