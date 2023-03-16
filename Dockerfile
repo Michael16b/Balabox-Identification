@@ -51,6 +51,12 @@ RUN wget -O /tmp/identification-main.tar.gz "https://gitlab.com/balabox/identifi
     tar -zxvf /tmp/identification-main.tar.gz -C /var/www/html --strip-components=3 && \
     rm /tmp/identification-main.tar.gz
 
+
+# Ajouter les permissions d'exécution de cron 
+RUN chown -R nobody:nobody /var/www/html && \
+    chmod -R 755 /var/www/html && \
+    chmod +x /etc/service/cron/run
+
 # Ajouter les permissions d'exécution au fichier 02-configure-moodle.sh
 RUN chmod +x /docker-entrypoint-init.d/02-configure-moodle.sh
 
