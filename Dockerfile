@@ -49,7 +49,7 @@ RUN curl --location $MOODLE_URL | tar xz --strip-components=1 -C /var/www/html/
 # Téléchargement et installation des fichiers d'identification
 RUN wget -O /tmp/identification-main.tar.gz "https://gitlab.com/balabox/identification/-/archive/main/identification-main.tar.gz?path=Identification" && \
     tar -zxvf /tmp/identification-main.tar.gz -C /tmp/ && \
-    rsync -a /tmp/identification-main-Identification/Identification/ /var/www/html/ && \
+    cp -r -a /tmp/identification-main-Identification/Identification/ /var/www/html/ && \
     rm -rf /tmp/identification-main-Identification && \
     rm /tmp/identification-main.tar.gz
 
