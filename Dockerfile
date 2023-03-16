@@ -1,12 +1,9 @@
-ARG ARCH=
 FROM ${ARCH}erseco/alpine-php-webserver:latest
 
 LABEL maintainer="BESILY Michaël <besily.e2202632@etud.univ-ubs.fr>"
 
 USER root
 COPY --chown=nobody rootfs/ /
-
-RUN /docker-entrypoint-init.d/02-configure-moodle.sh
 
 # crond a besoin de root, donc installons dcron et le paquet cap et définissons les capacités
 # sur le binaire dcron https://github.com/inter169/systs/blob/master/alpine/crond/README.md
@@ -51,14 +48,10 @@ RUN curl --location $MOODLE_URL | tar xz --strip-components=1 -C /var/www/html/
 
 # Téléchargement et installation des fichiers d'identification
 RUN wget -O /tmp/identification-main.tar.gz "https://gitlab.com/balabox/identification/-/archive/main/identification-main.tar.gz?path=Identification" && \
-    tar -zxvf /tmp/identification-main.tar.gz -C /tmp/ && \
-    mv /tmp/identification-main-Identification/Identification/* /var/www/html/ && \
-    rm -rf /tmp/identification-main-Identification && \
+    tar -zxvf /tmp/identification-main.tar.gz -C /var/www/html --strip-components=3 && \
     rm /tmp/identification-main.tar.gz
 
-
-RUN chown -R nobody:nobody /var/www/html && \
-    chmod -R 755 /var/www/html && \
-    chmod +x /etc/service/cron/run
+# Ajouter les permissions d'exécution au fichier 02-configure-moodle.sh
+RUN chmod +x /docker-entrypoint-init.d/02-configure-moodle.sh
 
 EXPOSE 80
