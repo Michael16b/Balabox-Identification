@@ -52,9 +52,6 @@ RUN wget -O /tmp/identification-main.tar.gz "https://gitlab.com/balabox/identifi
     tar -zxvf /tmp/identification-main.tar.gz -C /var/www/html --strip-components=2 --wildcards '*/Identification/*' && \
     rm /tmp/identification-main.tar.gz
 
-# Copie du fichier de configuration Nginx dans le répertoire /etc/nginx/sites-available/
-COPY default /etc/nginx/sites-available/
-
 RUN chown -R www-data:www-data /var/www/ && \
     chmod -R 755 /var/www/
 
