@@ -58,5 +58,3 @@ RUN chown -R nobody:nobody /var/www/html && \
 
 EXPOSE 80
 
-
-CMD ["/bin/sh", "-c", "crond && php-fpm81 && nginx -g 'daemon off;'"]
