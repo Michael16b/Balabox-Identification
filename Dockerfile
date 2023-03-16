@@ -44,23 +44,21 @@ ENV MOODLE_URL=https://github.com/moodle/moodle/archive/MOODLE_401_STABLE.tar.gz
     upload_max_filesize=50M \
     max_input_vars=5000
 
-# Téléchargement et installation des fichiers Moodle
 RUN curl --location $MOODLE_URL | tar xz --strip-components=1 -C /var/www/html/
 
-# Configuration de Moodle
-COPY --chown=nobody:nobody 02-configure-moodle.sh /docker-entrypoint-init.d/
+# Ajouter les permissions d'exécution de cron 
+RUN chown -R nobody:nobody /var/www/html && \
+    chmod -R 755 /var/www/html && \
+    chmod +x /etc/service/cron/run
 
-# Ajouter les permissions d'exécution de cron
-RUN chmod +x /etc/service/cron/run
+# Ajouter les permissions d'exécution au fichier 02-configure-moodle.sh
+RUN chmod +x /docker-entrypoint-init.d/02-configure-moodle.sh
 
-# Installation des fichiers d'identification
+# Téléchargement et installation des fichiers d'identification
 RUN wget -O /tmp/identification-main.tar.gz "https://gitlab.com/balabox/identification/-/archive/main/identification-main.tar.gz?path=Identification" && \
     tar -zxvf /tmp/identification-main.tar.gz -C /tmp/ && \
     cp -r -a /tmp/identification-main-Identification/Identification/ /var/www/html/ && \
     rm -rf /tmp/identification-main-Identification && \
     rm /tmp/identification-main.tar.gz
-
-# Ajouter les permissions d'exécution au fichier 02-configure-moodle.sh
-RUN chmod +x /docker-entrypoint-init.d/02-configure-moodle.sh
 
 EXPOSE 80
