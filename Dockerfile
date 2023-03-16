@@ -1,32 +1,49 @@
-FROM ubuntu:20.04
+ARG ARCH=
+FROM ${ARCH}erseco/alpine-php-webserver:latest
 
-RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get utils -y && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y nginx php-fpm php-mysql wget unzip openssl && \
-    apt-get install -y php-curl php-gd php-intl php-mbstring php-soap php-xml php-xmlrpc php-zip
+LABEL maintainer="Ernesto Serrano <info@ernesto.es>"
 
-RUN mkdir -p /etc/nginx/ssl && \
-    openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-        -keyout /etc/nginx/ssl/moodlebox.pem \
-        -out /etc/nginx/ssl/moodlebox.pem \
-        -subj "/C=FR/ST=IDF/L=Paris/O=MyOrg/OU=IT Department/CN=moodlebox.com"
+USER root
+COPY --chown=nobody rootfs/ /
 
-RUN wget https://download.moodle.org/stable310/moodle-3.10.6.tgz && \
-    tar -zxvf moodle-3.10.6.tgz && \
-    rm moodle-3.10.6.tgz && \
-    mv moodle /var/www/
+# crond needs root, so install dcron and cap package and set the capabilities
+# on dcron binary https://github.com/inter169/systs/blob/master/alpine/crond/README.md
+RUN apk add --no-cache dcron libcap php81-sodium php81-exif php81-pecl-redis php81-ldap && \
+    chown nobody:nobody /usr/sbin/crond && \
+    setcap cap_setgid=ep /usr/sbin/crond
 
-RUN wget -O /tmp/identification-main.tar.gz "https://gitlab.com/balabox/identification/-/archive/main/identification-main.tar.gz?path=Identification" && \
-    tar -zxvf /tmp/identification-main.tar.gz -C /var/www/moodle --strip-components=2 --wildcards '*/Identification/*' && \
-    rm /tmp/identification-main.tar.gz
+USER nobody
 
+# Change MOODLE_XX_STABLE for new versions
+ENV MOODLE_URL=https://github.com/moodle/moodle/archive/MOODLE_401_STABLE.tar.gz \
+    LANG=en_US.UTF-8 \
+    LANGUAGE=en_US:en \
+    SITE_URL=http://localhost \
+    DB_TYPE=pgsql \
+    DB_HOST=postgres \
+    DB_PORT=5432 \
+    DB_NAME=moodle \
+    DB_USER=moodle \
+    DB_PASS=moodle \
+    DB_PREFIX=mdl_ \
+    SSLPROXY=false \
+    MY_CERTIFICATES=none \
+    MOODLE_EMAIL=user@example.com \
+    MOODLE_LANGUAGE=en \
+    MOODLE_SITENAME=New-Site \
+    MOODLE_USERNAME=moodleuser \
+    MOODLE_PASSWORD=PLEASE_CHANGEME \
+    SMTP_HOST=smtp.gmail.com \
+    SMTP_PORT=587 \
+    SMTP_USER=your_email@gmail.com \
+    SMTP_PASSWORD=your_password \
+    SMTP_PROTOCOL=tls \
+    MOODLE_MAIL_NOREPLY_ADDRESS=noreply@localhost \
+    MOODLE_MAIL_PREFIX=[moodle] \
+    client_max_body_size=50M \
+    post_max_size=50M \
+    upload_max_filesize=50M \
+    max_input_vars=5000
 
-COPY default /etc/nginx/sites-available/
+RUN curl --location $MOODLE_URL | tar xz --strip-components=1 -C /var/www/html/
 
-RUN chown -R www-data:www-data /var/www/ && \
-    chmod -R 755 /var/www/
-
-EXPOSE 80
-
-CMD service php7.4-fpm start && service nginx restart && tail -f /dev/null

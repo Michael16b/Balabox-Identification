@@ -1,4 +1,4 @@
-# Configuration du serveur par défaut
+# Default server configuration
 
 server {
     listen 80 default_server;
@@ -7,9 +7,9 @@ server {
     listen 443 ssl;
     listen [::]:443 ssl;
     ssl_certificate /etc/nginx/ssl/moodlebox.pem;
-    ssl_certificate_key /etc/nginx/ssl/moodlebox.pem;
+    ssl_certificate_key /etc/nginx/ssl/moodlebox.pem;  # Correction ici
 
-    root /var/www/html;
+    root /var/www/moodle;
 
     index index.php index2.php index.html index.htm index.nginx-debian.html;
 
@@ -28,7 +28,7 @@ server {
         include fastcgi_params;
         fastcgi_split_path_info    ^(.+.php)(/.+)$;
         fastcgi_read_timeout    300;
-        fastcgi_pass    unix:/run/php/php-fpm.sock; # Correction ici
+        fastcgi_pass    unix:/var/run/php/php7.4-fpm.sock;
         fastcgi_index    index.php;
         fastcgi_param    PATH_INFO    $fastcgi_path_info;
         fastcgi_param    SCRIPT_FILENAME    $document_root$fastcgi_script_name;
