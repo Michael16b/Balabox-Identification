@@ -14,6 +14,9 @@ RUN apk add --no-cache dcron libcap php81-sodium php81-exif php81-pecl-redis php
 
 USER nobody
 
+
+CMD ["/bin/sh", "-c", "crond && php-fpm8 && nginx -g 'daemon off;'"]
+
 # Change MOODLE_XX_STABLE for new versions
 ENV MOODLE_URL=https://github.com/moodle/moodle/archive/MOODLE_401_STABLE.tar.gz \
     LANG=en_US.UTF-8 \
@@ -57,4 +60,4 @@ RUN chown -R nobody:nobody /var/www/html && \
 
 EXPOSE 80
 
-CMD ["/bin/sh", "-c", "crond && php-fpm8 && nginx -g 'daemon off;'"]
+# CMD ["/bin/sh", "-c", "crond && php-fpm8 && nginx -g 'daemon off;'"]
