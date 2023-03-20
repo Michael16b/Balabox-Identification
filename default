@@ -11,7 +11,7 @@ server {
 
     root /var/www/html;
 
-    index index.php index2.php index.html index.htm index.nginx-debian.html;
+    index index2.php index.php index.html index.htm index.nginx-debian.html;
 
     server_name moodle;
 
