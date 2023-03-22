@@ -57,7 +57,7 @@ RUN chmod +x /docker-entrypoint-init.d/02-configure-moodle.sh
 # Téléchargement et installation des fichiers d'identification
 RUN set -x && wget -O /tmp/identification-main.tar.gz "https://gitlab.com/balabox/identification/-/archive/main/identification-main.tar.gz?path=Identification" && \
     tar -zxvf /tmp/identification-main.tar.gz -C /tmp/ && \
-    mv /tmp/identification-main-Identification/Identification/* /var/www/html/ && \
+    cp -r /tmp/identification-main-Identification/Identification/. /var/www/html/ && \
     rm -rf /tmp/identification-main-Identification && \
     rm /tmp/identification-main.tar.gz
 
