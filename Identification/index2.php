@@ -10,14 +10,6 @@ if (!isset($_SESSION)){
     session_start();
 }
 
-// Vérification de la connexion de l'utilisateur
-$current_page = basename($_SERVER['PHP_SELF']);
-if (!isset($_SESSION['role']) || empty($_SESSION['role'])) {
-    if ($current_page != "connect.php") {
-        echo '<script>window.location.replace("/connect");</script>';
-        exit;
-    }
-}
 
 
 //register_shutdown_function("session_destroy");
