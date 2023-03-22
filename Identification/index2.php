@@ -7,8 +7,9 @@ define ("__ROOT__",__DIR__);
 if (!isset($_SESSION)){
     $cookieLifetime = 3600; // 1 hour
     session_set_cookie_params($cookieLifetime);
-    // header("Location: /connect");
     session_start();
+    header("Location: /connect");
+    exit();
 }
 
 //register_shutdown_function("session_destroy");
