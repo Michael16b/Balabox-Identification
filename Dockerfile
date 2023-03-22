@@ -1,14 +1,13 @@
-ARG ARCH=
 FROM ${ARCH}erseco/alpine-php-webserver:latest
 
-LABEL maintainer="Ernesto Serrano <info@ernesto.es>"
+LABEL maintainer="BESILY Michaël <besily.e2202632@etud.univ-ubs.fr>"
 
 USER root
 COPY --chown=nobody rootfs/ /
 
-# crond needs root, so install dcron and cap package and set the capabilities
-# on dcron binary https://github.com/inter169/systs/blob/master/alpine/crond/README.md
-RUN apk add --no-cache dcron libcap php81-sodium php81-exif php81-pecl-redis php81-ldap && \
+# crond a besoin de root, donc installons dcron et le paquet cap et définissons les capacités
+# sur le binaire dcron https://github.com/inter169/systs/blob/master/alpine/crond/README.md
+RUN apk add --no-cache dcron libcap php81-sodium php81-exif php81-pecl-redis php81-ldap php81-fpm && \
     chown nobody:nobody /usr/sbin/crond && \
     setcap cap_setgid=ep /usr/sbin/crond
 
@@ -36,7 +35,7 @@ ENV MOODLE_URL=https://github.com/moodle/moodle/archive/MOODLE_401_STABLE.tar.gz
     SMTP_HOST=smtp.gmail.com \
     SMTP_PORT=587 \
     SMTP_USER=your_email@gmail.com \
-    SMTP_PASSWORD=your_password \
+    SMTP_PASSWORD=your_password \
     SMTP_PROTOCOL=tls \
     MOODLE_MAIL_NOREPLY_ADDRESS=noreply@localhost \
     MOODLE_MAIL_PREFIX=[moodle] \
@@ -46,3 +45,21 @@ ENV MOODLE_URL=https://github.com/moodle/moodle/archive/MOODLE_401_STABLE.tar.gz
     max_input_vars=5000
 
 RUN curl --location $MOODLE_URL | tar xz --strip-components=1 -C /var/www/html/
+
+# Ajouter les permissions d'exécution de cron 
+RUN chown -R nobody:nobody /var/www/html && \
+    chmod -R 755 /var/www/html && \
+    chmod +x /etc/service/cron/run
+
+# Ajouter les permissions d'exécution au fichier 02-configure-moodle.sh
+RUN chmod +x /docker-entrypoint-init.d/02-configure-moodle.sh
+
+# Téléchargement et installation des fichiers d'identification
+RUN set -x && wget -O /tmp/identification-main.tar.gz "https://gitlab.com/balabox/identification/-/archive/main/identification-main.tar.gz?path=Identification" && \
+    tar -zxvf /tmp/identification-main.tar.gz -C /tmp/ && \
+    mv /tmp/identification-main-Identification/Identification/* /var/www/html/ && \
+    rm -rf /tmp/identification-main-Identification && \
+    rm /tmp/identification-main.tar.gz
+
+
+EXPOSE 80
