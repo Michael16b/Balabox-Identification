@@ -8,8 +8,8 @@ if (!isset($_SESSION)){
     $cookieLifetime = 3600; // 1 hour
     session_set_cookie_params($cookieLifetime);
     session_start();
-    header("Location: /connect");
-    exit();
+    http_redirect("/connect", array("timeout" => 0, "exit" => true));
+
 }
 
 //register_shutdown_function("session_destroy");
