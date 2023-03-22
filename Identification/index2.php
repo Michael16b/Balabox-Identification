@@ -9,6 +9,12 @@ if (!isset($_SESSION)){
     session_set_cookie_params($cookieLifetime);
     session_start();
 }
+
+if(!isset($_SESSION['role'])) {
+    header("Location: /connect");
+    exit();
+}
+
 //register_shutdown_function("session_destroy");
 // Configuration
 require (__ROOT__.'/model/userDB.php');
