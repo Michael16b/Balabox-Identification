@@ -1,6 +1,7 @@
 <?php
 require(__ROOT__.'/controllers/Controller.php');
 require(__ROOT__.'/controllers/connect.php');
+
 class MainController extends Controller{
 
     public function get($request){
@@ -13,5 +14,4 @@ class MainController extends Controller{
         }
     }
 }
-
 ?>
