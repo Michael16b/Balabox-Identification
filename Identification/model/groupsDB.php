@@ -7,7 +7,7 @@ class GroupsDB {
         $group = new stdClass();
         $group->name = $groupeName;
         $group->description = $desc;
-        return groups_create_group($group);
+        groups_create_group($group);
         }
 
     public function deleteGroups(String $groupeName): void{
@@ -20,7 +20,7 @@ class GroupsDB {
         $group = groups_get_group_by_name($oldGroupName);
         $group->name = $groupeName;
         $group->description = $desc;
-        return groups_update_group($group);
+        groups_update_group($group);
 
     }
 
