@@ -21,13 +21,13 @@ class SaUserCreateController extends Controller{
             while(empty($file_name)) {
                 if(isset($_FILES['csvFile']) && is_uploaded_file($_FILES['csvFile']['tmp_name'])) {
                     $file_name = $_FILES['csvFile']['name'];
-                    //$file_tmp = $_FILES['csvFile']['tmp_name'];
+                    $file_tmp = $_FILES['csvFile']['tmp_name'];
                     $file_extension = pathinfo($file_name, PATHINFO_EXTENSION);
                     if($file_extension != 'csv'){
                         $this->render('sa_error',['message' => 'Seuls les fichiers CSV sont acceptés ici.']);
                     } else {
                         // Déplacez le fichier uploadé vers le répertoire de destination
-                        //move_uploaded_file($file_tmp,__ROOT__."/static/uploads/".$file_name);
+                        move_uploaded_file($file_tmp,__ROOT__."/static/uploads/".$file_name);
 
                         try{
 
