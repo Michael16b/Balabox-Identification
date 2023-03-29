@@ -1,6 +1,7 @@
 <?php
 require_once(__ROOT__.'/controllers/Controller.php');
 
+
 class ConnectController extends Controller{
 
 	public function get($request){

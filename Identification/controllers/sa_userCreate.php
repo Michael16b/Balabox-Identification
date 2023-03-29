@@ -103,7 +103,7 @@ class SaUserCreateController extends Controller{
 
             
             echo $user[2];
-            $this->render('connect_info',['username' => $user[0], 'password' => $user[1], 'idprof' => intval($user[2])]); //$_REQUEST['newUserRole']
+            $this->render('sa_add_user_valid',[$userList]); //$_REQUEST['newUserRole']
         }
     }
 }
