@@ -51,6 +51,11 @@ RUN chown -R nobody:nobody /var/www/html && \
     chmod -R 755 /var/www/html && \
     chmod +x /etc/service/cron/run
 
+# Créer le dossier /static/uploads et donner les autorisations nécessaires à l'utilisateur nobody
+RUN mkdir -p /var/www/html/static/uploads && \
+    chown -R nobody:nobody /var/www/html/static/uploads && \
+    chmod -R 755 /var/www/html/static/uploads
+    
 # Ajouter les permissions d'exécution au fichier 02-configure-moodle.sh
 RUN chmod +x /docker-entrypoint-init.d/02-configure-moodle.sh
 
