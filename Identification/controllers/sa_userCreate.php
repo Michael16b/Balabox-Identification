@@ -98,8 +98,6 @@ class SaUserCreateController extends Controller{
 
             // Traitement pour le formulaire 1 utilisateur
 			$user = $userdb->addUser($_REQUEST['newUserPrenom'], $_REQUEST['newUserNom']);
-            $username = substr($_REQUEST['newUserPrenom'],0,1) . $_REQUEST['newUserNom'];
-            $userList = $userdb->getRecord($username);
 
             
             $this->render('sa_add_user_valid',[$user[0], $user[1]]); //$_REQUEST['newUserRole']

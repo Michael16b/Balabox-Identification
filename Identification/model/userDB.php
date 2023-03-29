@@ -11,10 +11,22 @@ class UserDB {
         $uppercase = range('A', 'Z');
         $lowercase = range('a', 'z');
         $numbers = range(0, 9);
-        $specialChars = array('!', '@', '#', '$', '%', '^', '&', '*');
-        $characters = array_merge($uppercase, $lowercase, $numbers, $specialChars);
+        $special_chars = array('!', '@', '#', '$', '%', '^', '&', '*');
+        $characters = array_merge($uppercase, $lowercase, $numbers, $special_chars);
+    
         shuffle($characters);
-        return implode(array_slice($characters, 0, 12));
+    
+        $password = '';
+        $password .= $uppercase[array_rand($uppercase)];
+        $password .= $lowercase[array_rand($lowercase)];
+        $password .= $numbers[array_rand($numbers)];
+        $password .= $special_chars[array_rand($special_chars)];
+    
+        for ($i = 0; $i < 4; $i++) {
+            $password .= $characters[array_rand($characters)];
+        }
+    
+        return str_shuffle($password);
     }
 
     public function checkUserName(String $username) : String {
