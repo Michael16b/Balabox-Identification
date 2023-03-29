@@ -102,8 +102,7 @@ class SaUserCreateController extends Controller{
             $userList = $userdb->getRecord($username);
 
             
-            echo $user[2];
-            $this->render('sa_add_user_valid',[$userList]); //$_REQUEST['newUserRole']
+            $this->render('sa_add_user_valid',[$user[0], $user[1]]); //$_REQUEST['newUserRole']
         }
     }
 }
