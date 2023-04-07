@@ -52,7 +52,7 @@ class SaUserCreateController extends Controller{
 
                             // Fermer et supprimer le fichier
                             fclose($file);
-                            unlink("static/uploads/".$file_name);
+                            
                             /////////////////////////DEBUT A TESTER : PARTIE PDF UNIQUEMENT///////////////////////////////////////////////////////////////
                             //créer le fichier PDF
                             $pdf = new FPDF();
