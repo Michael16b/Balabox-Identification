@@ -52,9 +52,8 @@ class SaClassCreateController extends Controller{
                                                         echo("création groupes");
                                                         // Utiliser les informations stockées dans le tableau $data pour insérer les utilisateurs 1 à 1
                                                         foreach ($data as $line) {
-                                                            list($firstName) = explode(";", $line[0]);
-                                                            list($lastName) = explode(";", $line[1]);
-                                                            $groupDB->addMember($idGroup, $firstName, $lastName);
+                                                            list($username) = explode(";", $line[0]);
+                                                            $groupDB->addMember($idGroup, $username[0], $username[1]);
                                                         }
                                             $this->render('sa_error',['message' => "réussi"]);
                                                     }catch(Exception $e){
