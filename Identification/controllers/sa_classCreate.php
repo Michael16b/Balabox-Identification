@@ -25,18 +25,12 @@ class SaClassCreateController extends Controller{
                         $file_name = $_FILES['csvFile']['name'];
                         $file_tmp = $_FILES['csvFile']['tmp_name'];
                         $file_extension = pathinfo($file_name, PATHINFO_EXTENSION);
-                                var_dump($file_name);
-                                var_dump($file_tmp);
-                                var_dump($file_extension);
                                                 if($file_extension != 'csv'){
                                                     $this->render('sa_error',['message' => 'Seuls les fichiers CSV sont acceptés ici.']);
                                                 } else {
                                             echo("avant déplacement");
 
                                 $destination_file = '/tmp/'.$file_name;
-                                                    // Déplacez le fichier uploadé vers le répertoire de destination
-                                                    var_dump(move_uploaded_file($file_tmp,$destination_file));
-                                var_dump(is_uploaded_file($file_name));
 
 
                                     
@@ -65,7 +59,6 @@ class SaClassCreateController extends Controller{
                                 echo($data);
                                                         // Fermer et supprimer le fichier
                                                         fclose($file);
-                                                        unlink($destination_file);
                                 echo("fermeture fichier");
                                                         // Créer l'objet UserDB pour entrer des données dans la bdd Moodle
                                                         $groupDB = new GroupsDB();
