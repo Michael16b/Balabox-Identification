@@ -12,8 +12,11 @@ class GroupsDB {
         $data->descriptionformat = FORMAT_HTML;
         $data->timecreated = time();
         $data->timemodified = $data->timecreated;
+        $data->courseid = null; //pas de contrainte de classe
+        $data->idnumber = null; //pas de contrainte sur le numéro d'identification
 
-        $data->visibility = GROUPS_VISIBILITY_ALL; //par défaut, visible pour tout le monde
+        use \core\group\constants;
+        $data->visibility = constants::GROUPS_VISIBILITY_ALL; //par défaut, visible pour tout le monde
         $data->participation = true;
         $data->enablemessaging = true;
 
