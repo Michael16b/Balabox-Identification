@@ -48,7 +48,7 @@ class UserDB {
         $user = new stdClass();
         $user->firstname =  $firstName;
         $user->lastname = $lastName;
-        $user->username = $this->checkUserName(strtolower(substr($firstName,0,1) . $lastName));
+        $user->username = $this->checkUserName(strtolower(substr($firstName,0,1) . preg_replace('/[^a-zA-Z]/', '', $lastName)));
         $user->password = $this->RandomPassword();
         $password = $user->password;
         // password_hash($password, PASSWORD_DEFAULT);
