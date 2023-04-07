@@ -51,10 +51,10 @@ class GroupsDB {
 
         // Appeler la fonction addUser() pour récupérer l'ID de l'utilisateur.
         $userDB = new UserDB();
-        $userId = $userDB->addUser($firstName, $lastName);
+        $user = $userDB->addUser($firstName, $lastName);
 
         // Ajouter l'utilisateur au groupe.
-        $user = $DB->get_record('user', array('id' => $userId));
+        $user = $userDB->getRecord($user[0]);
         groups_add_member($group, $user);
     }
 
