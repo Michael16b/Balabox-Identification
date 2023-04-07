@@ -15,7 +15,7 @@ class GroupsDB {
         $data->courseid = null; //pas de contrainte de classe
         $data->idnumber = null; //pas de contrainte sur le numéro d'identification
 
-        use \core\group\constants;
+        
         $data->visibility = constants::GROUPS_VISIBILITY_ALL; //par défaut, visible pour tout le monde
         $data->participation = true;
         $data->enablemessaging = true;
