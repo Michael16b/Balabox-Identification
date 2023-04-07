@@ -7,9 +7,9 @@ class GroupsDB {
         global $DB, $USER, $CFG;
 
         // Récupérer l'ID du dernier cours créé
-        $lastcourse = $DB->get_record_sql('SELECT id FROM {course} ORDER BY id DESC LIMIT 1');
-        $lastcourseid = ($lastcourse) ? $lastcourse->id : 0;
-        $newcourseid = $lastcourseid + 1;
+       // $lastcourse = $DB->get_record_sql('SELECT id FROM {course} ORDER BY id DESC LIMIT 1');
+        // $lastcourseid = ($lastcourse) ? $lastcourse->id : 0;
+        //$newcourseid = $lastcourseid + 1;
 
         // Créer le contexte pour le cours
         $context = context_course::instance($newcourseid);
@@ -29,8 +29,6 @@ class GroupsDB {
         // Récupérer les données du groupe créé
         $group = $DB->get_record('groups', array('id'=>$data->id));
 
-        // Mettre à jour l'icône du groupe (si applicable)
-        groups_update_group_icon($group, $data, false);
 
         // Mettre à jour les caches de groupes pour le cours
         cache_helper::invalidate_by_definition('core', 'groupdata', array(), array($newcourseid));
