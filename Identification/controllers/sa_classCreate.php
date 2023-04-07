@@ -15,10 +15,9 @@ class SaClassCreateController extends Controller{
     public function post($request){
         $file_name = '';
         $upload_dir = sys_get_temp_dir();
-        echo ($upload_dir);
+        
 
             // CONDITION : TANT QUE LE FICHIER N'EST PAS PRESENT DANS /static/uploads, ALORS ON ATTEND 5s AVANT DE REESSAYER LA LECTURE
-                echo("début");
             while(empty($file_name)) {
 
                     if(isset($_FILES['csvFile']) && is_uploaded_file($_FILES['csvFile']['tmp_name'])){
