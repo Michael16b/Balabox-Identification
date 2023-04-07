@@ -4,11 +4,13 @@ class GroupsDB {
 
 
     
-    public function addGroups(String $groupeName, String $desc) : void{
+    public function addGroups(String $groupeName, String $desc) : int {
         $group = new stdClass();
         $group->name = $groupeName;
+        $group->courseid = 123;
         $group->description = $desc;
-        groups_create_group($group);
+        $groupId = groups_create_group($group);
+        return $groupId;
         }
     
     public function deleteGroups(String $groupeName): void{

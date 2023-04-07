@@ -28,44 +28,29 @@ class SaClassCreateController extends Controller{
                                                 if($file_extension != 'csv'){
                                                     $this->render('sa_error',['message' => 'Seuls les fichiers CSV sont acceptés ici.']);
                                                 } else {
-                                            echo("avant déplacement");
-
-                                $destination_file = '/tmp/'.$file_name;
-
-
-                                    
+                                                    $destination_file = '/tmp/'.$file_name;
                                                     try{
-                                            echo("avant ouverture");
                                                         // Ouvrir le fichier CSV
                                                         $file = fopen($destination_file, "r");
-                                            echo("après ouverture");
                                                         // Initialiser un tableau pour stocker les informations
                                                         $data = array();
-                                echo("debut file");
-                                echo($file);
-                                echo("fin file");
                                                         // Parcourir chaque ligne du fichier sauf la première (contenant les informations des colonnes)
                                                         $line_counter = 0;
                                                         while (($line = fgetcsv($file)) !== false) {
-                                //var_dump($line);
-                                //var_dump(fgetcsv($file));
                                                             if ($line_counter != 0) {
                                                                 $data[] = $line;
 
                                                             }
                                                             $line_counter++;
                                                         }
-                                echo("après aprcours lignes");
-                                echo($data);
                                                         // Fermer et supprimer le fichier
                                                         fclose($file);
-                                echo("fermeture fichier");
                                                         // Créer l'objet UserDB pour entrer des données dans la bdd Moodle
                                                         $groupDB = new GroupsDB();
 
                                                         // A VERIFIER : Créer la classe/////////////////////////////////////////////////
                                                         $idGroup = $groupDB->addGroups($_REQUEST['newClassName'], $_REQUEST['newClassSummary']);
-                                echo("création groupes");
+                                                        echo("création groupes");
                                                         // Utiliser les informations stockées dans le tableau $data pour insérer les utilisateurs 1 à 1
                                                         foreach ($data as $line) {
                                                             list($username) = explode(";", $line[0]);
