@@ -14,7 +14,7 @@ class GroupsDB {
         $data->fullname = $groupeName;
         $data->shortname = $groupeName;
         $data->summary = $desc;
-        $data->format = $CFG->defaultcourseformat;
+        $data->format = "topics";
         $data->category = 1; // L'ID de la catégorie du cours.
     
         // Créer le cours.
