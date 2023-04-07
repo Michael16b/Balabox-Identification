@@ -5,12 +5,38 @@ class GroupsDB {
 
     
     public function addGroups(String $groupeName, String $desc) : int {
-        $group = new stdClass();
-        $group->name = $groupeName;
-        $group->courseid = 123;
-        $group->description = $desc;
-        $groupId = groups_create_group($group);
-        return $groupId;
+        global $DB, $USER;
+        $data = new stdClass();
+        $data->name = trim($groupeName);
+        $data->description = trim($desc);
+        $data->descriptionformat = FORMAT_HTML;
+        $data->timecreated = time();
+        $data->timemodified = $data->timecreated;
+
+        $data->visibility = GROUPS_VISIBILITY_ALL; //par défaut, visible pour tout le monde
+        $data->participation = true;
+        $data->enablemessaging = true;
+
+        $data->id = $DB->insert_record('groups', $data);
+
+        $group = $DB->get_record('groups', array('id'=>$data->id));
+
+        // Group conversation messaging.
+        if (\core_message\api::can_create_group_conversation($USER->id)) {
+            if (!empty($data->enablemessaging)) {
+                \core_message\api::create_conversation(
+                    \core_message\api::MESSAGE_CONVERSATION_TYPE_GROUP,
+                    [],
+                    $group->name,
+                    \core_message\api::MESSAGE_CONVERSATION_ENABLED,
+                    'core_group',
+                    'groups',
+                    $group->id,
+                    context_system::instance()->id);
+            }
+        }
+
+        return $group->id;
         }
     
     public function deleteGroups(String $groupeName): void{
