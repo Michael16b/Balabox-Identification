@@ -55,7 +55,7 @@ class GroupsDB {
         var_dump($user[0]);
         // Ajouter l'utilisateur au groupe.
         $user = $userDB->getRecord($user[0]);
-        //groups_add_member($group, $user);
+        groups_add_member($group, $user);
     }
 
     public function deleteMember(String $groupeName, String $username): void{
