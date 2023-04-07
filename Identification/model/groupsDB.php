@@ -45,7 +45,7 @@ class GroupsDB {
 
     }
 
-    public function addMember(String $groupeName, String $username): void{
+    public function addMember(String $groupeName, String $firstName, String $lastName): void{
         global $DB;
         $group = $DB->get_record('groups', array('name' => $groupeName));
 
