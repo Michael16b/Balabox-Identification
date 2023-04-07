@@ -52,6 +52,9 @@ if [ ! -f /var/www/html/config.php ]; then
 
     # Avoid allowing executable paths to be set via the Admin GUI
     echo "\$CFG->preventexecpath = true;" >> /var/www/html/config.php
+    echo "\$CFG->libdir = '/var/www/html/lib/';" >> /var/www/html/config.php
+    echo "\$CFG->dirroot = '/var/www/html/';" >> /var/www/html/config.php
+
 
 fi
 
