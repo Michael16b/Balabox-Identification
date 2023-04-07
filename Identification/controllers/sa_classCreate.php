@@ -35,7 +35,7 @@ class SaClassCreateController extends Controller{
                                                         $data = array();
                                                         // Parcourir chaque ligne du fichier sauf la première (contenant les informations des colonnes)
                                                         $line_counter = 0;
-                                                        while (($line = fgetcsv($file)) !== false) {
+                                                        while (($line = fgetcsv($file, 0, ";")) !== false) {
                                                             if ($line_counter != 0) {
                                                                 $data[] = $line;
 
@@ -46,14 +46,12 @@ class SaClassCreateController extends Controller{
                                                         fclose($file);
                                                         // Créer l'objet UserDB pour entrer des données dans la bdd Moodle
                                                         $groupDB = new GroupsDB();
-
                                                         // A VERIFIER : Créer la classe/////////////////////////////////////////////////
                                                         $idGroup = $groupDB->addGroups($_REQUEST['newClassName'], $_REQUEST['newClassSummary']);
-                                                        echo("création groupes");
+
                                                         // Utiliser les informations stockées dans le tableau $data pour insérer les utilisateurs 1 à 1
                                                         foreach ($data as $line) {
-                                                            list($username) = explode(";", $line[0]);
-                                                            $groupDB->addMember($idGroup, $username[0], $username[1]);
+                                                            $groupDB->addMember($idGroup, $line[1], $line[0]);
                                                         }
                                             $this->render('sa_error',['message' => "réussi"]);
                                                     }catch(Exception $e){
