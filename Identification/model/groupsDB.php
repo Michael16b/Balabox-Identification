@@ -52,10 +52,10 @@ class GroupsDB {
         // Appeler la fonction addUser() pour récupérer l'ID de l'utilisateur.
         $userDB = new UserDB();
         $user = $userDB->addUser($firstName, $lastName);
-
+        var_dump($user);
         // Ajouter l'utilisateur au groupe.
         $user = $userDB->getRecord($user[0]);
-        groups_add_member($group, $user);
+        //groups_add_member($group, $user);
     }
 
     public function deleteMember(String $groupeName, String $username): void{
