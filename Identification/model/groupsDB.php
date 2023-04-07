@@ -1,5 +1,7 @@
 <?php
 
+require_once(dirname(__FILE__) . '/userDB.php');
+
 class GroupsDB {
 
 
@@ -46,7 +48,13 @@ class GroupsDB {
     public function addMember(String $groupeName, String $username): void{
         global $DB;
         $group = $DB->get_record('groups', array('name' => $groupeName));
-        $user = $DB->get_record('user', array('username' => $username));
+
+        // Appeler la fonction addUser() pour récupérer l'ID de l'utilisateur.
+        $userDB = new UserDB();
+        $userId = $userDB->addUser($firstName, $lastName);
+
+        // Ajouter l'utilisateur au groupe.
+        $user = $DB->get_record('user', array('id' => $userId));
         groups_add_member($group, $user);
     }
 
