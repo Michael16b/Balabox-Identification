@@ -52,8 +52,13 @@ class SaUserCreateController extends Controller{
                                 $pdf->SetFont('Arial','',14,'ISO-8859-1');
                                 $header = array('Rôle', 'Nom', 'Prénom', 'Nom d\'utilisateur', 'Mot de passe');
                                 $w = array(25,25,25,25,25);
+                                
+
+                                // Centrer le tableau
+                                $pdf->SetY(45);
+                                $pdf->Cell(($pdf->GetPageWidth() - array_sum($w))/2); // Ajouter de l'espace à gauche pour centrer le tableau
                                 for($i=0;$i<count($header);$i++)
-                                    $pdf->Cell($w[$i],7,$header[$i],1,0,'C',true);
+                                    $pdf->Cell($w[$i],7,iconv('UTF-8', 'windows-1252',$header[$i]),1);
                                 $pdf->Ln();
 
                                 // Utiliser les informations stockées dans le tableau $data pour insérer les utilisateurs 1 à 1
