@@ -47,8 +47,9 @@ class SaUserCreateController extends Controller{
                                 $pdf = new FPDF();
 
                                 // Définir la police
-                                $pdf->SetFont('ArialUnicodeMS', '', 12);
+                                $pdf->AddFont('Alata-Regular', '', '../static/assets/FPDF/Alata-Regular.ttf', true);
                                 $pdf->AddPage();
+                                $pdf->SetFont('Alata-Regular', '', 12);
 
                                 $pdf->Cell(25,10,iconv('UTF-8', 'windows-1252','Rôle'));
                                 $pdf->Cell(25,10,'Nom');
