@@ -68,27 +68,19 @@ class SaUserCreateController extends Controller{
 
                                 $startX = $pdf->GetX();
                                 
-                                $fill = false;
                                 foreach ($data as $line) {
                                     // Insérer dans la bdd (rôle n'est pas encore traité)
                                     $user = $userdb->addUser($line[0],$line[1]);
                                     $pdf->SetTextColor(0, 0, 0); // définit la couleur de texte à noir
                                     $pdf->SetFont('Arial', '', 14); // définit la police de caractères sans gras
 
-                                    if ($fill) {
-                                        $pdf->SetFillColor(220, 220, 220); // définit la couleur de fond à gris clair
-                                    } else {
-                                        $pdf->SetFillColor(255, 255, 255); // définit la couleur de fond à blanc
-                                    }
-                                    $fill = !$fill;
-
                                     // importer dans le fichier PDF
                                     $pdf->SetX($startX + ($pdf->GetPageWidth() - array_sum($w))/2);
-                                    $pdf->Cell($w[0], 10, iconv('UTF-8', 'windows-1252', $line[2]), 'LR', 0, 'L', $fill);
-                                    $pdf->Cell($w[1], 10, iconv('UTF-8', 'windows-1252', $line[0]), 'LR', 0, 'L', $fill);
-                                    $pdf->Cell($w[2], 10, iconv('UTF-8', 'windows-1252', $line[1]), 'LR', 0, 'L', $fill);
-                                    $pdf->Cell($w[3], 10, iconv('UTF-8', 'windows-1252', $user[0]), 'LR', 0, 'L', $fill);
-                                    $pdf->Cell($w[4], 10, iconv('UTF-8', 'windows-1252', $user[1]), 'LR', 0, 'L', $fill);
+                                    $pdf->Cell($w[0], 10, iconv('UTF-8', 'windows-1252', $line[2]), 'LR', 0, 'L');
+                                    $pdf->Cell($w[1], 10, iconv('UTF-8', 'windows-1252', $line[0]), 'LR', 0, 'L');
+                                    $pdf->Cell($w[2], 10, iconv('UTF-8', 'windows-1252', $line[1]), 'LR', 0, 'L');
+                                    $pdf->Cell($w[3], 10, iconv('UTF-8', 'windows-1252', $user[0]), 'LR', 0, 'L');
+                                    $pdf->Cell($w[4], 10, iconv('UTF-8', 'windows-1252', $user[1]), 'LR', 0, 'L');
                                     $pdf->Ln();
                                 }
                                 $pdf->SetX($startX + ($pdf->GetPageWidth() - array_sum($w))/2);
