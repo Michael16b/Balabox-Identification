@@ -70,7 +70,12 @@ class SaUserCreateController extends Controller{
                                 
                                 foreach ($data as $line) {
                                     // Insérer dans la bdd (rôle n'est pas encore traité)
-                                    $user = $userdb->addUser($line[0],$line[1]);
+                                    $role = 4;
+                                    
+                                    if ($line[2] == 'Professeur') {
+                                        $role = 3;
+                                    }
+                                    $user = $userdb->addUser($line[0],$line[1],$role);
                                     $pdf->SetTextColor(0, 0, 0); // définit la couleur de texte à noir
                                     $pdf->SetFont('Arial', '', 14); // définit la police de caractères sans gras
 

@@ -44,7 +44,7 @@ class UserDB {
         return $TMPusername;
     }
 
-    public function addUser(String $firstName, String $lastName){
+    public function addUser(String $firstName, String $lastName, int $role = 4): array{
         $user = new stdClass();
         $user->firstname =  $firstName;
         $user->lastname = $lastName;
@@ -60,12 +60,9 @@ class UserDB {
         $user->timemodified = time();
 
         $user->id = user_create_user($user);
-        role_assign(4, $user->id, context_system::instance());
-
-
-        //echo $this->getUser_role($user->username);
-        $userRole = json_encode($this->getUser_role($user->username));
-        return array($user->username, $password,$this->getUser_role($user->username));
+        role_assign($role, $user->id, context_system::instance());
+        
+        return array($user->username, $password,$role);
         }
 
 
