@@ -70,7 +70,7 @@ class GroupsDB {
         return $group;
     }
 
-    public function getMembers(String $groupeName): array{
+    public function getMembers(String $groupeName) {
         global $DB;
         $group = $DB->get_record('groups', array('name' => $groupeName));
         $members = groups_get_members($group->id);
