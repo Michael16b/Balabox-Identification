@@ -1,6 +1,7 @@
 <?php
 
 require(__ROOT__.'/controllers/Controller.php');
+require(__ROOT__.'/static/assets/FPDF/fpdf.php');
 
 class SaClassCreateController extends Controller{
 
