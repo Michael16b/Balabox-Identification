@@ -56,7 +56,7 @@ class SaUserCreateController extends Controller{
 
                                 // Ajout du header
                                 $header = array('Rôle', 'Nom', 'Prénom', 'Nom d\'utilisateur', 'Mot de passe');
-                                $w = array(25,25,25,40,35);
+                                $w = array(30,25,25,45,35);
                                 
 
                                 // Centrer le tableau
@@ -73,6 +73,7 @@ class SaUserCreateController extends Controller{
                                     // Insérer dans la bdd (rôle n'est pas encore traité)
                                     $user = $userdb->addUser($line[0],$line[1]);
                                     $pdf->SetTextColor(0, 0, 0); // définit la couleur de texte à noir
+                                    $pdf->SetFont('Arial', 14);
 
                                     if ($fill) {
                                         $pdf->SetFillColor(220, 220, 220); // définit la couleur de fond à gris clair
@@ -82,6 +83,7 @@ class SaUserCreateController extends Controller{
                                     $fill = !$fill;
 
                                     // importer dans le fichier PDF
+                                    $pdf->SetX($startX + ($pdf->GetPageWidth() - array_sum($w))/2);
                                     $pdf->Cell($w[0], 10, iconv('UTF-8', 'windows-1252', $line[2]), 'LR', 0, 'L', $fill);
                                     $pdf->Cell($w[1], 10, iconv('UTF-8', 'windows-1252', $line[0]), 'LR', 0, 'L', $fill);
                                     $pdf->Cell($w[2], 10, iconv('UTF-8', 'windows-1252', $line[1]), 'LR', 0, 'L', $fill);
