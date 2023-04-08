@@ -51,7 +51,7 @@ class SaUserCreateController extends Controller{
                                 $pdf->Image(__ROOT__.'/static/img/logo_balabox.png',10,6,30);
                                 $pdf->SetFont('Arial','',14,'ISO-8859-1');
                                 $header = array('Rôle', 'Nom', 'Prénom', 'Nom d\'utilisateur', 'Mot de passe');
-                                $w = array(25,25,25,25,25);
+                                $w = array(25,25,25,35,35);
                                 
 
                                 // Centrer le tableau
@@ -60,6 +60,9 @@ class SaUserCreateController extends Controller{
                                 for($i=0;$i<count($header);$i++)
                                     $pdf->Cell($w[$i],7,iconv('UTF-8', 'windows-1252',$header[$i]),1);
                                 $pdf->Ln();
+
+                                $startY = $pdf->GetY();
+                                $pdf->SetY($startY + ((297 - $startY - 20) / 2) - (count($data) * 10));
 
                                 // Utiliser les informations stockées dans le tableau $data pour insérer les utilisateurs 1 à 1
                                 foreach ($data as $line) {
