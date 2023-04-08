@@ -1,3 +1,7 @@
+<head>
+<link rel="stylesheet" href="../static/assets/bootstrap/css/bootstrap.css">
+<meta charset="utf-8">
+</head>
 
 <body>
     <div class="container">
