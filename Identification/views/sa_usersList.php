@@ -12,7 +12,7 @@ include __ROOT__."/views/header.html";
                 <h2 class="mb-0"><?php echo $group['name']; ?></h2>
                 <form action="/sa_usersList" method="post">
                     <input type="hidden" name="isDeleteGroup" value="<?php echo $group['name']; ?>" />
-                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                    <button type="submit" class="btn btn-danger d-flex align-items-center justify-content-center"><i class="fas fa-trash-alt"></i></button>
                 </form>
             </div>
             <div class="card-body">
