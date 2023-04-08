@@ -90,8 +90,9 @@ class SaUserCreateController extends Controller{
                                     $pdf->Cell($w[3], 10, iconv('UTF-8', 'windows-1252', $user[0]), 'LR', 0, 'L', $fill);
                                     $pdf->Cell($w[4], 10, iconv('UTF-8', 'windows-1252', $user[1]), 'LR', 0, 'L', $fill);
                                     $pdf->Ln();
-
                                 }
+                                $pdf->SetX($startX + ($pdf->GetPageWidth() - array_sum($w))/2);
+                                $pdf->Cell(array_sum($w),0,'','T');
                                 
                                 //donner le pdf à la prochaine vue pour le téléchargement
                                 $pdf_content = $pdf->Output('','S');
