@@ -44,20 +44,62 @@ class SaClassCreateController extends Controller{
                                                         }
                                                         // Fermer et supprimer le fichier
                                                         fclose($file);
+
+                                                        if (count($data[0]) != 2) {
+                                                            $this->render('sa_error',['message' => 'Le fichier CSV ne contient pas le bon nombre de colonnes. Il doit y avoir 2 colonnes :  Nom, Prénom']);
+                                                        } else {
                                                         // Créer l'objet UserDB pour entrer des données dans la bdd Moodle
                                                         $groupDB = new GroupsDB();
                                                         // A VERIFIER : Créer la classe/////////////////////////////////////////////////
                                                         $idGroup = $groupDB->addGroups($_REQUEST['newClassName'], $_REQUEST['newClassSummary']);
-
-                                                        // Utiliser les informations stockées dans le tableau $data pour insérer les utilisateurs 1 à 1
                                                         foreach ($data as $line) {
                                                             $groupDB->addMember($idGroup, $line[1], $line[0]);
                                                         }
-                                            $this->render('sa_error',['message' => "réussi"]);
+                                                        
+                                                        // Création du fichier PDF
+                                                        $pdf = new FPDF();
+                                                        
+                                                        $pdf->AddPage();
+                                                        $pdf->Image(__ROOT__.'/static/img/logo_balabox.png',10,6,30);
+                                                        $pdf->SetFillColor(255, 165, 0); // définit la couleur de fond à orange
+                                                        $pdf->SetTextColor(255, 255, 255); // définit la couleur de texte à blanc
+                                                        $pdf->SetFont('Arial', 'B', 14); // définit la police de caractères en gras avec une taille de 14
+
+                                                        // Ajout du header
+                                                        $header = array('Rôle', 'Nom', 'Prénom', 'Nom d\'utilisateur', 'Mot de passe');
+                                                        $w = array(30,25,25,45,35);
+
+                                                        // Centrer le tableau
+                                                        $pdf->SetY(45);
+                                                        $pdf->Cell(($pdf->GetPageWidth() - array_sum($w))/2); // Ajouter de l'espace à gauche pour centrer le tableau
+                                                        for($i=0;$i<count($header);$i++)
+                                                            $pdf->Cell($w[$i],7,iconv('UTF-8', 'windows-1252',$header[$i]),1,0,'C',true);
+                                                        $pdf->Ln();
+                                                        $startX = $pdf->GetX();
+
+                                                        $members = $groupDB->getMembers($_REQUEST['newClassName']);
+                                                        $member = $members->fetch_object();
+                                                        foreach ($member as $members) {
+                                                            $pdf->Cell($w[0],6,iconv('UTF-8', 'windows-1252',$member->role),'LR');
+                                                            $pdf->Cell($w[1],6,iconv('UTF-8', 'windows-1252',$member->lastname),'LR');
+                                                            $pdf->Cell($w[2],6,iconv('UTF-8', 'windows-1252',$member->firstname),'LR');
+                                                            $pdf->Cell($w[3],6,iconv('UTF-8', 'windows-1252',$member->username),'LR');
+                                                            $pdf->Cell($w[4],6,iconv('UTF-8', 'windows-1252',$member->password),'LR');
+                                                            $pdf->Ln();
+                                                        }
+
+                                                        $pdf->SetX($startX + ($pdf->GetPageWidth() - array_sum($w))/2);
+                                                        $pdf->Cell(array_sum($w),0,'','T');
+                                                        
+                                                        //donner le pdf à la prochaine vue pour le téléchargement
+                                                        $pdf_content = $pdf->Output('','S');
+                                                        $this->render('sa_download', ['pdf_content' => $pdf_content]);
+
+
+                                                    }
                                                     }catch(Exception $e){
-                                echo($e);
-                                $this->render('sa_error',['message' => $e->getMessage()]);
-                            }
+                                                        $this->render('sa_error',['message' => $e->getMessage()]);
+                                                    }
 
                         }
                     } else{

@@ -46,6 +46,7 @@ class SaUserCreateController extends Controller{
                                 if (count($data[0]) != 3) {
                                     $this->render('sa_error',['message' => 'Le fichier CSV ne contient pas le bon nombre de colonnes. Il doit y avoir 3 colonnes :  Nom, Prénom, Rôle']);
                                 } else {
+
                                 //créer le fichier PDF
                                 $pdf = new FPDF();
 
@@ -72,7 +73,6 @@ class SaUserCreateController extends Controller{
                                 $startX = $pdf->GetX();
                                 
                                 foreach ($data as $line) {
-                                    // Insérer dans la bdd (rôle n'est pas encore traité)
                                     $role = 4;
                                     
                                     if ($line[2] == 'Professeur') {
