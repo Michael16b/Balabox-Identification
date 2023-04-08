@@ -47,9 +47,6 @@ class GroupsDB {
 
     public function addMember(String $groupId, String $firstName, String $lastName): array{
         global $DB;
-
-        $group = $DB->get_record('groups', array('id' => $groupId));
-
         // Appeler la fonction addUser() pour récupérer l'ID de l'utilisateur.
         $userDB = new UserDB();
         $user = $userDB->addUser($firstName, $lastName);
@@ -95,6 +92,20 @@ class GroupsDB {
                                         'username' => $userInfo->username));
         }
         return $members;
+    }
+
+    public function getGroups() : array {
+        global $DB;
+        $groups = $DB->get_records('groups');
+        $groupsArray = array();
+        foreach ($groups as $group) {
+            array_push($groupsArray, array('name' => $group->name, 'description' => $group->description));
+        }
+        foreach ($groupsArray as $group) {
+            $group->members = $this->getMembers($group['name']);
+        }
+
+        return $groupsArray;
     }
 }
 

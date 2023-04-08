@@ -99,5 +99,6 @@ class UserDB {
     	return  $roles->roleid;
     }
 
+
 }
 ?>
