@@ -62,24 +62,20 @@ class SaUserCreateController extends Controller{
                                 $pdf->Ln();
 
                                 $startX = $pdf->GetX();
-                                $startY = $pdf->GetY();
                                 // Utiliser les informations stockées dans le tableau $data pour insérer les utilisateurs 1 à 1
                                 foreach ($data as $line) {
                                     // Insérer dans la bdd (rôle n'est pas encore traité)
                                     $user = $userdb->addUser($line[0],$line[1]);
-                                
-                                    // Centrer la ligne du tableau
-                                    $pdf->SetY($startY);
-                                    $startX = $pdf->GetX() + (($pdf->GetPageWidth() - $pdf->GetX() - array_sum($w)) / 2);
-                                
-                                    // Importer dans le fichier PDF
-                                    $pdf->SetX($startX);
-                                    $pdf->Cell($w[0],10, iconv('UTF-8', 'windows-1252',$line[2]),1); // Rôle
-                                    $pdf->Cell($w[1],10, iconv('UTF-8', 'windows-1252',$line[0]),1); // Nom
-                                    $pdf->Cell($w[2],10, iconv('UTF-8', 'windows-1252',$line[1]),1); // Prenom
-                                    $pdf->Cell($w[3],10, iconv('UTF-8', 'windows-1252',$user[0]),1); // Username
-                                    $pdf->Cell($w[4],10, iconv('UTF-8', 'windows-1252',$user[1]),1); // Password
+
+                                    // importer dans le fichier PDF
+                                    $pdf->SetX($startX + ($pdf->GetPageWidth() - array_sum($w))/2);
+                                    $pdf->Cell($w[0],10, iconv('UTF-8', 'windows-1252',$line[2])); // Rôle
+                                    $pdf->Cell($w[1],10, iconv('UTF-8', 'windows-1252',$line[0])); // Nom
+                                    $pdf->Cell($w[2],10, iconv('UTF-8', 'windows-1252',$line[1])); // Prenom
+                                    $pdf->Cell($w[3],10, iconv('UTF-8', 'windows-1252',$user[0])); // Username
+                                    $pdf->Cell($w[4],10, iconv('UTF-8', 'windows-1252',$user[1])); // Password
                                     $pdf->Ln();
+
                                 }
                                 
                                 //donner le pdf à la prochaine vue pour le téléchargement
