@@ -73,7 +73,7 @@ class SaUserCreateController extends Controller{
                                     // Insérer dans la bdd (rôle n'est pas encore traité)
                                     $user = $userdb->addUser($line[0],$line[1]);
                                     $pdf->SetTextColor(0, 0, 0); // définit la couleur de texte à noir
-                                    $pdf->SetFont('Arial', 14);
+                                    $pdf->SetFont('Arial', '', 14); // définit la police de caractères sans gras
 
                                     if ($fill) {
                                         $pdf->SetFillColor(220, 220, 220); // définit la couleur de fond à gris clair
