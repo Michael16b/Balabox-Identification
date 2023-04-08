@@ -105,7 +105,7 @@ class SaClassCreateController extends Controller{
 
                                                             $pdf->SetTextColor(0, 0, 0); // définit la couleur de texte à noir
                                                             $pdf->SetFont('Arial', '', 14); // définit la police de caractères sans gras
-                                                            $pdf->SetX(($pdf->GetPageWidth() - array_sum($w))/2 - 10);
+                                                            $pdf->SetX(($pdf->GetPageWidth() - array_sum($w)));
                                                             $pdf->Cell($w[0],10,iconv('UTF-8', 'windows-1252',$role),'LR');
                                                             $pdf->Cell($w[1],10,iconv('UTF-8', 'windows-1252',$member->lastname),'LR');
                                                             $pdf->Cell($w[2],10,iconv('UTF-8', 'windows-1252',$member->firstname),'LR');

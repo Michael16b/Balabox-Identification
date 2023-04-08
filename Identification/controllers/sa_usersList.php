@@ -14,14 +14,24 @@ class SaUserList extends Controller{
             $this->render('sa_usersList',['groups' => $groups]);
         }
     }
+    public function delete($group) {
+        $groupsDB = new GroupsDB();
+        $groupsDB->deleteGroup($group);
+        $groups = $groupsDB->getGroups();
+        $this->render('sa_usersList',['groups' => $groups]);
+    }
+    public function addMember($group) {
+        $groupsDB = new GroupsDB();
+        $groupsDB->addMember($group);
+        $groups = $groupsDB->getGroups();
+        $this->render('sa_usersList',['groups' => $groups]);
+    }
 
     public function post($request){
         if(isset($_POST['isDeleteGroup'])){
-            $groupsDB = new GroupsDB();
-            $groupsDB->deleteGroup($_POST['isDeleteGroup']);
-            
-            $groups = $groupsDB->getGroups();
-            $this->render('sa_usersList',['groups' => $groups]);
+            $this->delete($_POST['isDeleteGroup']);
+        } else if (isset($_POST['addMember'])) {
+
         }
     }
 
