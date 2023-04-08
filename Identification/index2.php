@@ -30,7 +30,6 @@ require_once (CONTROLLERS_DIR.'/ApplicationController.php');
 
 // Add routes here
 ApplicationController::getInstance()->addRoute('seeConfig', CONTROLLERS_DIR.'/seeConfig.php');
-ApplicationController::getInstance()->addRoute('connect_Prof', CONTROLLERS_DIR.'/connect_Prof.php');
 ApplicationController::getInstance()->addRoute('connect', CONTROLLERS_DIR.'/connect.php');
 ApplicationController::getInstance()->addRoute('sa_classCreate', CONTROLLERS_DIR.'/sa_classCreate.php');
 ApplicationController::getInstance()->addRoute('sa_courseCreate', CONTROLLERS_DIR.'/sa_courseCreate.php');
