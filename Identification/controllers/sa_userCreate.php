@@ -62,14 +62,15 @@ class SaUserCreateController extends Controller{
                                 $pdf->Ln();
 
                                 $startY = $pdf->GetY();
+                                $startX = $pdf->GetX();
 
                                 // Utiliser les informations stockées dans le tableau $data pour insérer les utilisateurs 1 à 1
                                 foreach ($data as $line) {
                                     // Insérer dans la bdd (rôle n'est pas encore traité)
                                     $user = $userdb->addUser($line[0],$line[1]);
-                                    
+
                                     // importer dans le fichier PDF
-                                    $pdf->SetY($startY + ((297 - $startY - 20) / 2) - (count($data) * 10) + (10 * $pdf->GetY() / 10));
+                                    $pdf->SetXY($startX, $startY + ((297 - $startY - 20) / 2) - (count($data) * 10) + (10 * $pdf->GetY() / 10));
                                     $pdf->Cell(25,10, iconv('UTF-8', 'windows-1252',$line[2])); // Rôle
                                     $pdf->Cell(25,10, iconv('UTF-8', 'windows-1252',$line[0])); // Nom
                                     $pdf->Cell(25,10, iconv('UTF-8', 'windows-1252',$line[1])); // Prenom
