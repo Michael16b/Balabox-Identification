@@ -10,8 +10,25 @@ class SaUserList extends Controller{
         }else{
             $groupsDB = new GroupsDB();
             $groups = $groupsDB->getGroups();
+
+            $user = new UserDB();
+            $users = $user->getUsers();
+            /*Chercher tous les utilisateurs qui n'ont pas de groupe */
+            $usersWithoutGroup = array();
+            foreach ($users as $user) {
+                if($user->id != 1){
+                    $user = $user->username;
+                    foreach ($groups as $group) {
+                        if($groupsDB->isMember($group->name, $user)){
+                            break;
+                        } else {
+                            array_push($usersWithoutGroup, $user);
+                        } 
+                    }
+                }
+            }
             
-            $this->render('sa_usersList',['groups' => $groups]);
+            $this->render('sa_usersList',['groups' => $groups, 'usersWithoutGroup' => $usersWithoutGroup]);
         }
     }
     public function delete($group) {
@@ -19,24 +36,9 @@ class SaUserList extends Controller{
         $groupsDB->deleteGroup($group);
         $groups = $groupsDB->getGroups();
 
-        $user = new UserDB();
-        $users = $user->getUsers();
-        /*Chercher tous les utilisateurs qui n'ont pas de groupe */
-        $usersWithoutGroup = array();
-        foreach ($users as $user) {
-            if($user->id != 1){
-                $user = $user->username;
-                foreach ($groups as $group) {
-                    if($groupsDB->isMember($group->name, $user)){
-                        break;
-                    } else {
-                        array_push($usersWithoutGroup, $user);
-                    } 
-                }
-            }
-        }
 
-        $this->render('sa_usersList',['groups' => $groups, 'usersWithoutGroup' => $usersWithoutGroup]);
+
+        $this->render('sa_usersList',['groups' => $groups ]);
     }
     
     public function addMember($group) {
