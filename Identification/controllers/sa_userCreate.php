@@ -67,26 +67,28 @@ class SaUserCreateController extends Controller{
                                 $pdf->Ln();
 
                                 $startX = $pdf->GetX();
-
+                                
                                 $fill = false;
                                 foreach ($data as $line) {
+                                    // Insérer dans la bdd (rôle n'est pas encore traité)
                                     $user = $userdb->addUser($line[0],$line[1]);
+                                    $pdf->SetTextColor(0, 0, 0); // définit la couleur de texte à noir
 
                                     if ($fill) {
-                                        $pdf->SetFillColor(220, 220, 220);
+                                        $pdf->SetFillColor(220, 220, 220); // définit la couleur de fond à gris clair
                                     } else {
-                                        $pdf->SetFillColor(255, 255, 255);
+                                        $pdf->SetFillColor(255, 255, 255); // définit la couleur de fond à blanc
                                     }
                                     $fill = !$fill;
 
-
-                                    // Ajouter une bordure à gauche et à droite de la cellule de la première colonne
-                                    $pdf->Cell($w[0], 10, iconv('UTF-8', 'windows-1252', $line[2]), 1, 0, 'L', $fill);
-                                    $pdf->Cell($w[1], 10, iconv('UTF-8', 'windows-1252', $line[0]), 1, 0, 'L', $fill);
-                                    $pdf->Cell($w[2], 10, iconv('UTF-8', 'windows-1252', $line[1]), 1, 0, 'L', $fill);
-                                    $pdf->Cell($w[3], 10, iconv('UTF-8', 'windows-1252', $user[0]), 1, 0, 'L', $fill);
-                                    $pdf->Cell($w[4], 10, iconv('UTF-8', 'windows-1252', $user[1]), 1, 0, 'L', $fill);
+                                    // importer dans le fichier PDF
+                                    $pdf->Cell($w[0], 10, iconv('UTF-8', 'windows-1252', $line[2]), 'LR', 0, 'L', $fill);
+                                    $pdf->Cell($w[1], 10, iconv('UTF-8', 'windows-1252', $line[0]), 'LR', 0, 'L', $fill);
+                                    $pdf->Cell($w[2], 10, iconv('UTF-8', 'windows-1252', $line[1]), 'LR', 0, 'L', $fill);
+                                    $pdf->Cell($w[3], 10, iconv('UTF-8', 'windows-1252', $user[0]), 'LR', 0, 'L', $fill);
+                                    $pdf->Cell($w[4], 10, iconv('UTF-8', 'windows-1252', $user[1]), 'LR', 0, 'L', $fill);
                                     $pdf->Ln();
+
                                 }
                                 
                                 //donner le pdf à la prochaine vue pour le téléchargement
