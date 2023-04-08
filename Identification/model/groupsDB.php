@@ -99,6 +99,19 @@ class GroupsDB {
         return $members;
     }
 
+    public function isMember(String $groupeName, String $username) : bool {
+        global $DB;
+        $group = $this->getGroup($groupeName);
+        $user = $DB->get_record('user', array('username' => $username));
+        $group_members = $DB->get_records('groups_members', array('groupid' => $group->id));
+        foreach ($group_members as $member) {
+            if ($member->userid == $user->id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public function getGroups() : array {
         global $DB;
         $groups = $DB->get_records('groups');
