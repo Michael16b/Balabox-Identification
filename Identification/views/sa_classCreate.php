@@ -2,9 +2,7 @@
 include __ROOT__."/views/header.html";
 ?>
 
-<body>
-
-    
+<body>    
     <!-- BODY -->
     <div class="container my-4">
         <div class="container-fluid ">

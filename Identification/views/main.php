@@ -1,6 +1,3 @@
-<?php
-include __ROOT__."/views/header.html";
-?>
 
 <body>
     <div class="container">
