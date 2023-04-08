@@ -37,7 +37,7 @@ ApplicationController::getInstance()->addRoute('sa_courseCreate', CONTROLLERS_DI
 ApplicationController::getInstance()->addRoute('sa_userCreate', CONTROLLERS_DIR.'/sa_userCreate.php');
 ApplicationController::getInstance()->addRoute('sa_confirm', CONTROLLERS_DIR.'/sa_confirm.php');
 ApplicationController::getInstance()->addRoute('sa_error', CONTROLLERS_DIR.'/sa_error.php');
-ApplicationController::getInstance()->addRoute('sa_userList', CONTROLLERS_DIR.'/users_list.php');
+ApplicationController::getInstance()->addRoute('sa_userList', CONTROLLERS_DIR.'/sa_usersList.php');
 ApplicationController::getInstance()->addRoute('sa_download', CONTROLLERS_DIR.'/sa_download.php');
 ApplicationController::getInstance()->addRoute('authentified', CONTROLLERS_DIR.'/authentified.php');
 ApplicationController::getInstance()->addRoute('disconnect', CONTROLLERS_DIR.'/disconnect.php');
