@@ -6,6 +6,11 @@ class UserDB {
         return $DB->get_record('user', array('username' => $username));
     }
 
+    public function getUserById(int $id){
+        global $DB;
+        return $DB->get_record('user', array('id' => $id));
+    }
+
 
     public final function RandomPassword() {
         $uppercase = range('A', 'Z');
