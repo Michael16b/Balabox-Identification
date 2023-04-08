@@ -6,8 +6,7 @@ class GroupsDB {
 
 
     
-    public function addGroups(String $groupeName, String $desc) : int {
-        global $CFG;
+    public function addGroups(String $groupeName, String $desc = 'Pas de description') : int {
     
         // Créer les données nécessaires pour créer un nouveau cours.
         $data = new stdClass();
@@ -29,22 +28,6 @@ class GroupsDB {
     
         return $idGroup;
     }
-    
-    
-    public function deleteGroups(String $groupeName): void{
-        global $DB;
-        $DB->delete_records('groups', array('name' => $groupeName));
-    }
-
-    public function updateGroups(String $oldGroupName, String $groupeName, String $desc): void{
-        global $DB;
-        $group = groups_get_group_by_name($oldGroupName);
-        $group->name = $groupeName;
-        $group->description = $desc;
-        groups_update_group($group);
-
-    }
-
     public function addMember(String $groupId, String $firstName, String $lastName): array{
         global $DB;
         // Appeler la fonction addUser() pour récupérer l'ID de l'utilisateur.
@@ -65,11 +48,33 @@ class GroupsDB {
         return array($user[0], $user[1], $user[2]);
     }
 
+
+
+
     public function deleteMember(String $groupeName, String $username): void{
         global $DB;
         $group = $DB->get_record('groups', array('name' => $groupeName));
         $user = $DB->get_record('user', array('username' => $username));
         groups_remove_member($group, $user);
+    }
+
+    
+    public function deleteGroups(String $groupeName): void{
+        global $DB;
+        $members = $this->getMembers($groupeName);
+        foreach ($members as $member) {
+            $this->deleteMember($groupeName, $member->username);
+        }
+        $DB->delete_records('groups', array('name' => $groupeName));
+    }
+
+    public function updateGroups(String $oldGroupName, String $groupeName, String $desc = 'Pas de description'): void{
+        global $DB;
+        $group = groups_get_group_by_name($oldGroupName);
+        $group->name = $groupeName;
+        $group->description = $desc;
+        groups_update_group($group);
+
     }
 
     public function getGroup(String $groupeName): stdClass {
@@ -99,12 +104,8 @@ class GroupsDB {
         $groups = $DB->get_records('groups');
         $groupsArray = array();
         foreach ($groups as $group) {
-            array_push($groupsArray, array('name' => $group->name, 'description' => $group->description));
+            array_push($groupsArray, array('name' => $group->name, 'description' => $group->description, 'members' => $this->getMembers($group->name)));
         }
-        foreach ($groupsArray as $group) {
-            $group->members = $this->getMembers($group['name']);
-        }
-
         return $groupsArray;
     }
 }

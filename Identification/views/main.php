@@ -1,4 +1,5 @@
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../static/assets/bootstrap/css/bootstrap.css">
 <meta charset="utf-8">
 </head>

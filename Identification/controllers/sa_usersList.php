@@ -10,6 +10,7 @@ class SaUserList extends Controller{
         }else{
             $groupsDB = new GroupsDB();
             $groups = $groupsDB->getGroups();
+            
             $this->render('sa_usersList',['groups' => $groups]);
         }
     }

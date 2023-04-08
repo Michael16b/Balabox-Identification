@@ -70,21 +70,6 @@ class UserDB {
         return array($user->username, $password,$role);
         }
 
-
-    public function deleteUser(String $username): void{
-        global $DB;
-        $DB->delete_records('user', array('username' => $username));
-    }
-
-    public function updateUser(String $username, String $firstName, String $lastName): void{
-        global $DB;
-        $user = $DB->get_record('user', array('username' => $username));
-        $user->firstname = $firstName;
-        $user->lastname = $lastName;
-        $DB->update_record('user', $user);
-    }
-
-
     public function addRolesSystemMembers(String $username, String $role): void{
         global $DB;
         $user = $DB->get_record('user', array('username' => $username));
@@ -97,6 +82,20 @@ class UserDB {
     	$user = $this->getRecord($username);
 	    $roles =$DB->get_record('role_assignments', array('userid' => $user->id));
     	return  $roles->roleid;
+    }
+
+
+    public function deleteUser(String $username): void{
+        global $DB;
+        $DB->delete_records('user', array('username' => $username));
+    }
+
+    public function updateUser(String $username, String $firstName, String $lastName): void{
+        global $DB;
+        $user = $DB->get_record('user', array('username' => $username));
+        $user->firstname = $firstName;
+        $user->lastname = $lastName;
+        $DB->update_record('user', $user);
     }
 
 

@@ -7,6 +7,7 @@ include __ROOT__."/views/header.html";
 <div class="container my-4">
     <h1>Liste des groupes</h1>
     <?php foreach($groups as $group) { ?>
+        <?php echo $group; ?>
         <div class="card my-3">
             <div class="card-header">
                 <h2><?php echo $group['name']; ?></h2>

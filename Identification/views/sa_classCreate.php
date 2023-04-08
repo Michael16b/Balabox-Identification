@@ -18,7 +18,7 @@ include __ROOT__."/views/header.html";
             <!-- DEXRIPTION DE LA CLASSE-->
             <div class="mb-3">
                 <label for="newClassSummary" class="form-label">Description</label>
-                <textarea class="form-control" id="newClassSummary" name="newClassSummary"  rows="3" required></textarea>
+                <textarea class="form-control" id="newClassSummary" name="newClassSummary"  rows="3" ></textarea>
             </div>
             <!-- FICHIER CSV -->
             <div class="mb-3 my-5">
