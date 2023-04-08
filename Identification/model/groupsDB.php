@@ -65,13 +65,14 @@ class GroupsDB {
     }
 
     public function getGroup(String $groupeName): array{
-        $course = get_course_by_name($groupeName);
+        global $DB;
+        $course = $course = $DB->get_record('course', array('fullname' => $groupeName));
         $group = groups_get_group_by_name($course->id, $groupeName);
         return $group;
     }
 
     public function getMembers(String $groupeName) : array {
-        $group = getGroup($groupeName);
+        $group = $this->getGroup($groupeName);
         $members = groups_get_members($group->id);
         return $members;
     }
