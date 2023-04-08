@@ -64,13 +64,13 @@ class GroupsDB {
         groups_remove_member($group, $user);
     }
 
-    public function getGroup(String $groupeName): String{
+    public function getGroup(String $groupeName): array{
         global $DB;
         $group = $DB->get_record('groups', array('name' => $groupeName));
         return $group;
     }
 
-    public function getMembers(String $groupeName): String{
+    public function getMembers(String $groupeName): array{
         global $DB;
         $group = $DB->get_record('groups', array('name' => $groupeName));
         $members = groups_get_members($group->id);
