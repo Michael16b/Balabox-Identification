@@ -80,7 +80,7 @@ class SaClassCreateController extends Controller{
 
                                                         $members = $groupDB->getMembers($_REQUEST['newClassName']);
                                                         
-                                                        $this->render('sa_error',['message' => $members]); 
+                                                         
                                                         $member = new stdClass();
                                                         foreach ($member as $members) {
                                                             $pdf->Cell($w[0],6,iconv('UTF-8', 'windows-1252',$member->role),'LR');

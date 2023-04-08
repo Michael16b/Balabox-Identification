@@ -71,8 +71,8 @@ class GroupsDB {
     }
 
     public function getMembers(String $groupeName) : array {
-        global $DB;
-        $group = $DB->get_record('groups', array('name' => $groupeName));
+        
+        $group = groups_get_group_by_name($groupeName);
         $members = groups_get_members($group->id);
         return $members;
     }
