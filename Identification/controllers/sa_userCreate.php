@@ -47,15 +47,12 @@ class SaUserCreateController extends Controller{
                                 $pdf = new FPDF();
 
                                 // Définir la police
-                                $pdf->AddFont('Alata-Regular', '', '../static/assets/FPDF/Alata-Regular.ttf', true);
                                 $pdf->AddPage();
-                                $pdf->SetFont('Alata-Regular', '', 12);
-
-                                $pdf->Cell(25,10,iconv('UTF-8', 'windows-1252','Rôle'));
-                                $pdf->Cell(25,10,'Nom');
-                                $pdf->Cell(25,10,iconv('UTF-8', 'windows-1252','Prénom'));
-                                $pdf->Cell(25,10,"Nom d'utilisateur");
-                                $pdf->Cell(25,10,'Mot de passe');
+                                $pdf->Image(__ROOT__.'/static/assets/images/logo.png',10,6,30);
+                                $header = array('Rôle', 'Nom', 'Prénom', 'Nom d\'utilisateur', 'Mot de passe');
+                                $w = array(25,25,25,25,25);
+                                for($i=0;$i<count($header);$i++)
+                                    $pdf->Cell($w[$i],7,$header[$i],1,0,'C',true);
                                 $pdf->Ln();
 
                                 // Utiliser les informations stockées dans le tableau $data pour insérer les utilisateurs 1 à 1
