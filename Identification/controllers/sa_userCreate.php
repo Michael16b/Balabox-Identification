@@ -23,67 +23,64 @@ class SaUserCreateController extends Controller{
                     $file_name = $_FILES['csvFile']['name'];
                     $file_tmp = $_FILES['csvFile']['tmp_name'];
                     $file_extension = pathinfo($file_name, PATHINFO_EXTENSION);
-                    if($file_extension != 'csv'){
-                        $this->render('sa_error',['message' => 'Seuls les fichiers CSV sont acceptés ici.']);
-                    } else {
-                        $destination_file = '/tmp/'.$file_name;
-                        try{
-                            // Ouvrir le fichier CSV
-                            $file = fopen($destination_file, "r");
-                            // Initialiser un tableau pour stocker les informations
-                            $data = array();
-                            // Parcourir chaque ligne du fichier sauf la première (contenant les informations des colonnes)
-                            $line_counter = 0;
-                            while (($line = fgetcsv($file, 0, ";")) !== false) {
-                                if ($line_counter != 0) {
-                                    $data[] = $line;
+                        if($file_extension != 'csv'){
+                            $this->render('sa_error',['message' => 'Seuls les fichiers CSV sont acceptés ici.']);
+                        } else {
+                            $destination_file = '/tmp/'.$file_name;
+                            try{
+                                // Ouvrir le fichier CSV
+                                $file = fopen($destination_file, "r");
+                                // Initialiser un tableau pour stocker les informations
+                                $data = array();
+                                // Parcourir chaque ligne du fichier sauf la première (contenant les informations des colonnes)
+                                $line_counter = 0;
+                                while (($line = fgetcsv($file, 0, ";")) !== false) {
+                                    if ($line_counter != 0) {
+                                        $data[] = $line;
 
+                                    }
+                                    $line_counter++;
                                 }
-                                $line_counter++;
-                            }
-                            // Fermer et supprimer le fichier
-                            fclose($file);
-                            // Créer l'objet UserDB pour entrer des données dans la bdd Moodle
+                                // Fermer et supprimer le fichier
+                                fclose($file);
+                                //créer le fichier PDF
+                                $pdf = new FPDF();
 
-                            /////////////////////////DEBUT A TESTER : PARTIE PDF UNIQUEMENT///////////////////////////////////////////////////////////////
-                            //créer le fichier PDF
-                            $pdf = new FPDF();
-                            $pdf->AddPage();
-                            $pdf->SetFont('Arial','B',16);
+                                // Définir la police
+                                $pdf->SetFont('ArialUnicodeMS', '', 12);
+                                $pdf->AddPage();
 
-                            $pdf->Cell(25,10,'Rôle');
-                            $pdf->Cell(25,10,'Nom');
-                            $pdf->Cell(25,10,'Prénom');
-                            $pdf->Cell(25,10,"Nom d'utilisateur");
-                            $pdf->Cell(25,10,'Mot de passe');
-                            $pdf->Ln();
-
-                            // Utiliser les informations stockées dans le tableau $data pour insérer les utilisateurs 1 à 1
-                            foreach ($data as $line) {
-                                list($line[0], $line[1], $line[2]) = explode(";", $line[0]);
-                                // Insérer dans la bdd (rôle n'est pas encore traité)
-                                $user = $userdb->addUser($line[0],$line[1]);
-
-                                //importer dans le fichier PDF
-                                $pdf->Cell(25,10,$line[2]); // Rôle
-                                $pdf->Cell(25,10,$line[0]); // Nom
-                                $pdf->Cell(25,10,$line[1]); // Prenom
-                                $pdf->Cell(25,10,$user[0]); // Username
-                                $pdf->Cell(25,10,$user[1]); // Password
+                                $pdf->Cell(25,10,iconv('UTF-8', 'windows-1252','Rôle'));
+                                $pdf->Cell(25,10,'Nom');
+                                $pdf->Cell(25,10,iconv('UTF-8', 'windows-1252','Prénom'));
+                                $pdf->Cell(25,10,"Nom d'utilisateur");
+                                $pdf->Cell(25,10,'Mot de passe');
                                 $pdf->Ln();
 
+                                // Utiliser les informations stockées dans le tableau $data pour insérer les utilisateurs 1 à 1
+                                foreach ($data as $line) {
+                                    // Insérer dans la bdd (rôle n'est pas encore traité)
+                                    $user = $userdb->addUser($line[0],$line[1]);
+
+                                    //importer dans le fichier PDF
+                                    $pdf->Cell(25,10, iconv('UTF-8', 'windows-1252',$line[2])); // Rôle
+                                    $pdf->Cell(25,10, iconv('UTF-8', 'windows-1252',$line[0])); // Nom
+                                    $pdf->Cell(25,10, iconv('UTF-8', 'windows-1252',$line[1])); // Prenom
+                                    $pdf->Cell(25,10, iconv('UTF-8', 'windows-1252',$user[0])); // Username
+                                    $pdf->Cell(25,10, iconv('UTF-8', 'windows-1252',$user[1])); // Password
+                                    $pdf->Ln();
+
+                                }
+                                
+                                //donner le pdf à la prochaine vue pour le téléchargement
+                                $pdf_content = $pdf->Output('','S');
+                                $this->render('sa_download', ['pdf_content' => $pdf_content]);
                             }
-                            
-                            //donner le pdf à la prochaine vue pour le téléchargement
-                            $pdf_content = $pdf->Output('','S');
-                            $this->render('sa_download', ['pdf_content' => $pdf_content]);
+                            catch(Exception $e){
+                                $this->render('sa_error',['message' => $e->getMessage()]);
+    }
 
-                $this->render('sa_error',['message' => "réussi"]);
-                        }catch(Exception $e){
-    $this->render('sa_error',['message' => $e->getMessage()]);
 }
-
-                    }
                 } else{
                     sleep(5); // Attendre 5 secondes avant de vérifier à nouveau
                 } 
