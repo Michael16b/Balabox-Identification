@@ -66,8 +66,7 @@ class GroupsDB {
 
     public function getGroup(String $groupeName): array{
         global $DB;
-        $course = $course = $DB->get_record('course', array('fullname' => $groupeName));
-        $group = groups_get_group_by_name($course->id, $groupeName);
+        $group = $DB->get_record('groups', array('name' => $groupeName));
         return $group;
     }
 
