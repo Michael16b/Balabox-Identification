@@ -48,7 +48,8 @@ class SaUserCreateController extends Controller{
 
                                 // Définir la police
                                 $pdf->AddPage();
-                                $pdf->Image(__ROOT__.'/static/assets/images/logo.png',10,6,30);
+                                $pdf->Image(__ROOT__.'/static/img/logo_balabox.png',10,6,30);
+                                $pdf->SetFont('Arial','',14,'ISO-8859-1');
                                 $header = array('Rôle', 'Nom', 'Prénom', 'Nom d\'utilisateur', 'Mot de passe');
                                 $w = array(25,25,25,25,25);
                                 for($i=0;$i<count($header);$i++)
