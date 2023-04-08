@@ -19,7 +19,7 @@ class SaUserList extends Controller{
                 if($user->id != 1){
                     $user = $user->username;
                     foreach ($groups as $group) {
-                        if($groupsDB->isMember($group->name, $user)){
+                        if($groupsDB->isMember($group['name'], $user)){
                             break;
                         } else {
                             array_push($usersWithoutGroup, $user);

@@ -36,16 +36,14 @@ include __ROOT__."/views/header.html";
                     <h5 class="modal-title" id="add-member-modal-<?php echo $group['id']; ?>-label">Ajouter un membre à la classe <span id="group-name"></span></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
                 </div>
-                    <div class="modal-body">
-                        <?php
-                            // Inclure ici le code PHP pour récupérer tous les utilisateurs existants
-                        ?>
-                        <ul>
-                            <?php foreach($users as $user) { ?>
-                                <li><?php echo $user['lastname'] . ' ' . $user['firstname'] . ' (' . $user['username'] . ')'; ?></li>
-                            <?php } ?>
-                        </ul>
+                <div class="modal-body">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Rechercher un utilisateur..." id="search-users-input">
+                        <button class="btn btn-primary" type="button" id="search-users-button">Rechercher</button>
                     </div>
+                    <div id="users-list">
+                </div>
+                </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                             <button type="button" class="btn btn-primary">Ajouter</button>
@@ -62,15 +60,71 @@ include __ROOT__."/views/header.html";
 
 
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function() {
     var addMemberButtons = document.querySelectorAll('[data-bs-toggle="modal"]');
-    addMemberButtons.forEach(function (button) {
-      button.addEventListener("click", function () {
-        var groupName = this.getAttribute("data-groupname");
-        document.getElementById('group-name').innerHTML = groupName;
-      });
+    var searchUsersButton = document.querySelector("#search-users-button");
+    var toggleBtns = document.querySelectorAll('input[type="checkbox"].btn-check');
+
+
+        addMemberButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+            var groupName = this.getAttribute("data-groupname");
+            document.getElementById('group-name').innerHTML = groupName;
+        });
+        });
+
+
+        toggleBtns.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var clickedBtn = this;
+                toggleBtns.forEach(function(otherBtn) {
+                    if(!otherBtn.isEqualNode(clickedBtn)) {
+                        otherBtn.classList.add('d-none');
+                        otherBtn.classList.remove('d-block');
+                    } else {
+                        otherBtn.classList.add('d-block');
+                        otherBtn.classList.remove('d-none');
+                    }
+                });
+            });
+        });
+
+
+
+        searchUsersButton.addEventListener("click", function() {
+            var searchText = document.querySelector("#search-users-input").value.toLowerCase();
+            var usersList = document.querySelector("#users-list");
+            usersList.innerHTML = "";
+            var count = 0; // variable pour compter le nombre de boutons
+            <?php foreach($usersWithoutGroup as $username) { ?>
+                if ("<?php echo $username; ?>".includes(searchText)) {
+                    var div = document.createElement("div");
+                    div.className = "my-2 d-flex justify-content-center";
+
+                    var toggleBtn = document.createElement("input");
+                    toggleBtn.setAttribute("type", "checkbox");
+                    toggleBtn.setAttribute("class", "btn-check col-2");
+                    toggleBtn.setAttribute("id", "<?php echo $username; ?>");
+                    toggleBtn.setAttribute("autocomplete", "off");
+
+                    var label = document.createElement("label");
+                    label.setAttribute("class", "btn btn-outline-primary col-8 mx-3");
+                    label.setAttribute("for", "<?php echo $username; ?>");
+
+                    var labelText = document.createTextNode("<?php echo $username; ?>");
+                    label.appendChild(labelText);
+
+                    div.appendChild(toggleBtn);
+                    div.appendChild(label);
+                    usersList.appendChild(div);
+                }
+            <?php } ?>
+        });
+
+
     });
-  });
+
+
 </script>
 
 </body>
