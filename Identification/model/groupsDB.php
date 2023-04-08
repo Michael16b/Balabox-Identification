@@ -59,16 +59,16 @@ class GroupsDB {
     }
 
     
-    public function deleteGroups(String $groupeName): void{
+    public function deleteGroup(String $groupeName): void{
         global $DB;
         $members = $this->getMembers($groupeName);
         foreach ($members as $member) {
-            $this->deleteMember($groupeName, $member->username);
+            $this->deleteMember($groupeName, $member["username"]);
         }
         $DB->delete_records('groups', array('name' => $groupeName));
     }
 
-    public function updateGroups(String $oldGroupName, String $groupeName, String $desc = 'Pas de description'): void{
+    public function updateGroups(String $oldGroupName, String $groupeName, String $desc = 'Pas de description') : void{
         global $DB;
         $group = groups_get_group_by_name($oldGroupName);
         $group->name = $groupeName;

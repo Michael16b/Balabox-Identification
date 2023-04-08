@@ -14,6 +14,18 @@ class SaUserList extends Controller{
             $this->render('sa_usersList',['groups' => $groups]);
         }
     }
+
+    public function post($request){
+        if(isset($_POST['isDeleteGroup'])){
+            $groupsDB = new GroupsDB();
+            $groupsDB->deleteGroup($_POST['isDeleteGroup']);
+            
+            $groups = $groupsDB->getGroups();
+            $this->render('sa_usersList',['groups' => $groups]);
+        }
+    }
+
+
 }
 
 ?>
