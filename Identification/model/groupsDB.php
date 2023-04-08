@@ -45,13 +45,8 @@ class GroupsDB {
 
     }
 
-    public function addMember(String $groupId, String $firstName, String $lastName): void{
+    public function addMember(String $groupId, String $firstName, String $lastName): array{
         global $DB;
-
-
-
-
-
 
         $group = $DB->get_record('groups', array('id' => $groupId));
 
@@ -59,16 +54,18 @@ class GroupsDB {
         $userDB = new UserDB();
         $user = $userDB->addUser($firstName, $lastName);
         // Ajouter l'utilisateur au groupe.
-        $user = $userDB->getRecord($user[0]);
+        $userID = $userDB->getRecord($user[0]);
 
         $member = new stdClass();
         $member->groupid = $groupId;
         $member->component = "";
         $member-> itemid =  0;
         $member->timeadded = time();
-        $member->userid = $user->id;
+        $member->userid = $userID->id;
 
         $DB->insert_record('groups_members', $member);
+
+        return array($user[0], $user[1], $user[2]);
     }
 
     public function deleteMember(String $groupeName, String $username): void{
@@ -93,11 +90,9 @@ class GroupsDB {
         foreach ($group_members as $member) {
             $userInfo = $user->getUserById($member->userid);
             array_push($members, array(
-                                        'role' => $user->getUser_role($member->userid),
                                         'lastname' => $userInfo->lastname, 
                                         'firstname' => $userInfo->firstname, 
-                                        'username' => $userInfo->username, 
-                                        'password' => $userInfo->password));
+                                        'username' => $userInfo->username));
         }
         return $members;
     }

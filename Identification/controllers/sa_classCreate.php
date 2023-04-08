@@ -53,9 +53,7 @@ class SaClassCreateController extends Controller{
                                                         $groupDB = new GroupsDB();
                                                         // A VERIFIER : Créer la classe/////////////////////////////////////////////////
                                                         $idGroup = $groupDB->addGroups($_REQUEST['newClassName'], $_REQUEST['newClassSummary']);
-                                                        foreach ($data as $line) {
-                                                            $groupDB->addMember($idGroup, $line[1], $line[0]);
-                                                        }
+                                                        
                                                         
                                                         // Création du fichier PDF
                                                         $pdf = new FPDF();
@@ -77,17 +75,17 @@ class SaClassCreateController extends Controller{
                                                             $pdf->Cell($w[$i],7,iconv('UTF-8', 'windows-1252',$header[$i]),1,0,'C',true);
                                                         $pdf->Ln();
                                                         $startX = $pdf->GetX();
+                                                        $user = new UserDB();
 
-                                                        $members = $groupDB->getMembers($_REQUEST['newClassName']);
-                                                        var_dump($members);
-                                                        $this->render('sa_error',['message' => $members[0]]); 
-                                                        $member = new stdClass();
-                                                        foreach ($member as $members) {
-                                                            $pdf->Cell($w[0],6,iconv('UTF-8', 'windows-1252',$member->role),'LR');
+
+                                                        foreach ($data as $line) {
+                                                            list($username, $password,$role) =  $groupDB->addMember($idGroup, $line[1], $line[0]);
+                                                            $member = $user->getRecord($username);
+                                                            $pdf->Cell($w[0],6,iconv('UTF-8', 'windows-1252',$role),'LR');
                                                             $pdf->Cell($w[1],6,iconv('UTF-8', 'windows-1252',$member->lastname),'LR');
                                                             $pdf->Cell($w[2],6,iconv('UTF-8', 'windows-1252',$member->firstname),'LR');
-                                                            $pdf->Cell($w[3],6,iconv('UTF-8', 'windows-1252',$member->username),'LR');
-                                                            $pdf->Cell($w[4],6,iconv('UTF-8', 'windows-1252',$member->password),'LR');
+                                                            $pdf->Cell($w[3],6,iconv('UTF-8', 'windows-1252',$username),'LR');
+                                                            $pdf->Cell($w[4],6,iconv('UTF-8', 'windows-1252',$password),'LR');
                                                             $pdf->Ln();
                                                         }
 
