@@ -43,8 +43,8 @@ class SaUserCreateController extends Controller{
                                 }
                                 // Fermer et supprimer le fichier
                                 fclose($file);
-                                if (count($data[0]) != 4) {
-                                    $this->render('sa_error',['message' => 'Le fichier CSV ne contient pas le bon nombre de colonnes. Il doit y avoir 4 colonnes : Rôle, Nom, Prénom et Nom d\'utilisateur.']);
+                                if (count($data[0]) != 3) {
+                                    $this->render('sa_error',['message' => 'Le fichier CSV ne contient pas le bon nombre de colonnes. Il doit y avoir 3 colonnes :  Nom, Prénom, Rôle']);
                                 } else {
                                 //créer le fichier PDF
                                 $pdf = new FPDF();
