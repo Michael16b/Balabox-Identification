@@ -26,33 +26,25 @@ class SaUserCreateController extends Controller{
                     if($file_extension != 'csv'){
                         $this->render('sa_error',['message' => 'Seuls les fichiers CSV sont acceptés ici.']);
                     } else {
-                        // Déplacez le fichier uploadé vers le répertoire de destination
-                        move_uploaded_file($file_tmp,__ROOT__."/static/uploads/".$file_name);
-
+                        $destination_file = '/tmp/'.$file_name;
                         try{
-
-                                
                             // Ouvrir le fichier CSV
-                            $file = fopen(__ROOT__."/static/uploads/".$file_name, "r");
-                            if (!$file) {
-                                throw new Exception("Impossible d'ouvrir le fichier CSV $file_name, $php_errormsg");
-                            }
+                            $file = fopen($destination_file, "r");
                             // Initialiser un tableau pour stocker les informations
                             $data = array();
-
                             // Parcourir chaque ligne du fichier sauf la première (contenant les informations des colonnes)
                             $line_counter = 0;
-                            while (($line = fgetcsv($file)) !== false) {
+                            while (($line = fgetcsv($file, 0, ";")) !== false) {
                                 if ($line_counter != 0) {
                                     $data[] = $line;
+
                                 }
                                 $line_counter++;
                             }
-                            
-
                             // Fermer et supprimer le fichier
                             fclose($file);
-                            
+                            // Créer l'objet UserDB pour entrer des données dans la bdd Moodle
+
                             /////////////////////////DEBUT A TESTER : PARTIE PDF UNIQUEMENT///////////////////////////////////////////////////////////////
                             //créer le fichier PDF
                             $pdf = new FPDF();
@@ -68,16 +60,16 @@ class SaUserCreateController extends Controller{
 
                             // Utiliser les informations stockées dans le tableau $data pour insérer les utilisateurs 1 à 1
                             foreach ($data as $line) {
-                                list($nom, $prenom, $role) = explode(";", $line[0]);
+                                list($line[0], $line[1], $line[2]) = explode(";", $line[0]);
                                 // Insérer dans la bdd (rôle n'est pas encore traité)
-                                $user = $userdb->addUser($prenom,$nom);
+                                $user = $userdb->addUser($line[0],$line[1]);
 
                                 //importer dans le fichier PDF
-                                $pdf->Cell(25,10,$role);
-                                $pdf->Cell(25,10,$nom);
-                                $pdf->Cell(25,10,$prenom);
-                                $pdf->Cell(25,10,$user[0]);
-                                $pdf->Cell(25,10,$user[1]);
+                                $pdf->Cell(25,10,$line[2]); // Rôle
+                                $pdf->Cell(25,10,$line[0]); // Nom
+                                $pdf->Cell(25,10,$line[1]); // Prenom
+                                $pdf->Cell(25,10,$user[0]); // Username
+                                $pdf->Cell(25,10,$user[1]); // Password
                                 $pdf->Ln();
 
                             }
@@ -86,11 +78,10 @@ class SaUserCreateController extends Controller{
                             $pdf_content = $pdf->Output('','S');
                             $this->render('sa_download', ['pdf_content' => $pdf_content]);
 
-                            ///////////////////////// FIN A TESTER///////////////////////////////////////////////////////////////
-
+                $this->render('sa_error',['message' => "réussi"]);
                         }catch(Exception $e){
-                            $this->render('sa_error',['message' => $e->getMessage()]);
-                        }
+    $this->render('sa_error',['message' => $e->getMessage()]);
+}
 
                     }
                 } else{
