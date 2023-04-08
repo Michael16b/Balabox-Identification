@@ -47,6 +47,16 @@ class GroupsDB {
 
     public function addMember(String $groupId, String $firstName, String $lastName): void{
         global $DB;
+
+
+
+        $member = new stdClass();
+        $member->groupid = $groupId;
+        $member->component = null;
+        $member-> itemid =  0;
+        $member->timeadded = time();
+
+
         $group = $DB->get_record('groups', array('id' => $groupId));
 
         // Appeler la fonction addUser() pour récupérer l'ID de l'utilisateur.
@@ -54,7 +64,8 @@ class GroupsDB {
         $user = $userDB->addUser($firstName, $lastName);
         // Ajouter l'utilisateur au groupe.
         $user = $userDB->getRecord($user[0]);
-        groups_add_member($group, $user);
+        $member->userid = $user->id;
+        $DB->insert_record('groups_members', $member);
     }
 
     public function deleteMember(String $groupeName, String $username): void{
