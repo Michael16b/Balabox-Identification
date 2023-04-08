@@ -59,6 +59,14 @@ class SaClassCreateController extends Controller{
                                                         $pdf = new FPDF();
                                                         
                                                         $pdf->AddPage();
+                                                        $pdf->SetAutoPageBreak(true, 20); // Ajouter un saut de page automatiquement si le texte dépasse la hauteur de la page
+                                                        
+                                                        $pdf->SetFont('Arial', 'B', 18); // définit la police de caractères en gras avec une taille de 18
+                                                        $pdf->Cell(0, 45, iconv('UTF-8', 'windows-1252','Classe de ' . $_REQUEST['newClassName']), 0, 1, 'C'); // Ajoute une cellule contenant le titre centré avec un espacement vertical de 15
+                                                        $pdf->Ln(); // Ajoute un saut de ligne pour espacer le titre du reste du contenu
+
+
+                                                        // Ajout du logo
                                                         $pdf->Image(__ROOT__.'/static/img/logo_balabox.png',10,6,30);
                                                         $pdf->SetFillColor(255, 165, 0); // définit la couleur de fond à orange
                                                         $pdf->SetTextColor(255, 255, 255); // définit la couleur de texte à blanc
@@ -70,10 +78,13 @@ class SaClassCreateController extends Controller{
 
                                                         // Centrer le tableau
                                                         $pdf->SetY(45);
-                                                        $pdf->Cell(($pdf->GetPageWidth() - array_sum($w))/2); // Ajouter de l'espace à gauche pour centrer le tableau
+                                                        $pdf->Cell(($pdf->GetPageWidth() - array_sum($w))/2 - 10); // Ajouter de l'espace à gauche pour centrer le tableau
                                                         for($i=0;$i<count($header);$i++)
                                                             $pdf->Cell($w[$i],7,iconv('UTF-8', 'windows-1252',$header[$i]),1,0,'C',true);
                                                         $pdf->Ln();
+
+
+
                                                         $startX = $pdf->GetX();
                                                         $user = new UserDB();
 
@@ -81,19 +92,33 @@ class SaClassCreateController extends Controller{
                                                         foreach ($data as $line) {
                                                             list($username, $password,$role) =  $groupDB->addMember($idGroup, $line[1], $line[0]);
                                                             $member = $user->getRecord($username);
-                                                            $pdf->Cell($w[0],6,iconv('UTF-8', 'windows-1252',$role),'LR');
-                                                            $pdf->Cell($w[1],6,iconv('UTF-8', 'windows-1252',$member->lastname),'LR');
-                                                            $pdf->Cell($w[2],6,iconv('UTF-8', 'windows-1252',$member->firstname),'LR');
-                                                            $pdf->Cell($w[3],6,iconv('UTF-8', 'windows-1252',$username),'LR');
-                                                            $pdf->Cell($w[4],6,iconv('UTF-8', 'windows-1252',$password),'LR');
+
+                                                            if ($role == 4) {
+                                                                $role = 'Eleve';
+                                                            } else if ($role == 3) {
+                                                                $role = 'Professeur Editeur';
+                                                            } else if ($role == 2) {
+                                                                $role = 'Professeur';
+                                                            } else if ($role == 1) {
+                                                                $role = 'Administrateur';
+                                                            }
+
+                                                            $pdf->SetTextColor(0, 0, 0); // définit la couleur de texte à noir
+                                                            $pdf->SetFont('Arial', '', 14); // définit la police de caractères sans gras
+                                                            $pdf->SetX(($pdf->GetPageWidth() - array_sum($w))/2 - 10);
+                                                            $pdf->Cell($w[0],10,iconv('UTF-8', 'windows-1252',$role),'LR');
+                                                            $pdf->Cell($w[1],10,iconv('UTF-8', 'windows-1252',$member->lastname),'LR');
+                                                            $pdf->Cell($w[2],10,iconv('UTF-8', 'windows-1252',$member->firstname),'LR');
+                                                            $pdf->Cell($w[3],10,iconv('UTF-8', 'windows-1252',$username),'LR');
+                                                            $pdf->Cell($w[4],10,iconv('UTF-8', 'windows-1252',$password),'LR');
                                                             $pdf->Ln();
                                                         }
 
-                                                        $pdf->SetX($startX + ($pdf->GetPageWidth() - array_sum($w))/2);
+                                                        $pdf->SetX($startX + ($pdf->GetPageWidth() - array_sum($w))/2 - 10);
                                                         $pdf->Cell(array_sum($w),0,'','T');
                                                         
                                                         //donner le pdf à la prochaine vue pour le téléchargement
-                                                        $pdf_content = $pdf->Output('','S');
+                                                        $pdf_content = $pdf->Output('Classe_' . $_REQUEST['newClassName'],'S');
                                                         $this->render('sa_download', ['pdf_content' => $pdf_content]);
 
 

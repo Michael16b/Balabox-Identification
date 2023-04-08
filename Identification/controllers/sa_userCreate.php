@@ -52,6 +52,9 @@ class SaUserCreateController extends Controller{
 
                                 // Définir la police
                                 $pdf->AddPage();
+                                $pdf->SetAutoPageBreak(true, 20); // Ajouter un saut de page automatiquement si le texte dépasse la hauteur de la page
+
+                                
                                 $pdf->Image(__ROOT__.'/static/img/logo_balabox.png',10,6,30);
                                 $pdf->SetFillColor(255, 165, 0); // définit la couleur de fond à orange
                                 $pdf->SetTextColor(255, 255, 255); // définit la couleur de texte à blanc
@@ -65,7 +68,7 @@ class SaUserCreateController extends Controller{
 
                                 // Centrer le tableau
                                 $pdf->SetY(45);
-                                $pdf->Cell(($pdf->GetPageWidth() - array_sum($w))/2); // Ajouter de l'espace à gauche pour centrer le tableau
+                                $pdf->Cell(($pdf->GetPageWidth() - array_sum($w))/2 - 10); // Ajouter de l'espace à gauche pour centrer le tableau
                                 for($i=0;$i<count($header);$i++)
                                     $pdf->Cell($w[$i],7,iconv('UTF-8', 'windows-1252',$header[$i]),1,0,'C',true);
                                 $pdf->Ln();
@@ -83,7 +86,7 @@ class SaUserCreateController extends Controller{
                                     $pdf->SetFont('Arial', '', 14); // définit la police de caractères sans gras
 
                                     // importer dans le fichier PDF
-                                    $pdf->SetX($startX + ($pdf->GetPageWidth() - array_sum($w))/2);
+                                    $pdf->SetX($startX + ($pdf->GetPageWidth() - array_sum($w))/2 - 10);
                                     $pdf->Cell($w[0], 10, iconv('UTF-8', 'windows-1252', $line[2]), 'LR', 0, 'L');
                                     $pdf->Cell($w[1], 10, iconv('UTF-8', 'windows-1252', $line[0]), 'LR', 0, 'L');
                                     $pdf->Cell($w[2], 10, iconv('UTF-8', 'windows-1252', $line[1]), 'LR', 0, 'L');
@@ -91,7 +94,7 @@ class SaUserCreateController extends Controller{
                                     $pdf->Cell($w[4], 10, iconv('UTF-8', 'windows-1252', $user[1]), 'LR', 0, 'L');
                                     $pdf->Ln();
                                 }
-                                $pdf->SetX($startX + ($pdf->GetPageWidth() - array_sum($w))/2);
+                                $pdf->SetX($startX + ($pdf->GetPageWidth() - array_sum($w))/2 - 10);
                                 $pdf->Cell(array_sum($w),0,'','T');
                                 
                                 //donner le pdf à la prochaine vue pour le téléchargement
