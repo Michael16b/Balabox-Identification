@@ -49,7 +49,12 @@ class SaUserCreateController extends Controller{
                                 // Définir la police
                                 $pdf->AddPage();
                                 $pdf->Image(__ROOT__.'/static/img/logo_balabox.png',10,6,30);
-                                $pdf->SetFont('Arial','',14,'ISO-8859-1');
+                                $pdf->SetFillColor(255, 165, 0); // définit la couleur de fond à orange
+                                $pdf->SetTextColor(255, 255, 255); // définit la couleur de texte à blanc
+                                $pdf->SetFont('Arial', 'B', 14); // définit la police de caractères en gras avec une taille de 14
+
+
+                                // Ajout du header
                                 $header = array('Rôle', 'Nom', 'Prénom', 'Nom d\'utilisateur', 'Mot de passe');
                                 $w = array(25,25,25,40,35);
                                 
@@ -58,24 +63,30 @@ class SaUserCreateController extends Controller{
                                 $pdf->SetY(45);
                                 $pdf->Cell(($pdf->GetPageWidth() - array_sum($w))/2); // Ajouter de l'espace à gauche pour centrer le tableau
                                 for($i=0;$i<count($header);$i++)
-                                    $pdf->Cell($w[$i],7,iconv('UTF-8', 'windows-1252',$header[$i]),1);
+                                    $pdf->Cell($w[$i],7,iconv('UTF-8', 'windows-1252',$header[$i]),1,0,'C',true);
                                 $pdf->Ln();
 
                                 $startX = $pdf->GetX();
-                                // Utiliser les informations stockées dans le tableau $data pour insérer les utilisateurs 1 à 1
+
+                                $fill = false;
                                 foreach ($data as $line) {
-                                    // Insérer dans la bdd (rôle n'est pas encore traité)
                                     $user = $userdb->addUser($line[0],$line[1]);
 
-                                    // importer dans le fichier PDF
-                                    $pdf->SetX($startX + ($pdf->GetPageWidth() - array_sum($w))/2);
-                                    $pdf->Cell($w[0],10, iconv('UTF-8', 'windows-1252',$line[2])); // Rôle
-                                    $pdf->Cell($w[1],10, iconv('UTF-8', 'windows-1252',$line[0])); // Nom
-                                    $pdf->Cell($w[2],10, iconv('UTF-8', 'windows-1252',$line[1])); // Prenom
-                                    $pdf->Cell($w[3],10, iconv('UTF-8', 'windows-1252',$user[0])); // Username
-                                    $pdf->Cell($w[4],10, iconv('UTF-8', 'windows-1252',$user[1])); // Password
-                                    $pdf->Ln();
+                                    if ($fill) {
+                                        $pdf->SetFillColor(220, 220, 220);
+                                    } else {
+                                        $pdf->SetFillColor(255, 255, 255);
+                                    }
+                                    $fill = !$fill;
 
+
+                                    // Ajouter une bordure à gauche et à droite de la cellule de la première colonne
+                                    $pdf->Cell($w[0], 10, iconv('UTF-8', 'windows-1252', $line[2]), 1, 0, 'L', $fill);
+                                    $pdf->Cell($w[1], 10, iconv('UTF-8', 'windows-1252', $line[0]), 1, 0, 'L', $fill);
+                                    $pdf->Cell($w[2], 10, iconv('UTF-8', 'windows-1252', $line[1]), 1, 0, 'L', $fill);
+                                    $pdf->Cell($w[3], 10, iconv('UTF-8', 'windows-1252', $user[0]), 1, 0, 'L', $fill);
+                                    $pdf->Cell($w[4], 10, iconv('UTF-8', 'windows-1252', $user[1]), 1, 0, 'L', $fill);
+                                    $pdf->Ln();
                                 }
                                 
                                 //donner le pdf à la prochaine vue pour le téléchargement
