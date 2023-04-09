@@ -68,4 +68,4 @@ RUN set -x && wget -O /tmp/identification-main.tar.gz "https://gitlab.com/balabo
     rm -rf /var/www/html/Identification
 
 
-EXPOSE 80
+EXPOSE 4001
