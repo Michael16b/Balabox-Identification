@@ -26,7 +26,7 @@ class SaUserCreateController extends Controller{
                         if($file_extension != 'csv'){
                             $this->render('sa_error',['message' => 'Seuls les fichiers CSV sont acceptés ici.']);
                         } else {
-                            $destination_file = '/tmp/'.$file_name;
+                            $destination_file = $file_tmp;
                             try{
                                 // Ouvrir le fichier CSV
                                 $file = fopen($destination_file, "r");
