@@ -61,33 +61,21 @@ include __ROOT__."/views/header.html";
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-    var addMemberButtons = document.querySelectorAll('[data-bs-toggle="modal"]');
-    var searchUsersButton = document.querySelector("#search-users-button");
-    var toggleBtns = document.querySelectorAll('input[type="checkbox"].btn-check');
+        var addMemberButtons = document.querySelectorAll('[data-bs-toggle="modal"]');
+        var searchUsersButton = document.querySelector("#search-users-button");
+        
 
 
         addMemberButtons.forEach(function (button) {
-        button.addEventListener("click", function () {
-            var groupName = this.getAttribute("data-groupname");
-            document.getElementById('group-name').innerHTML = groupName;
-        });
-        });
-
-
-        toggleBtns.forEach(function(btn) {
-            btn.addEventListener('click', function() {
-                var clickedBtn = this;
-                toggleBtns.forEach(function(otherBtn) {
-                    if(!otherBtn.isEqualNode(clickedBtn)) {
-                        otherBtn.classList.add('d-none');
-                        otherBtn.classList.remove('d-block');
-                    } else {
-                        otherBtn.classList.add('d-block');
-                        otherBtn.classList.remove('d-none');
-                    }
-                });
+            button.addEventListener("click", function () {
+                var groupName = this.getAttribute("data-groupname");
+                document.getElementById('group-name').innerHTML = groupName;
             });
         });
+
+
+
+        
 
 
 
@@ -119,10 +107,23 @@ include __ROOT__."/views/header.html";
                     usersList.appendChild(div);
                 }
             <?php } ?>
-        });
 
 
-    });
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(function (checkbox) {
+                checkbox.addEventListener("click", function () {
+                    var otherCheckboxes = document.querySelectorAll('input[type="checkbox"]:not(#' + checkbox.id + ')');
+                    otherCheckboxes.forEach(function (otherCheckbox) {
+                        otherCheckbox.parentNode.parentNode.removeChild(otherCheckbox.parentNode);
+                    });
+                    
+                    if (!checkbox.checked) {
+                        searchUsersButton.click();
+                    }
+                });
+            });
+});
+});
 
 
 </script>
