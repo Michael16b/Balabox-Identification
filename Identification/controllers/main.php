@@ -11,7 +11,7 @@ class MainController extends Controller{
         }else{
             $this->render('main',[]);
         }*/
-        $this->render('main',[]);
+        $this->render('/connect',[]);
     }
 }
 ?>
