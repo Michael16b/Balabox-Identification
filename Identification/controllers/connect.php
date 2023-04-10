@@ -48,6 +48,7 @@ class ConnectController extends Controller{
 			*/
 			//fin test //
 			//recuperation de l'utilisateur
+			$this-> render('/sa_classCreate',[]);
 			$userdb = new UserDB();
 			$user = $userdb->getRecord($request['username']);
 			$username = $request['username'];
@@ -69,6 +70,7 @@ class ConnectController extends Controller{
 					//$uc->newConnection($request['username'], $userRole);
 					echo "ok";
 					//$this->connection($userRole);
+
 				}else{
 					$this-> render('/main',[]);
 					echo " mot de passe incorrect";
