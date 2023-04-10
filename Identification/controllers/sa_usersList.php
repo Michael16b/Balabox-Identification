@@ -46,11 +46,20 @@ class SaUserList extends Controller{
         $this->render('sa_usersList',['groups' => $groups]);
     }
 
+    public function deleteMember($group, $member) {
+        $groupsDB = new GroupsDB();
+        $groupsDB->deleteMember($group, $member);
+        $groups = $groupsDB->getGroups();
+        $this->render('sa_usersList',['groups' => $groups]);
+    }
+
     public function post($request){
         if(isset($_POST['isDeleteGroup'])){
             $this->delete($_POST['isDeleteGroup']);
         } else if (isset($_POST['addMember'])) {
             $this->addMember($_POST['addMember'], $_POST['member']);
+        } else if (isset($_POST['deleteMember'])) {
+            $this->deleteMember($_POST['deleteMember'], $_POST['member']);
         }
     }
 
