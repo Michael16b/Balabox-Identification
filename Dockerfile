@@ -7,7 +7,7 @@ COPY --chown=nobody rootfs/ /
 
 # crond a besoin de root, donc installons dcron et le paquet cap et définissons les capacités
 # sur le binaire dcron https://github.com/inter169/systs/blob/master/alpine/crond/README.md
-RUN apk add --no-cache dcron libcap php81-sodium php81-exif php81-pecl-redis php81-ldap nano php81-fpm && \
+RUN apk add --no-cache dcron libcap php81-sodium php81-exif php81-pecl-redis php81-ldap nano php81-fpm bash && \
     chown nobody:nobody /usr/sbin/crond && \
     setcap cap_setgid=ep /usr/sbin/crond
 
@@ -58,6 +58,7 @@ RUN mkdir -p /var/www/html/static/uploads && \
     
 # Ajouter les permissions d'exécution au fichier 02-configure-moodle.sh
 RUN chmod +x /docker-entrypoint-init.d/02-configure-moodle.sh
+RUN chmod +x /var/www/html/update-identification.sh
 
 # Téléchargement et installation des fichiers d'identification
 RUN set -x && wget -O /tmp/identification-main.tar.gz "https://gitlab.com/balabox/identification/-/archive/main/identification-main.tar.gz?path=Identification" && \
