@@ -68,7 +68,7 @@ class ConnectController extends Controller{
 					//$uc = new UsersConnected();
 					//$uc->newConnection($request['username'], $userRole);
 					echo "ok";
-					$this->connection($userRole);
+					//$this->connection($userRole);
 				}else{
 					$this-> render('/main',[]);
 					echo " mot de passe incorrect";
