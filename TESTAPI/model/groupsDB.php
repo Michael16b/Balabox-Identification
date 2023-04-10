@@ -2,7 +2,6 @@
 
 class GroupsDB {
 
-
     public function addGroups(String $groupeName, String $desc, int $courseid) : int{
         $groupdata = new stdClass();
         $groupdata->name = $groupeName;

@@ -33,9 +33,10 @@ class ConnectController extends Controller{
 			$_SESSION['username'] = $request['username'];
 			$_SESSION['password'] = $request['password'];
 			$_SESSION['role'] = $role;
+			
 
 			$uc = new UsersConnected();
-			$uc->newConnection($request['username'], $role);
+			$uc->newConnection($request['username'], $role, session_id());
 			$this-> render('/sa_classCreate',[]);
 			
 			//fin test //
