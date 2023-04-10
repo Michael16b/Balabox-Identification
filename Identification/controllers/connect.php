@@ -28,6 +28,7 @@ class ConnectController extends Controller{
 			default:
 				$this-> render('/main',[]);
 				echo "erreur de role";
+				echo "votre role est : $role";
 				break;
 		}
 	}
