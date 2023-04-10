@@ -72,7 +72,7 @@ class GroupsDB {
         global $DB;
         $group = $DB->get_record('groups', array('name' => $groupeName));
         $user = $DB->get_record('user', array('username' => $username));
-        groups_remove_member($group, $user);
+        groups_remove_member($group->id, $user->id);
     }
 
     
