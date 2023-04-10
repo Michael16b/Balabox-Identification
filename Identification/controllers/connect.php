@@ -65,7 +65,7 @@ class ConnectController extends Controller{
 					$_SESSION['username'] = $username;
 					$_SESSION['password'] = $password;
 					$uc = new UsersConnected();
-					$uc->newConnection($request['username'], $userRole);
+					//$uc->newConnection($request['username'], $userRole);
 					$this->connection($userRole);
 				}else{
 					$this-> render('/main',[]);
