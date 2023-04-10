@@ -9,7 +9,8 @@ class ConnectController extends Controller{
 	}
 
 	public function connection($role){
-		switch ($role){
+		echo "ok2";
+		switch ($role){		
 			case 1:
 				$this-> render('/sa_classCreate',[]);
 				break;
@@ -66,10 +67,11 @@ class ConnectController extends Controller{
 					$_SESSION['password'] = $password;
 					//$uc = new UsersConnected();
 					//$uc->newConnection($request['username'], $userRole);
+					echo "ok";
 					$this->connection($userRole);
 				}else{
 					$this-> render('/main',[]);
-					echo  " mot de passe incorrect";
+					echo " mot de passe incorrect";
 				}
 			}
 			else{
