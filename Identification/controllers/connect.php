@@ -25,6 +25,10 @@ class ConnectController extends Controller{
 			case 5:
 				$this-> render('/connect_info',[]);
 				break;
+			default:
+				$this-> render('/main',[]);
+				echo "erreur de role";
+				break;
 		}
 	}
     public function post($request){
