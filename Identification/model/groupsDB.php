@@ -28,7 +28,7 @@ class GroupsDB {
     
         return $idGroup;
     }
-    public function addMember(String $groupId, String $firstName, String $lastName): array{
+    public function createMember(String $groupId, String $firstName, String $lastName): array{
         global $DB;
         // Appeler la fonction addUser() pour récupérer l'ID de l'utilisateur.
         $userDB = new UserDB();
@@ -46,6 +46,23 @@ class GroupsDB {
         $DB->insert_record('groups_members', $member);
 
         return array($user[0], $user[1], $user[2]);
+    }
+
+    public function addMember(String $groupId, String $username){
+        global $DB;
+        // Appeler la fonction addUser() pour récupérer l'ID de l'utilisateur.
+        $userDB = new UserDB();
+        // Ajouter l'utilisateur au groupe.
+        $userID = $userDB->getRecord($username);
+
+        $member = new stdClass();
+        $member->groupid = $groupId;
+        $member->component = "";
+        $member-> itemid =  0;
+        $member->timeadded = time();
+        $member->userid = $userID->id;
+
+        $DB->insert_record('groups_members', $member);
     }
 
 

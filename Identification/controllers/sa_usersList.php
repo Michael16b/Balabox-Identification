@@ -35,15 +35,13 @@ class SaUserList extends Controller{
         $groupsDB = new GroupsDB();
         $groupsDB->deleteGroup($group);
         $groups = $groupsDB->getGroups();
-
-
-
         $this->render('sa_usersList',['groups' => $groups ]);
     }
     
-    public function addMember($group) {
+    public function addMember($group, $member) {
         $groupsDB = new GroupsDB();
-        //$groupsDB->addMember($group);
+        $groupInfo = $groupsDB->getGroup($group);
+        $groupsDB->addMember($groupInfo->id, $member);
         $groups = $groupsDB->getGroups();
         $this->render('sa_usersList',['groups' => $groups]);
     }
@@ -52,7 +50,7 @@ class SaUserList extends Controller{
         if(isset($_POST['isDeleteGroup'])){
             $this->delete($_POST['isDeleteGroup']);
         } else if (isset($_POST['addMember'])) {
-
+            $this->addMember($_POST['addMember'], $_POST['member']);
         }
     }
 

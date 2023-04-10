@@ -90,7 +90,7 @@ class SaClassCreateController extends Controller{
 
 
                                                         foreach ($data as $line) {
-                                                            list($username, $password,$role) =  $groupDB->addMember($idGroup, $line[1], $line[0]);
+                                                            list($username, $password,$role) =  $groupDB->createMember($idGroup, $line[1], $line[0]);
                                                             $member = $user->getRecord($username);
 
                                                             if ($role == 4) {

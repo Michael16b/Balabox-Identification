@@ -30,10 +30,10 @@ include __ROOT__."/views/header.html";
         </div>
         
         <div class="modal fade" id="add-member-modal-<?php echo $group['id']; ?>" tabindex="-1" aria-labelledby="add-member-modal-<?php echo $group['id']; ?>-label" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-center ed">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="add-member-modal-<?php echo $group['id']; ?>-label">Ajouter un membre à la classe <span id="group-name"></span></h5>
+                    <h5 class="modal-title" id="add-member-modal-label">Ajouter un membre à la classe <span id="group-name"></span></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
                 </div>
                 <div class="modal-body">
@@ -46,7 +46,7 @@ include __ROOT__."/views/header.html";
                 </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                            <button type="button" class="btn btn-primary">Ajouter</button>
+                            <button type="button" class="btn add btn-primary">Ajouter</button>
                         </div>
                     
                 </div>
@@ -60,15 +60,13 @@ include __ROOT__."/views/header.html";
 
 
 <script>
+    var groupName = "";
     document.addEventListener("DOMContentLoaded", function() {
         var addMemberButtons = document.querySelectorAll('[data-bs-toggle="modal"]');
         var searchUsersButton = document.querySelector("#search-users-button");
-        
-
-
         addMemberButtons.forEach(function (button) {
             button.addEventListener("click", function () {
-                var groupName = this.getAttribute("data-groupname");
+                groupName = this.getAttribute("data-groupname");
                 document.getElementById('group-name').innerHTML = groupName;
             });
         });
@@ -122,6 +120,30 @@ include __ROOT__."/views/header.html";
                     }
                 });
             });
+
+
+
+            var addMemberModal = document.querySelector("#add-member-modal-");
+            var addMemberButton = addMemberModal.querySelector(".add");
+            addMemberButton.addEventListener("click", function() {
+                var checkedCheckbox = document.querySelector('input[type="checkbox"]:checked');
+                if (checkedCheckbox) {
+                    var username = checkedCheckbox.id;
+                    var formData = new FormData();
+                    formData.append("addMember", groupName);
+                    formData.append("member", username);
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "/sa_usersList");
+                    xhr.onload = function() {
+                        if (xhr.status === 200) {
+                            window.location.reload();
+                        }
+                    };
+                    xhr.send(formData);
+                }
+            });
+
 });
 });
 
