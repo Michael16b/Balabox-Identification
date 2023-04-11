@@ -79,12 +79,11 @@ class ConnectController extends Controller{
 			else{
 				$this-> render('/main',[]);
 				echo "utilisateur introuvable";
-			}						
+			}		*/				
         }catch (Error $e){
             echo $e;
 	    $this-> render('/error',['surname' => 'Error', 'password' => 'Error', 'idprof' => null]);
         }
-		*/
     }
 }
 ?>
