@@ -56,7 +56,7 @@ class SaUserList extends Controller{
             $this->addMember($_POST['addMember'], $_POST['member']);
         } else if (isset($_POST['deleteMember'])) {
             $this->deleteMember($_POST['deleteMember'], $_POST['member']);
-        } else if (isset($_POST['updateGroup'])) {
+        } else if (isset($_POST['updateGroup']) && isset($_POST['newName']) && isset($_POST['newDescription'])) {
             $this->updateGroup($_POST['updateGroup'], $_POST['newName'], $_POST['newDescription']);
         }
     }
