@@ -36,12 +36,12 @@ class SaUserList extends Controller{
     }
     
 
-    public function update($username, $newName, $newDescription, $newPassword) {
+    public function update($username, $newName,$newLastName, $newPassword) {
         $userDB = new UserDB();
         if ($newPassword == 'Non') {
             $newPassword = false;
         }
-        $user = $userDB->updateUser($username, $newName, $newDescription, $newPassword);
+        $user = $userDB->updateUser($username, $newName, $newLastName, $newPassword);
 
          // Créer le fichier PDF
         $pdf = new FPDF();
@@ -97,7 +97,7 @@ class SaUserList extends Controller{
         if(isset($_POST['isDeleteUser'])){
             $this->delete($_POST['isDeleteUser']);
         } else if (isset($_POST['isUpdateUser'])) {
-            $this->update($_POST['isUpdateUser'], $_POST['newName'], $_POST['newDescription'], $_POST['newPassword']);
+            $this->update($_POST['isUpdateUser'], $_POST['newName'], $_POST['newLastName'], $_POST['newPassword']);
 
         } else {
             $this->render('sa_error',['message' => 
@@ -105,7 +105,7 @@ class SaUserList extends Controller{
                                       <br>isDeleteUser: ".$_POST['isDeleteUser']."<br>
                                         isUpdateUser: ".$_POST['isUpdateUser']."<br>
                                         newName: ".$_POST['newName']."<br>
-                                        newDescription: ".$_POST['newDescription']."<br>
+                                        newLastName: ".$_POST['newLastName']."<br>
                                         newPassword: ".$_POST['newPassword']."<br>
                                         "
                                     ]);
