@@ -3,7 +3,6 @@ require(__ROOT__.'/controllers/Controller.php');
 
 class AuthentifiedController extends Controller{
     public function get($request){
-        var_dump($_GET['id']);
         // Check if session ID provided in query parameter
         if(isset($_GET['id'])){
             $session_id = $_GET['id'];
