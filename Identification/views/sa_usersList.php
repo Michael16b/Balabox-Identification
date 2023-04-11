@@ -22,7 +22,7 @@ include __ROOT__."/views/header.html";
                             <div class="d-flex justify-content-end align-items-center">
                                 
                                 <form method="post" class="me-3 mb-3 mb-md-0">
-                                    <input type="hidden" name="isDeleteUser" value="True" />
+                                    <input type="hidden" name="isDeleteUser" value=<?php echo $user['username']; ?> />
                                     <button type="submit" class="btn btn-danger mx-2"><i class="fas fa-trash-alt"></i> Supprimer</button>
                                 </form>
                                 <button class="btn btn-primary"><i class="fas fa-edit"></i> Modifier</button>
