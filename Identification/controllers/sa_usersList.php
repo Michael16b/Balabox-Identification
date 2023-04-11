@@ -116,8 +116,7 @@ class SaUserList extends Controller{
         if(isset($_POST['isDeleteUser'])){
             $this->delete($_POST['isDeleteUser']);
         } else if (isset($_POST['isUpdateUser'])) {
-            //$this->update($_POST['isUpdateUser'], $_POST['newName'], $_POST['newLastName'], $_POST['newPassword']);
-            var_dump($_POST);
+            $this->update($_POST['isUpdateUser'], $_POST['newName'], $_POST['newLastName'], $_POST['newPassword']);
 
         } else {
             $this->render('sa_error',['message' => 
@@ -128,7 +127,6 @@ class SaUserList extends Controller{
                                         isUpdateUser: ".$_POST['isUpdateUser']."<br>
                                         newLastName: ".$_POST['newLastName']."<br>
                                         newPassword: ".$_POST['newPassword']."<br>
-                                        $_POST
                                         "
                                     ]);
         }
