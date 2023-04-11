@@ -37,6 +37,16 @@ include __ROOT__."/views/header.html";
         flex-direction: row;
         align-items: center;
     }
+    
+    #user-cards .card:not(:first-child) {
+        margin-left: 15px;
+    }
+    
+    @media (max-width: 767.98px) {
+        #user-cards .card {
+            margin-left: 0 !important;
+        }
+    }
 </style>
 
 
