@@ -27,7 +27,7 @@ class SaUserList extends Controller{
                     }
                 }
             }
-            
+            $usersWithoutGroup = array_unique($usersWithoutGroup);
             $this->render('sa_usersList',['groups' => $groups, 'usersWithoutGroup' => $usersWithoutGroup]);
         }
     }
