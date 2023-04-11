@@ -4,7 +4,6 @@ require(__ROOT__.'/controllers/Controller.php');
 class AuthentifiedController extends Controller{
     public function get($request){
         // Check if session ID provided in query parameter
-        var_dump($_GET['id']);
         if(isset($_GET['id'])){
             $session_id = $_GET['id'];
             $uc = new UsersConnected();
