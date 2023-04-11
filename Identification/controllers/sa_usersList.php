@@ -58,8 +58,18 @@ class SaUserList extends Controller{
             $this->deleteMember($_POST['deleteMember'], $_POST['member']);
         } else if (isset($_POST['updateGroup']) && isset($_POST['newName']) && isset($_POST['newDescription'])) {
             $this->updateGroup($_POST['updateGroup'], $_POST['newName'], $_POST['newDescription']);
+
         } else {
-            $this->render('sa_error',['message' => "Erreur de requête"]);
+            $this->render('sa_error',['message' => 
+                                      "Erreur de requête POST
+                                      <br>isDeleteGroup: ".$_POST['isDeleteGroup']."<br>
+                                        addMember: ".$_POST['addMember']."<br>
+                                        deleteMember: ".$_POST['deleteMember']."<br>
+                                        updateGroup: ".$_POST['updateGroup']."<br>
+                                        newName: ".$_POST['newName']."<br>
+                                        newDescription: ".$_POST['newDescription']."<br>
+                                        "
+                                    ]);
         }
     }
 
