@@ -102,7 +102,7 @@ include __ROOT__."/views/header.html";
 
                 Object.keys(users).forEach(function (key) {
                     var user = users[key];
-                    if (user["name"] == userName) {
+                    if (user["name"] == username) {
                         document.getElementById('name-update').value = user["firstname"];
                         document.getElementById('lastname-update').value = user["lastname"];
                         document.getElementById('username').value = username;
