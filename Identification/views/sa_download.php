@@ -12,6 +12,9 @@ include __ROOT__."/views/header.html";
                     class="btn btn-primary">
                     <i class="fas fa-download"></i> Télécharger
                 </a>
+                <a href="javascript:history.go(-1)" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Retour
+                </a>
             </div>
         </div>
     </div>
