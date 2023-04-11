@@ -75,8 +75,6 @@ class SaUserList extends Controller{
             $role = 'Administrateur';
         }
 
-        $pdf->SetX(($pdf->GetPageWidth() - array_sum($w))/2);
-
         $pdf->SetTextColor(0, 0, 0); // définit la couleur de texte à noir
         $pdf->SetFont('Arial', '', 14); // définit la police de caractères sans gras
         $pdf->Cell($startX);
