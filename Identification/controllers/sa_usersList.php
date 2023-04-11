@@ -4,27 +4,31 @@ require(__ROOT__.'/controllers/Controller.php');
 
 class SaUserList extends Controller{
 
+    public function filterUsers() {
+        $user = new UserDB();
+        $users = $user->getUsers();
+
+        // Filter the users
+
+        foreach ($users as $key => $user) {
+            if ($user->username == 'guest' || $user->username == 'moodleuser') {
+                unset($users[$key]);
+            }
+        } 
+        
+        $columnsToKeep = ['username', 'firstname', 'lastname'];
+        $newUsers = array_map(function($user) use ($columnsToKeep) {
+            return array_intersect_key((array) $user, array_flip($columnsToKeep));
+        }, $users);
+
+        return $newUsers;
+    }
+
     public function get($request){
         if($_SESSION['role'] != 1){
             $this->render('sa_error',['message' => "Vous n'avez pas de permission d'entrer dans cette page"]);
         }else{
-            $user = new UserDB();
-            $users = $user->getUsers();
-
-            // Filter the users
-
-            foreach ($users as $key => $user) {
-                if ($user->username == 'guest' || $user->username == 'moodleuser') {
-                    unset($users[$key]);
-                }
-            } 
-            
-            $columnsToKeep = ['username', 'firstname', 'lastname'];
-            $newUsers = array_map(function($user) use ($columnsToKeep) {
-                return array_intersect_key((array) $user, array_flip($columnsToKeep));
-            }, $users);
-
-           
+            $newUsers = $this->filterUsers();
             $this->render('sa_usersList',['users' => $newUsers]);
         }
     }
@@ -32,7 +36,10 @@ class SaUserList extends Controller{
     public function delete($username) {
         $userDB = new UserDB();
         $userDB->deleteUser($username);
-        $this->render('sa_usersList',[]);
+
+        $newUsers = $this->filterUsers();
+        
+        $this->render('sa_usersList',['users' => $newUsers]);
     }
     
 
