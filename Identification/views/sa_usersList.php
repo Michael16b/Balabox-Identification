@@ -19,7 +19,7 @@ include __ROOT__."/views/header.html";
                             <p class="card-text"><?php echo $user['firstname'] . ' ' . $user['lastname']; ?></p>
                             <div class="d-flex justify-content-end">
                                 <button class="btn btn-danger mx-2"><i class="fas fa-trash-alt"></i> Supprimer</button>
-                                <button class="btn btn-primary"><i class="fas fa-edit"></i> Modifier</button>
+                                <button type="button" id="updateUserbtn" class="btn btn-primary" data-groupname="<?php echo $user['name']; ?>" data-bs-toggle="modal" data-bs-target="#update-user-modal-<?php echo $group['id']; ?>"><i class="fas fa-edit"></i>Modifier</button>
                             </div>
                         </div>
                     </div>
@@ -27,38 +27,90 @@ include __ROOT__."/views/header.html";
             <?php } ?>
         </div>
     <?php } ?>
+
+            <!-- Update User -->
+            <div class="modal fade" id="update-user-modal-<?php echo $group['id']; ?>" tabindex="-1" aria-labelledby="update-user-modal-<?php echo $group['id']; ?>-label" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="update-user-modal-<?php echo $group['id']; ?>-label">Modifier l'utilisateur <span id="user-name-update"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+                        <div class="mb-3">
+                            <label for="surname-user" class="form-label">Nom</label>
+                            <input type="hidden" id="newLastName" name="newLastName" />
+                            <input type="text" class="form-control" id="lastname-update" name="newName" placeholder="Dupont" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name-user" class="form-label">Prénom</label>
+                            <input type="hidden" id="newName" name="newName" />
+                            <input type="text" class="form-control" id="name-update" name="newName" placeholder="Xavier" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Nom d'utilisateur</label>
+                            <input type="text" class="form-control" value="xdupont" disabled>
+                        </div>
+                        <div class="mb-3">
+                            <select class="form-select" aria-label="Modifier le mot de passe" name="newPassword">
+                                        <option selected value="false">Non</option>
+                                        <option value="true">Oui</option>
+                            </select>
+                        </div>
+
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
 </div>
 
 <a href="sa_userCreate" class="btn btn-primary btn-lg position-fixed" style="bottom: 20px; right: 20px;" role="button">+</a>
 
 <script>
-    // récupérer l'élément de recherche
     const searchInput = document.getElementById('search');
-
-    // récupérer tous les cartes d'utilisateurs
     const userCards = document.querySelectorAll('#user-cards .card');
+    var users = <?php echo json_encode($users); ?>;
 
-    // ajouter un écouteur d'événements pour la saisie utilisateur
+
     searchInput.addEventListener('input', () => {
-        // récupérer la valeur de recherche
         const searchValue = searchInput.value.trim().toLowerCase();
 
-        // boucler sur toutes les cartes d'utilisateurs
         userCards.forEach(card => {
-            // récupérer le nom d'utilisateur et le nom complet
             const username = card.querySelector('.card-title').textContent.trim().toLowerCase();
             const fullName = card.querySelector('.card-text').textContent.trim().toLowerCase();
 
-            // vérifier si le nom d'utilisateur ou le nom complet contient la valeur de recherche
             if (username.includes(searchValue) || fullName.includes(searchValue)) {
-                // afficher la carte d'utilisateur
                 card.style.display = 'block';
             } else {
-                // cacher la carte d'utilisateur
                 card.style.display = 'none';
             }
         });
     });
+
+
+        // Update user
+        var descGroup ;
+        var updateUserButton = document.querySelectorAll('[data-bs-toggle="modal"]');
+        
+        updateUserButton.forEach(function (button) {
+            button.addEventListener("click", function () {
+                userName = this.getAttribute("data-groupname");
+                document.getElementById('user-name-update').innerHTML = userName;
+
+
+                users.forEach(function (user) {
+                    if (user["name"] == userName) {
+                        document.getElementById('name-update').value = groupName;
+                        document.getElementById('lastname-update').value = user["lastname"];
+                        document.getElementById('name-update').value = user["firstname"];
+                    }
+                });
+
+            });
+        });
 </script>
 
 </body>

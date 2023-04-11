@@ -84,7 +84,7 @@ include __ROOT__."/views/header.html";
             </div>
         </div>
 
-        <!-- Modify Group -->
+        <!-- Update Group -->
         <div class="modal fade" id="update-group-modal-<?php echo $group['id']; ?>" tabindex="-1" aria-labelledby="update-group-modal-<?php echo $group['id']; ?>-label" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">

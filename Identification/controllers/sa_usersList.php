@@ -41,16 +41,8 @@ class SaUserList extends Controller{
         
         $this->render('sa_usersList',['users' => $newUsers]);
     }
-    
 
-    public function update($username, $newName,$newLastName, $newPassword) {
-        $userDB = new UserDB();
-        if ($newPassword == 'Non') {
-            $newPassword = false;
-        }
-        $user = $userDB->updateUser($username, $newName, $newLastName, $newPassword);
-
-         // Créer le fichier PDF
+    public function createPDF($user) {
         $pdf = new FPDF();
         $pdf->AddPage();
         $pdf->Image(__ROOT__.'/static/img/logo_balabox.png',10,6,30);
@@ -99,12 +91,33 @@ class SaUserList extends Controller{
         $pdf_content = $pdf->Output('','S');
         $this->render('sa_download', ['pdf_content' => $pdf_content]);
     }
+    
+
+    public function update($username, $newName,$newLastName, $newPassword) {
+        $userDB = new UserDB();
+        if ($newPassword == 'Non') {
+            $newPassword = false;
+        }
+        $user = $userDB->updateUser($username, $newName, $newLastName, $newPassword);
+        if ($user == false) {
+            $this->render('sa_error',['message' => "Erreur de mise à jour de l'utilisateur"]);
+        } else {
+            if ($newPassword != false) {
+                $this->createPDF($user);
+            } else {
+                $newUsers = $this->filterUsers();
+                $this->render('sa_usersList',['users' => $newUsers]);
+            }
+            
+        }
+    }
 
     public function post($request){
         if(isset($_POST['isDeleteUser'])){
             $this->delete($_POST['isDeleteUser']);
         } else if (isset($_POST['isUpdateUser'])) {
-            $this->update($_POST['isUpdateUser'], $_POST['newName'], $_POST['newLastName'], $_POST['newPassword']);
+            //$this->update($_POST['isUpdateUser'], $_POST['newName'], $_POST['newLastName'], $_POST['newPassword']);
+            var_dump($_POST);
 
         } else {
             $this->render('sa_error',['message' => 
