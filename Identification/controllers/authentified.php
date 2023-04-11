@@ -11,7 +11,7 @@ class AuthentifiedController extends Controller{
             echo $uc->getUserBySessionId($session_id);
         } else {
             // No session ID provided, return error
-            echo json_encode(array('error' => 'Session ID not provided'));
+            $this->render('sa_error',["message" => "Session ID not provided"]);
             return;
         }
     }
