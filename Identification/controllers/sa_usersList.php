@@ -51,7 +51,10 @@ class SaUserList extends Controller{
         $pdf->SetTextColor(255, 255, 255); // définit la couleur de texte à blanc
         $pdf->SetFont('Arial', 'B', 14); // définit la police de caractères en gras avec une taille de 14
 
-
+        $pdf->SetAutoPageBreak(true, 20);
+        $pdf->Cell(0, 45, iconv('UTF-8', 'windows-1252','Compte de ' . $user[3] . ' ' . $user[2]), 0, 1, 'C');
+        $pdf->Ln();
+        
         // Ajout du header
         $header = array('Rôle', 'Nom', 'Prénom', 'Nom d\'utilisateur', 'Mot de passe');
         $w = array(30,25,25,45,35);
@@ -59,7 +62,8 @@ class SaUserList extends Controller{
 
         // Centrer le tableau
         $pdf->SetY(45);
-        $pdf->Cell(($pdf->GetPageWidth() - array_sum($w))/2 - 10); // Ajouter de l'espace à gauche pour centrer le tableau
+        $startX = ($pdf->GetPageWidth() - array_sum($w))/2 - 10;
+        $pdf->Cell($startX); // Ajouter de l'espace à gauche pour centrer le tableau
         for($i=0;$i<count($header);$i++)
             $pdf->Cell($w[$i],7,iconv('UTF-8', 'windows-1252',$header[$i]),1,0,'C',true);
         $pdf->Ln();
@@ -74,21 +78,18 @@ class SaUserList extends Controller{
             $role = 'Administrateur';
         }
 
-        $pdf->SetX(($pdf->GetPageWidth() - array_sum($w))/2);
-
         $pdf->SetTextColor(0, 0, 0); // définit la couleur de texte à noir
         $pdf->SetFont('Arial', '', 14); // définit la police de caractères sans gras
-        $pdf->SetX(($pdf->GetPageWidth() - array_sum($w)/2 - 10));
+        $pdf->Cell($startX);
         $pdf->Cell($w[0],10,iconv('UTF-8', 'windows-1252',$role),'LR');
-        $pdf->Cell($w[1],10,iconv('UTF-8', 'windows-1252',$user[3]),'LR');
-        $pdf->Cell($w[2],10,iconv('UTF-8', 'windows-1252',$user[2]),'LR');
-        $pdf->Cell($w[3],10,iconv('UTF-8', 'windows-1252',$user[1]),'LR');
-        $pdf->Cell($w[4],10,iconv('UTF-8', 'windows-1252',$user[4]),'LR');
+        $pdf->Cell($w[1],10,iconv('UTF-8', 'windows-1252',$user[3]),'LR'); // Nom
+        $pdf->Cell($w[2],10,iconv('UTF-8', 'windows-1252',$user[2]),'LR'); // Prénom
+        $pdf->Cell($w[3],10,iconv('UTF-8', 'windows-1252',$user[1]),'LR'); // Nom d'utilisateur
+        $pdf->Cell($w[4],10,iconv('UTF-8', 'windows-1252',$user[4]),'LR'); // Mot de passe
         $pdf->Ln();
 
 
-        $startX = $pdf->GetX();
-        $pdf->SetX($startX + ($pdf->GetPageWidth() - array_sum($w))/2 - 10);
+        $pdf->Cell($startX);
         $pdf->Cell(array_sum($w),0,'','T');
 
         $pdf_content = $pdf->Output('','S');
