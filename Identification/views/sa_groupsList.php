@@ -5,7 +5,7 @@ include __ROOT__."/views/header.html";
 <body>
 
 <div class="container my-4">
-    <h1>Liste des groupes</h1>
+    <h1>Liste des classes</h1>
     <?php if (count($groups) == 0) { ?>
         <p>Pas de classe</p>
     <?php } else { ?>
@@ -114,10 +114,8 @@ include __ROOT__."/views/header.html";
 </div>
 
 
-
+<a href="sa_classCreate" class="btn btn-primary position-fixed" style="bottom: 20px; right: 20px;" role="button">+</a>
         
-
-
 
 
 
@@ -194,7 +192,7 @@ include __ROOT__."/views/header.html";
                     formData.append("member", username);
 
                     var xhr = new XMLHttpRequest();
-                    xhr.open("POST", "/sa_usersList");
+                    xhr.open("POST", "/sa_groupsList");
                     xhr.onload = function() {
                         if (xhr.status === 200) {
                             window.location.reload();
@@ -289,7 +287,7 @@ include __ROOT__."/views/header.html";
                     formData.append("member", username);
 
                     var xhr = new XMLHttpRequest();
-                    xhr.open("POST", "/sa_usersList");
+                    xhr.open("POST", "/sa_groupsList");
                     xhr.onload = function() {
                         if (xhr.status === 200) {
                             window.location.reload();
