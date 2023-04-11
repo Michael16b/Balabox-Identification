@@ -93,7 +93,6 @@ include __ROOT__."/views/header.html";
 
 
         // Update user
-        var descGroup ;
         var updateUserButton = document.querySelectorAll('[data-bs-toggle="modal"]');
         
         updateUserButton.forEach(function (button) {
@@ -101,17 +100,16 @@ include __ROOT__."/views/header.html";
                 userName = this.getAttribute("data-groupname");
                 document.getElementById('user-name-update').innerHTML = userName;
 
-
-                users.forEach(function (user) {
+                Object.keys(users).forEach(function (key) {
+                    var user = users[key];
                     if (user["name"] == userName) {
-                        document.getElementById('name-update').value = groupName;
-                        document.getElementById('lastname-update').value = user["lastname"];
                         document.getElementById('name-update').value = user["firstname"];
+                        document.getElementById('lastname-update').value = user["lastname"];
                     }
                 });
-
             });
         });
+
 </script>
 
 </body>
