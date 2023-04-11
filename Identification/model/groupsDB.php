@@ -65,9 +65,6 @@ class GroupsDB {
         $DB->insert_record('groups_members', $member);
     }
 
-
-
-
     public function deleteMember(String $groupeName, String $username): void{
         global $DB;
         $group = $DB->get_record('groups', array('name' => $groupeName));
@@ -120,6 +117,17 @@ class GroupsDB {
                                         'username' => $userInfo->username));
         }
         return $members;
+    }
+
+    public function getGroupByUser(String $username) : mixed {
+        global $DB;
+        $groups = $this->getGroups();
+        foreach($groups as $group){
+            if($this->isMember($group["name"], $username)){
+                return $group;
+            }
+        }
+        return false;
     }
 
     public function isMember(String $groupeName, String $username) : bool {

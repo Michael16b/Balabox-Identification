@@ -1,4 +1,7 @@
 <?php
+
+require_once(dirname(__FILE__) . '/groupsDB.php');
+
 class UserDB {
 
     public function getRecord(string $username){
@@ -92,15 +95,26 @@ class UserDB {
 
     public function deleteUser(String $username): void{
         global $DB;
+        $groupsDB = new GroupsDB();
+        $group = $groupsDB->getGroupByUser($username);
+        if ($group != false) {
+            $groupsDB->deleteMember($group->name, $username);
+        }
         $DB->delete_records('user', array('username' => $username));
     }
 
-    public function updateUser(String $username, String $firstName, String $lastName): void{
+    public function updateUser(String $username, String $firstName, String $lastName, bool $password): array{
         global $DB;
         $user = $DB->get_record('user', array('username' => $username));
         $user->firstname = $firstName;
         $user->lastname = $lastName;
+        $role = $this->getUser_role($username);
+        if ($password != false) {
+            $user->password = $this->RandomPassword();
+        }
         $DB->update_record('user', $user);
+
+        return array($role,$username,$firstName, $lastName, $user->password);
     }
 
 
