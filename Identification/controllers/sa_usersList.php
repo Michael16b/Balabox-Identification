@@ -89,7 +89,6 @@ class SaUserList extends Controller{
 
 
         $pdf->Cell($startX);
-        $pdf->SetX($startX + ($pdf->GetPageWidth() - array_sum($w))/2 - 10);
         $pdf->Cell(array_sum($w),0,'','T');
 
         $pdf_content = $pdf->Output('','S');
