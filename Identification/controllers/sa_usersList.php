@@ -39,14 +39,15 @@ class SaUserList extends Controller{
         $groupsDB = new GroupsDB();
         if ($groupsDB->getGroup($newName) != null) {
             $this->render('sa_error',['message' => "Le nom du groupe existe déjà"]);
-        }
-        if ($newDescription == "" || $newDescription == null) {
-           $groupsDB->updateGroups($group, $newName);
-        } else { 
-           $groupsDB->updateGroups($group, $newName, $newDescription);
-        }
-        $groups = $groupsDB->getGroups();
-        $this->render('sa_usersList',['groups' => $groups]);
+        } else {
+                if ($newDescription == "" || $newDescription == null) {
+                    $groupsDB->updateGroups($group, $newName);
+                } else { 
+                    $groupsDB->updateGroups($group, $newName, $newDescription);
+                }
+                $groups = $groupsDB->getGroups();
+                $this->render('sa_usersList',['groups' => $groups]);
+    }
     }
 
     public function post($request){
