@@ -1,9 +1,8 @@
 <?php
 
 class UsersConnected{
-
     
-    private $logFile = __ROOT__."/.csv";
+    private $logFile = __ROOT__."/logs.csv";
 
     /**
      * Create a new connection in the log
