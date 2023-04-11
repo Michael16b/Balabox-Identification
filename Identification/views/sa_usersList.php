@@ -15,7 +15,7 @@ include __ROOT__."/views/header.html";
                     <h2 class="mb-0"><?php echo $group['name']; ?></h2>
                     <div class="d-flex flex-wrap align-items-center justify-content-md-end">
 
-                        <form action="/sa_usersList" method="post" class="me-3 mb-3 mb-md-0">
+                        <form method="post" class="me-3 mb-3 mb-md-0">
                             <input type="hidden" name="isDeleteGroup" value="<?php echo $group['name']; ?>" />
                             <button type="submit" class="btn btn-danger align-items-center" style="width: 40px; height: 40px;"><i class="fas fa-trash-alt"></i></button>
                         </form>
@@ -93,7 +93,7 @@ include __ROOT__."/views/header.html";
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="/sa_usersList" method="post">
+                    <form method="post">
                         <div class="mb-3">
                             <label for="name-group" class="form-label">Nom du groupe</label>
                             <input type="hidden" id="old-name" name="updateGroup" />
