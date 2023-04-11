@@ -4,8 +4,6 @@ require_once(dirname(__FILE__) . '/userDB.php');
 
 class GroupsDB {
 
-
-    
     public function addGroups(String $groupeName, String $desc = 'Pas de description') : int {
     
         // Créer les données nécessaires pour créer un nouveau cours.

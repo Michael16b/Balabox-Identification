@@ -1,7 +1,5 @@
 <?php
 
-require_once(dirname(__FILE__) . '/groupsDB.php');
-
 class UserDB {
 
     public function getRecord(string $username){
