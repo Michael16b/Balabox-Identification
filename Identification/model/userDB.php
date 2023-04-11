@@ -103,7 +103,7 @@ class UserDB {
         $groupsDB = new GroupsDB();
         $group = $groupsDB->getGroupByUser($username);
         if ($group != false) {
-            $groupsDB->deleteMember($group->name, $username);
+            $groupsDB->deleteMember($group["name"], $username);
         }
         $DB->delete_records('user', array('username' => $username));
     }
