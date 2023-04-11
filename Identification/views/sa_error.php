@@ -1,6 +1,12 @@
-<?php
-include __ROOT__."/views/header.html";
-?>
+<head>
+    <!-- bootstrap -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../static/assets/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/assets/fontawesome/css/all.css">
+    <title id="title">Erreur</title>
+    <script src="../static/assets/bootstrap/js/bootstrap.bundle.js"></script>
+    <meta charset="utf-8">
+</head>
 
 <body>
 
