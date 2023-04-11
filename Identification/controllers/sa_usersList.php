@@ -1,5 +1,6 @@
 <?php
 require(__ROOT__.'/controllers/Controller.php');
+require(__ROOT__.'/static/assets/FPDF/fpdf.php');
 
 
 class SaUserList extends Controller{
@@ -102,7 +103,7 @@ class SaUserList extends Controller{
         if ($user == false) {
             $this->render('sa_error',['message' => "Erreur de mise à jour de l'utilisateur"]);
         } else {
-            if ($newPassword != false) {
+            if ($newPassword != true) {
                 $this->createPDF($user);
             } else {
                 $newUsers = $this->filterUsers();
