@@ -13,7 +13,7 @@ class SaUserList extends Controller{
 
             $user = new UserDB();
             $users = $user->getUsers();
-            /*Chercher tous les utilisateurs qui n'ont pas de groupe */
+            /* Chercher tous les utilisateurs qui n'ont pas de groupe */
             $usersWithoutGroup = array();
             foreach ($users as $user) {
                 if($user->id != 1){
@@ -54,15 +54,15 @@ class SaUserList extends Controller{
         $this->render('sa_usersList',['groups' => $groups]);
     }
 
-    public function updateGroup($group, $newName, $newDescription) {
+    public function updateGroup($oldName, $newName, $newDescription) {
         $groupsDB = new GroupsDB();
-        if ($groupsDB->getGroup($newName) != null) {
+        if ($groupsDB->getGroup($newName) != null && $newName != $oldName) {
             $this->render('sa_error',['message' => "Le nom du groupe existe déjà"]);
         } else {
                 if ($newDescription == "" || $newDescription == null) {
-                    $groupsDB->updateGroups($group, $newName);
+                    $groupsDB->updateGroups($oldName, $newName);
                 } else { 
-                    $groupsDB->updateGroups($group, $newName, $newDescription);
+                    $groupsDB->updateGroups($oldName, $newName, $newDescription);
                 }
                 $groups = $groupsDB->getGroups();
                 $this->render('sa_usersList',['groups' => $groups]);
