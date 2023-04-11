@@ -5,18 +5,13 @@ define ("__ROOT__",__DIR__);
 
 //paramètrage de la session
 if (!isset($_SESSION)){
-    $cookieLifetime = 3600; // 1 hour
-    session_set_cookie_params($cookieLifetime);
     session_start();
+    setcookie("session_id", session_id(), time()+3600, "/");
 }
 
-
-
-//register_shutdown_function("session_destroy");
 // Configuration
 require (__ROOT__.'/model/userDB.php');
 require (__ROOT__.'/model/groupsDB.php');
-require (__ROOT__.'/model/tokenGenerator.php');
 require (__ROOT__.'/model/usersConnected.php');
 require_once (__ROOT__.'/config.php');
 require_once(__ROOT__.'/user/lib.php');

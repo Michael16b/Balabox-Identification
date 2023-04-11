@@ -2,46 +2,94 @@
 
 class UsersConnected{
 
-    private $logFile = __ROOT__."/logs.txt";
+    
+    private $logFile = __ROOT__."/.csv";
 
     /**
      * Create a new connection in the log
      * @param username the username of user
      */
-    public function newConnection($username, $role): void{
-        //if(!checkAlreadyConnect()){
-            $fileHandle = fopen($this->logFile, "a+");
-            if($this->checkAlreadyConnect($username) === false){
-                $logEntry = $username. "/" .$role . "\n";
-                fwrite($fileHandle, $logEntry);
-            }
-            fclose($fileHandle);
-        //}
+    public function newConnection($username, $role, $id): void{
+        $this->checkAlreadyConnect($id);
+        $fileHandle = fopen($this->logFile, "a+");
+        $logEntry = array(
+            $username,
+            $role,
+            $id
+        );
+        fputcsv($fileHandle, $logEntry);
+        fclose($fileHandle);
     }
 
-    private function checkAlreadyConnect($username){
-        $logs = file_get_contents($this->logFile);
-        // check if the user already exist
-        return strpos($logs, $username);
-    }
-
-    public function getUserConnected(){
-        $list = "";
+    /**
+     * Check if the user is already connected
+     * @param username the username of user
+     * @return bool true if the user is already connected, false otherwise
+     */
+    public function checkAlreadyConnect($id) {
+        $tempFile = tempnam(sys_get_temp_dir(), 'temp_log');
         $fileHandle = fopen($this->logFile, "r");
+        $tempHandle = fopen($tempFile, "w");
         while (!feof($fileHandle)) {
-            $line = fgets($fileHandle);
-            $parties = explode('/', $line);
-            if(array_key_exists(1, $parties)){
-                if ($parties[1] == "4" || $parties[1] == "5"){
-                    $list = $list . "{" . '"username"='. '"'. $parties[0]. '"' . "}". ",";
-                }
+            $data = fgetcsv($fileHandle);
+            if($data == false){
+                break;
             }
-            
+            if ($data[2] == $id) {
+                continue; // Skip the line with the same id
+            }
+            fputcsv($tempHandle, $data);
         }
         fclose($fileHandle);
-        $list = substr($list, 0, -1);
-        $list = $list . "]";
-        return "[".$list;
+        fclose($tempHandle);
+        unlink($this->logFile);
+        rename($tempFile, $this->logFile);
+    }
+
+    /**
+     * Get the list of users connected
+     * @return the list of users connected
+     */
+    public function getUserConnected(){
+        $list = array();
+        $fileHandle = fopen($this->logFile, "r");
+        while (!feof($fileHandle)) {
+            $data = fgetcsv($fileHandle);
+            if($data == false){
+                break;
+            }
+            $logEntry = array(
+                'username' => $data[0],
+                'role' => $data[1],
+                'id' => $data[2]
+            );
+            if (!($logEntry['role'] == '1')) {
+                $list[] = $logEntry;
+            }
+        }
+        fclose($fileHandle);
+        return json_encode($list);
+    }
+
+    /**
+     * Get the user by session id
+     * @param session_id the session id
+     * @return the user informations
+     */
+    public function getUserBySessionId($session_id) {
+        $fileHandle = fopen($this->logFile, "r");
+        while (!feof($fileHandle)) {
+            $data = fgetcsv($fileHandle);
+            if($data == false){
+                break;
+            }
+            if ($data[2] == $session_id) {
+                return $data[0] . " " . $data[1] . " " . $data[2];
+                //return 
+            }
+        }
+        fclose($fileHandle);
+        return "False";
     }
 }
 ?>

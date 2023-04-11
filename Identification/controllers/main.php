@@ -5,13 +5,12 @@ class MainController extends Controller{
 
     public function get($request){
         //persistant connection
-        /*if(isset($_SESSION['username'])){
+        if(isset($_SESSION['username'])){
             $connect = new ConnectController();
             $connect->connection($_SESSION['role']);
         }else{
             $this->render('main',[]);
-        }*/
-        $this->render('/main',[]);
+        }
     }
 }
 ?>
