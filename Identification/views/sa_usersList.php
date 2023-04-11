@@ -44,7 +44,6 @@ include __ROOT__."/views/header.html";
                         </div>
                         <div class="mb-3">
                             <label for="name-user" class="form-label">Prénom</label>
-                            <input type="hidden" id="newName" name="newName" />
                             <input type="text" class="form-control" id="name-update" name="newName" placeholder="Xavier" required>
                         </div>
                         <div class="mb-3">

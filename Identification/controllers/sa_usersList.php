@@ -128,6 +128,7 @@ class SaUserList extends Controller{
                                         isUpdateUser: ".$_POST['isUpdateUser']."<br>
                                         newLastName: ".$_POST['newLastName']."<br>
                                         newPassword: ".$_POST['newPassword']."<br>
+                                        $_POST
                                         "
                                     ]);
         }
