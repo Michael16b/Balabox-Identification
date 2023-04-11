@@ -99,7 +99,7 @@ class SaUserCreateController extends Controller{
                                 
                                 //donner le pdf à la prochaine vue pour le téléchargement
                                 $pdf_content = $pdf->Output('','S');
-                                $this->render('sa_download', ['pdf_content' => $pdf_content, 'filename' => 'utilisateurs_balabox.pdf']);
+                                $this->render('sa_download', ['pdf_content' => $pdf_content, 'filename' => 'Utilisateurs Balabox.pdf']);
                             }
                         }
                             catch(Exception $e){

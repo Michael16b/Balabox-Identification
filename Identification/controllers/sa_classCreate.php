@@ -118,7 +118,7 @@ class SaClassCreateController extends Controller{
                                                         
                                                         //donner le pdf à la prochaine vue pour le téléchargement
                                                         $pdf_content = $pdf->Output('Classe_' . $_REQUEST['newClassName'],'S');
-                                                        $this->render('sa_download', ['pdf_content' => $pdf_content, 'pdf_name' => 'Classe de ' . $_REQUEST['newClassName'] . '.pdf']);
+                                                        $this->render('sa_download', ['pdf_content' => $pdf_content, 'filename' => 'Classe de ' . $_REQUEST['newClassName'] . '.pdf']);
 
 
                                                     }
