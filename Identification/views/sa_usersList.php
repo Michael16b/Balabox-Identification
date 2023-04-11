@@ -46,11 +46,11 @@ include __ROOT__."/views/header.html";
                         <div class="mb-3">
                             <label for="name-user" class="form-label">Prénom</label>
                             <input type="hidden" id="newName" name="newName" />
-                            <input type="text" class="form-control" id="name-update" name="newName" placeholder="Xavier" required>
+                            <input type="text" class="form-control" id="name-update" name="newLastName" placeholder="Xavier" required>
                         </div>
                         <div class="mb-3">
                             <label for="username" class="form-label">Nom d'utilisateur</label>
-                            <input type="text" id="username" class="form-control" value="xdupont" disabled>
+                            <input type="text" id="username" class="form-control" name="Username" value="xdupont" disabled>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Voulez-vous changer le mot de passe ?</label>

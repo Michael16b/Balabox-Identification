@@ -125,6 +125,7 @@ class SaUserList extends Controller{
                                       <br>isDeleteUser: ".$_POST['isDeleteUser']."<br>
                                         isUpdateUser: ".$_POST['isUpdateUser']."<br>
                                         newName: ".$_POST['newName']."<br>
+                                        isUpdateUser: ".$_POST['isUpdateUser']."<br>
                                         newLastName: ".$_POST['newLastName']."<br>
                                         newPassword: ".$_POST['newPassword']."<br>
                                         "
