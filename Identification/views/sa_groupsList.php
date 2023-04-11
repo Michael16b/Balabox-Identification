@@ -114,7 +114,7 @@ include __ROOT__."/views/header.html";
 </div>
 
 
-<a href="sa_classCreate" class="btn btn-primary position-fixed" style="bottom: 20px; right: 20px;" role="button">+</a>
+<a href="sa_classCreate" class="btn btn-primary btn-lg position-fixed" style="bottom: 20px; right: 20px;" role="button">+</a>
         
 
 

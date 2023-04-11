@@ -29,7 +29,7 @@ include __ROOT__."/views/header.html";
     <?php } ?>
 </div>
 
-<a href="sa_userCreate" class="btn btn-primary position-fixed" style="bottom: 20px; right: 20px;" role="button">+</a>
+<a href="sa_userCreate" class="btn btn-primary btn-lg position-fixed" style="bottom: 20px; right: 20px;" role="button">+</a>
 
 <script>
     // récupérer l'élément de recherche
