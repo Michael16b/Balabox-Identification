@@ -103,7 +103,7 @@ class SaUserList extends Controller{
         if ($user == false) {
             $this->render('sa_error',['message' => "Erreur de mise à jour de l'utilisateur"]);
         } else {
-            if ($newPassword != true) {
+            if ($newPassword == true) {
                 $this->createPDF($user);
             } else {
                 $newUsers = $this->filterUsers();
