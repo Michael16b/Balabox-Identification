@@ -64,28 +64,30 @@ class SaUserList extends Controller{
             $pdf->Cell($w[$i],7,iconv('UTF-8', 'windows-1252',$header[$i]),1,0,'C',true);
         $pdf->Ln();
 
-        $startX = $pdf->GetX();
-
-        if ($user["role"] == 4) {
+        if ($user[0] == 4) {
             $role = 'Eleve';
-        } else if ($user["role"] == 3) {
+        } else if ($user[0] == 3) {
             $role = 'Professeur Editeur';
-        } else if ($user["role"] == 2) {
+        } else if ($user[0] == 2) {
             $role = 'Professeur';
-        } else if ($user["role"] == 1) {
+        } else if ($user[0] == 1) {
             $role = 'Administrateur';
         }
+
+        $pdf->SetX(($pdf->GetPageWidth() - array_sum($w))/2);
 
         $pdf->SetTextColor(0, 0, 0); // définit la couleur de texte à noir
         $pdf->SetFont('Arial', '', 14); // définit la police de caractères sans gras
         $pdf->SetX(($pdf->GetPageWidth() - array_sum($w)/2 - 10));
         $pdf->Cell($w[0],10,iconv('UTF-8', 'windows-1252',$role),'LR');
-        $pdf->Cell($w[1],10,iconv('UTF-8', 'windows-1252',$user["lastname"]),'LR');
-        $pdf->Cell($w[2],10,iconv('UTF-8', 'windows-1252',$user["firstname"]),'LR');
-        $pdf->Cell($w[3],10,iconv('UTF-8', 'windows-1252',$user["username"]),'LR');
-        $pdf->Cell($w[4],10,iconv('UTF-8', 'windows-1252',$user["password"]),'LR');
+        $pdf->Cell($w[1],10,iconv('UTF-8', 'windows-1252',$user[3]),'LR');
+        $pdf->Cell($w[2],10,iconv('UTF-8', 'windows-1252',$user[2]),'LR');
+        $pdf->Cell($w[3],10,iconv('UTF-8', 'windows-1252',$user[1]),'LR');
+        $pdf->Cell($w[4],10,iconv('UTF-8', 'windows-1252',$user[4]),'LR');
         $pdf->Ln();
 
+
+        $startX = $pdf->GetX();
         $pdf->SetX($startX + ($pdf->GetPageWidth() - array_sum($w))/2 - 10);
         $pdf->Cell(array_sum($w),0,'','T');
 
