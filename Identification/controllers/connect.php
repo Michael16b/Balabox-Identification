@@ -9,7 +9,6 @@ class ConnectController extends Controller{
 	}
 
 	public function connection($role){
-		echo "ok2";
 		switch ($role){		
 			case 1:
 				$this-> render('/sa_classCreate',[]);
@@ -25,11 +24,6 @@ class ConnectController extends Controller{
 				break;
 			case 5:
 				$this-> render('/connect_info',[]);
-				break;
-			default:
-				$this-> render('/main',[]);
-				echo "erreur de role";
-				echo "votre role est : $role";
 				break;
 		}
 	}
@@ -47,8 +41,8 @@ class ConnectController extends Controller{
 			$this-> render('/sa_classCreate',[]);
 			*/
 			//fin test //
+			
 			//recuperation de l'utilisateur
-
 			$userdb = new UserDB();
 			$user = $userdb->getRecord($request['username']);
 			$username = $request['username'];
@@ -67,8 +61,7 @@ class ConnectController extends Controller{
 					$_SESSION['username'] = $username;
 					$_SESSION['password'] = $password;
 					$uc = new UsersConnected();
-					$uc->newConnection($request['username'], $userRole);
-					echo "ok";
+					$uc->newConnection($request['username'], $role, session_id());
 					$this->connection($userRole);
 
 				}else{
