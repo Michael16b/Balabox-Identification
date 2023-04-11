@@ -93,7 +93,7 @@ class GroupsDB {
 
     public function updateGroups(String $oldGroupName, String $groupeName, String $desc = 'Pas de description') : void{
         global $DB;
-        $group = groups_get_group_by_name($oldGroupName);
+        $group = $this->getGroup($oldGroupName);
         $group->name = $groupeName;
         $group->description = $desc;
         groups_update_group($group);

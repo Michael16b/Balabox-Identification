@@ -11,15 +11,13 @@ include __ROOT__."/views/header.html";
             <div class="card-header d-flex align-items-center justify-content-between"> 
                 <h2 class="mb-0"><?php echo $group['name']; ?></h2>
                 <div class="d-flex flex-wrap align-items-center justify-content-md-end">
+
                     <form action="/sa_usersList" method="post" class="me-3 mb-3 mb-md-0">
                         <input type="hidden" name="isDeleteGroup" value="<?php echo $group['name']; ?>" />
                         <button type="submit" class="btn btn-danger align-items-center" style="width: 40px; height: 40px;"><i class="fas fa-trash-alt"></i></button>
                     </form>
                     <button type="button" id="deleteMemberbtn" class="btn btn-danger d-flex align-items-center justify-content-center me-3 mb-3 mb-md-0" data-groupname="<?php echo $group['name']; ?>" data-bs-toggle="modal" data-bs-target="#delete-member-modal-<?php echo $group['id']; ?>" style="width: 40px; height: 40px;"><i class="fas fa-user-times"></i></button> 
-                    <form action="/sa_usersList" method="post" class="me-3 mb-3 mb-md-0">
-                        <input type="hidden" name="isUpdateGroup" value="<?php echo $group['name']; ?>" />
-                        <button type="submit" class="btn btn-primary align-items-center" style="width: 40px; height: 40px;"><i class="fas fa-edit"></i></button>
-                    </form>
+                    <button type="button" id="updateGroupbtn" class="btn btn-primary d-flex align-items-center justify-content-center me-3 mb-3 mb-md-0" data-groupname="<?php echo $group['name']; ?>" data-bs-toggle="modal" data-bs-target="#update-group-modal-<?php echo $group['id']; ?>" style="width: 40px; height: 40px;"><i class="fas fa-edit"></i></button>
                     <button type="button" class="btn btn-primary d-flex align-items-center justify-content-center me-3 mb-3 mb-md-0" data-groupname="<?php echo $group['name']; ?>" data-bs-toggle="modal" data-bs-target="#add-member-modal-<?php echo $group['id']; ?>" style="width: 40px; height: 40px;"><i class="fas fa-user-plus"></i></button>
                 </div>
             </div>
@@ -32,7 +30,7 @@ include __ROOT__."/views/header.html";
                 </ul>
             </div>
         </div>
-        
+    <?php } ?>    
 
         <!-- Add Member -->
         <div class="modal fade" id="add-member-modal-<?php echo $group['id']; ?>" tabindex="-1" aria-labelledby="add-member-modal-<?php echo $group['id']; ?>-label" aria-hidden="true">
@@ -82,8 +80,33 @@ include __ROOT__."/views/header.html";
             </div>
         </div>
 
+        <!-- Modify Group -->
+        <div class="modal fade" id="update-group-modal-<?php echo $group['id']; ?>" tabindex="-1" aria-labelledby="update-group-modal-<?php echo $group['id']; ?>-label" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="update-group-modal-<?php echo $group['id']; ?>-label">Modifier le groupe <span id="group-name-update"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/sa_usersList" method="post">
+                        <div class="mb-3">
+                            <label for="name-group" class="form-label">Nom du groupe</label>
+                            <input type="hidden" id="old-name" name="updateGroup" />
+                            <input type="text" class="form-control" id="name-update" name="newName" placeholder="Entrez le nom du groupe" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="update-desc-group" class="form-label">Description du groupe</label>
+                            <textarea class="form-control" id="group-desc-update" name="desc-group" rows="3" placeholder="Entrez une description du groupe"></textarea>
+                        </div>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
 
-    <?php } ?>
+    
 </div>
 
 
@@ -273,9 +296,26 @@ include __ROOT__."/views/header.html";
             });
         });
 
-});
+        // Update Group
+        var descGroup ;
+        var updateGroupButton = document.querySelectorAll('[data-bs-toggle="modal"]');
+        updateGroupButton.forEach(function (button) {
+            button.addEventListener("click", function () {
+                groupName = this.getAttribute("data-groupname");
+                document.getElementById('group-name-update').innerHTML = groupName;
 
 
+                groups.forEach(function (group) {
+                    if (group["name"] == groupName) {
+                        document.getElementById('name-update').value = groupName;
+                        document.getElementById('old-name').value = groupName;
+                        document.getElementById('group-desc-update').value = group["description"];
+                    }
+                });
+
+            });
+        });
+    });
 </script>
 
 </body>
