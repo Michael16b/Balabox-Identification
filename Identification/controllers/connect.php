@@ -41,8 +41,8 @@ class ConnectController extends Controller{
 			$this-> render('/sa_classCreate',[]);
 			*/
 			//fin test //
+			
 			//recuperation de l'utilisateur
-
 			$userdb = new UserDB();
 			$user = $userdb->getRecord($request['username']);
 			$username = $request['username'];
@@ -61,7 +61,7 @@ class ConnectController extends Controller{
 					$_SESSION['username'] = $username;
 					$_SESSION['password'] = $password;
 					$uc = new UsersConnected();
-					$uc->newConnection($request['username'], $userRole);
+					$uc->newConnection($request['username'], $role, session_id());
 					$this->connection($userRole);
 
 				}else{
