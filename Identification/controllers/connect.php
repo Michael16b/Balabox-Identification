@@ -11,7 +11,7 @@ class ConnectController extends Controller{
 	public function connection($role){
 		switch ($role){		
 			case 1:
-				$this-> render('/sa_classCreate',[]);
+				$this-> render('/sa_usersList',[]);
 				break;
 			case 2:
 				$this-> render('/connect_info',[]);
