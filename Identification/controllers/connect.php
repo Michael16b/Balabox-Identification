@@ -36,7 +36,7 @@ class ConnectController extends Controller{
     public function post($request){
         try{
 			// test //
-			
+			/*
 			$role = 1;
 			$_SESSION['username'] = $request['username'];
 			$_SESSION['password'] = $request['password'];
@@ -45,10 +45,10 @@ class ConnectController extends Controller{
 			$uc = new UsersConnected();
 			$uc->newConnection($request['username'], $role);
 			$this-> render('/sa_classCreate',[]);
-			
+			*/
 			//fin test //
 			//recuperation de l'utilisateur
-			/*
+
 			$userdb = new UserDB();
 			$user = $userdb->getRecord($request['username']);
 			$username = $request['username'];
@@ -79,7 +79,7 @@ class ConnectController extends Controller{
 			else{
 				$this-> render('/main',[]);
 				echo "utilisateur introuvable";
-			}		*/				
+			}			
         }catch (Error $e){
             echo $e;
 	    $this-> render('/error',['surname' => 'Error', 'password' => 'Error', 'idprof' => null]);
