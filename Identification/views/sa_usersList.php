@@ -50,7 +50,7 @@ include __ROOT__."/views/header.html";
                         </div>
                         <div class="mb-3">
                             <label for="username" class="form-label">Nom d'utilisateur</label>
-                            <input type="text" class="form-control" value="xdupont" disabled>
+                            <input type="text" id="username" class="form-control" value="xdupont" disabled>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Voulez-vous changer le mot de passe ?</label>
