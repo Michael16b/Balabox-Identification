@@ -19,7 +19,7 @@ include __ROOT__."/views/header.html";
                             <p class="card-text"><?php echo $user['firstname'] . ' ' . $user['lastname']; ?></p>
                             <div class="d-flex justify-content-end">
                                 <button class="btn btn-danger mx-2"><i class="fas fa-trash-alt"></i> Supprimer</button>
-                                <button type="button" id="updateUserbtn" class="btn btn-primary" data-groupname="<?php echo $user['name']; ?>" data-bs-toggle="modal" data-bs-target="#update-user-modal-<?php echo $group['id']; ?>"><i class="fas fa-edit"></i>Modifier</button>
+                                <button type="button" id="updateUserbtn" class="btn btn-primary" data-groupname="<?php echo $user['username']; ?>" data-bs-toggle="modal" data-bs-target="#update-user-modal-<?php echo $group['id']; ?>"><i class="fas fa-edit"></i>Modifier</button>
                             </div>
                         </div>
                     </div>
@@ -28,8 +28,8 @@ include __ROOT__."/views/header.html";
         </div>
     <?php } ?>
 
-            <!-- Update User -->
-            <div class="modal fade" id="update-user-modal-<?php echo $group['id']; ?>" tabindex="-1" aria-labelledby="update-user-modal-<?php echo $group['id']; ?>-label" aria-hidden="true">
+        <!-- Update User -->
+        <div class="modal fade" id="update-user-modal-<?php echo $group['id']; ?>" tabindex="-1" aria-labelledby="update-user-modal-<?php echo $group['id']; ?>-label" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
@@ -97,14 +97,15 @@ include __ROOT__."/views/header.html";
         
         updateUserButton.forEach(function (button) {
             button.addEventListener("click", function () {
-                userName = this.getAttribute("data-groupname");
-                document.getElementById('user-name-update').innerHTML = userName;
+                username = this.getAttribute("data-groupname");
+                document.getElementById('user-name-update').innerHTML = username;
 
                 Object.keys(users).forEach(function (key) {
                     var user = users[key];
                     if (user["name"] == userName) {
                         document.getElementById('name-update').value = user["firstname"];
                         document.getElementById('lastname-update').value = user["lastname"];
+                        document.getElementById('username').value = username;
                     }
                 });
             });
