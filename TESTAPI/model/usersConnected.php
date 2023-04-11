@@ -62,7 +62,7 @@ class UsersConnected{
                 'role' => $data[1],
                 'id' => $data[2]
             );
-            if ($logEntry['role'] == '4' || $logEntry['role'] == '5') {
+            if (!($logEntry['role'] == '1')) {
                 $list[] = $logEntry;
             }
         }
