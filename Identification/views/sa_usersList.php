@@ -5,7 +5,7 @@ include __ROOT__."/views/header.html";
 <body>
 
 <div class="container my-4">
-    <h1>Liste des classes</h1>
+    <h1>Liste des utilisateurs</h1>
     <?php if (count($users) == 0) { ?>
         <p>Pas d'utilisateur</p>
     <?php } else { ?>
