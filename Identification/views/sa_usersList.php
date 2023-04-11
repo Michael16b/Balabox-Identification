@@ -40,17 +40,16 @@ include __ROOT__."/views/header.html";
                     <form method="post">
                         <div class="mb-3">
                             <label for="surname-user" class="form-label">Nom</label>
-                            <input type="hidden" id="newLastName" name="newLastName" />
-                            <input type="text" class="form-control" id="lastname-update" name="newName" placeholder="Dupont" required>
+                            <input type="text" class="form-control" id="lastname-update" name="newLastName" placeholder="Dupont" required>
                         </div>
                         <div class="mb-3">
                             <label for="name-user" class="form-label">Prénom</label>
                             <input type="hidden" id="newName" name="newName" />
-                            <input type="text" class="form-control" id="name-update" name="newLastName" placeholder="Xavier" required>
+                            <input type="text" class="form-control" id="name-update" name="newName" placeholder="Xavier" required>
                         </div>
                         <div class="mb-3">
                             <label for="username" class="form-label">Nom d'utilisateur</label>
-                            <input type="text" id="username" class="form-control" name="Username" value="xdupont" disabled>
+                            <input type="text" id="username" class="form-control" value="xdupont" name="isUpdateUser" disabled>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Voulez-vous changer le mot de passe ?</label>
