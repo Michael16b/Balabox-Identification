@@ -10,12 +10,22 @@ class SaUserList extends Controller{
         }else{
             $user = new UserDB();
             $users = $user->getUsers();
+
+            // Filter the users
+
             foreach ($users as $key => $user) {
                 if ($user->username == 'guest' || $user->username == 'moodleuser') {
                     unset($users[$key]);
                 }
-            }            
-            $this->render('sa_usersList',['users' => $users]);
+            } 
+            
+            $columnsToKeep = ['username', 'firstname', 'lastname'];
+            $newUsers = array_map(function($user) use ($columnsToKeep) {
+                return array_intersect_key((array) $user, array_flip($columnsToKeep));
+            }, $users);
+
+           
+            $this->render('sa_usersList',['users' => $newUsers]);
         }
     }
 

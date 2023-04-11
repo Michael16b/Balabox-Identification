@@ -90,6 +90,13 @@ class UserDB {
     	return  $roles->roleid;
     }
 
+    public function getGroupOfUser(String $username): String {
+        global $DB;
+        $user = $this->getRecord($username);
+        $groupName = $DB->get_record('groups_members', array('userid' => $user->id));
+        return $groupName;
+    }
+
 
     public function deleteUser(String $username): void{
         global $DB;
