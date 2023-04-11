@@ -28,7 +28,7 @@ class SaUserList extends Controller{
                 }
             }
             $usersWithoutGroup = array_unique($usersWithoutGroup);
-            $this->render('sa_usersList',['groups' => $groups, 'usersWithoutGroup' => $usersWithoutGroup]);
+            $this->render('sa_groupsList',['groups' => $groups, 'usersWithoutGroup' => $usersWithoutGroup]);
         }
     }
 
@@ -36,7 +36,7 @@ class SaUserList extends Controller{
         $groupsDB = new GroupsDB();
         $groupsDB->deleteGroup($group);
         $groups = $groupsDB->getGroups();
-        $this->render('sa_usersList',['groups' => $groups ]);
+        $this->render('sa_groupsList',['groups' => $groups ]);
     }
     
     public function addMember($group, $member) {
@@ -44,14 +44,14 @@ class SaUserList extends Controller{
         $groupInfo = $groupsDB->getGroup($group);
         $groupsDB->addMember($groupInfo->id, $member);
         $groups = $groupsDB->getGroups();
-        $this->render('sa_usersList',['groups' => $groups]);
+        $this->render('sa_groupsList',['groups' => $groups]);
     }
 
     public function deleteMember($group, $member) {
         $groupsDB = new GroupsDB();
         $groupsDB->deleteMember($group, $member);
         $groups = $groupsDB->getGroups();
-        $this->render('sa_usersList',['groups' => $groups]);
+        $this->render('sa_groupsList',['groups' => $groups]);
     }
 
     public function updateGroup($oldName, $newName, $newDescription) {
@@ -65,7 +65,7 @@ class SaUserList extends Controller{
                     $groupsDB->updateGroups($oldName, $newName, $newDescription);
                 }
                 $groups = $groupsDB->getGroups();
-                $this->render('sa_usersList',['groups' => $groups]);
+                $this->render('sa_groupsList',['groups' => $groups]);
     }
     }
 
