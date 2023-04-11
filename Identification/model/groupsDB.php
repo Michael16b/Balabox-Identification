@@ -100,7 +100,7 @@ class GroupsDB {
 
     }
 
-    public function getGroup(String $groupeName): stdClass {
+    public function getGroup(String $groupeName): mixed {
         global $DB;
         $group = $DB->get_record('groups', array('name' => $groupeName));
         return $group;
