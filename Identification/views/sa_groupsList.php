@@ -6,6 +6,7 @@ include __ROOT__."/views/header.html";
 
 <div class="container my-4">
     <h1>Liste des classes</h1>
+    <a href="sa_classCreate" class="btn btn-primary fixed-bottom" role="button">+</a>
     <?php if (count($groups) == 0) { ?>
         <p>Pas de classe</p>
     <?php } else { ?>
