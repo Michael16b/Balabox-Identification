@@ -46,15 +46,20 @@ class SaUserList extends Controller{
     public function createPDF($user) {
         $pdf = new FPDF();
         $pdf->AddPage();
+        $pdf->SetAutoPageBreak(true, 20);
         $pdf->Image(__ROOT__.'/static/img/logo_balabox.png',10,6,30);
+        $pdf->SetFont('Arial', 'B', 18); // définit la police de caractères en gras avec une taille de 14
+        $pdf->Cell(0, 45, iconv('UTF-8', 'windows-1252','Compte de ' . $user[3] . ' ' . $user[2]), 0, 1, 'C');
+
+
         $pdf->SetFillColor(255, 165, 0); // définit la couleur de fond à orange
         $pdf->SetTextColor(255, 255, 255); // définit la couleur de texte à blanc
         $pdf->SetFont('Arial', 'B', 14); // définit la police de caractères en gras avec une taille de 14
 
-        $pdf->SetAutoPageBreak(true, 20);
-        $pdf->Cell(0, 45, iconv('UTF-8', 'windows-1252','Compte de ' . $user[3] . ' ' . $user[2]), 0, 1, 'C');
-        $pdf->Ln();
         
+        
+        $pdf->Ln();
+
         // Ajout du header
         $header = array('Rôle', 'Nom', 'Prénom', 'Nom d\'utilisateur', 'Mot de passe');
         $w = array(30,25,25,45,35);
@@ -93,7 +98,7 @@ class SaUserList extends Controller{
         $pdf->Cell(array_sum($w),0,'','T');
 
         $pdf_content = $pdf->Output('','S');
-        $this->render('sa_download', ['pdf_content' => $pdf_content]);
+        $this->render('sa_download', ['pdf_content' => $pdf_content, 'filename' => 'Compte de ' . $user[3] . ' ' . $user[2] . '.pdf']);
     }
     
 
