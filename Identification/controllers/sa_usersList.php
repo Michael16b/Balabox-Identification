@@ -12,7 +12,7 @@ class SaUserList extends Controller{
             $users = $user->getUsers();
             foreach ($users as $key => $user) {
                 if ($user->username == 'guest' || $user->username == 'moodleuser') {
-                    unset($user->{$key});
+                    unset($users[$key]);
                 }
             }            
             $this->render('sa_usersList',['users' => $users]);
