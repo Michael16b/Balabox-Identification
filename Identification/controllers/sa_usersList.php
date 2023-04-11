@@ -59,7 +59,8 @@ class SaUserList extends Controller{
 
         // Centrer le tableau
         $pdf->SetY(45);
-        $pdf->Cell(($pdf->GetPageWidth() - array_sum($w))/2 - 10); // Ajouter de l'espace à gauche pour centrer le tableau
+        $startX = ($pdf->GetPageWidth() - array_sum($w))/2 - 10;
+        $pdf->Cell($startX); // Ajouter de l'espace à gauche pour centrer le tableau
         for($i=0;$i<count($header);$i++)
             $pdf->Cell($w[$i],7,iconv('UTF-8', 'windows-1252',$header[$i]),1,0,'C',true);
         $pdf->Ln();
@@ -78,7 +79,7 @@ class SaUserList extends Controller{
 
         $pdf->SetTextColor(0, 0, 0); // définit la couleur de texte à noir
         $pdf->SetFont('Arial', '', 14); // définit la police de caractères sans gras
-        $pdf->SetX(($pdf->GetPageWidth() - array_sum($w)/2 - 10));
+        $pdf->Cell($startX);
         $pdf->Cell($w[0],10,iconv('UTF-8', 'windows-1252',$role),'LR');
         $pdf->Cell($w[1],10,iconv('UTF-8', 'windows-1252',$user[3]),'LR');
         $pdf->Cell($w[2],10,iconv('UTF-8', 'windows-1252',$user[2]),'LR');
@@ -87,7 +88,7 @@ class SaUserList extends Controller{
         $pdf->Ln();
 
 
-        $startX = $pdf->GetX();
+        $pdf->Cell($startX);
         $pdf->SetX($startX + ($pdf->GetPageWidth() - array_sum($w))/2 - 10);
         $pdf->Cell(array_sum($w),0,'','T');
 
