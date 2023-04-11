@@ -8,6 +8,13 @@
     <meta charset="utf-8">
 </head>
 
+<nav class="navbar border-bottom justify-content-center">
+    <div class="container-fluid">
+        <img src="../static/img/logo_balabox.png" alt="Logo" height="30" class="d-inline-block align-text-top">
+    </div>
+</nav>
+
+
 <body>
 
     <div class="container my-4">
