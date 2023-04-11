@@ -18,7 +18,7 @@
 <body>
 
     <div class="container my-4">
-        <?php if(strpos($data['message'], 'CSV') !== false || strpos($data['message'], 'POST') !== false || $data['message'] === 'Le nom du groupe existe déjà') { ?>
+        <?php if(strpos($data['message'], 'CSV') !== false || strpos($data['message'], 'POST') !== false || $data['message'] === 'Le nom du groupe existe déjà' || $data['message'] === 'ID') { ?>
             <div class="alert alert-danger">
                 <i class="fas fa-exclamation-circle"></i> <?php echo $data['message']; ?>
             </div>
