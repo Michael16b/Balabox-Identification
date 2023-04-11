@@ -3,13 +3,16 @@ include __ROOT__."/views/header.html";
 ?>
 
 <body>
-    
-    <!-- BODY -->
     <div class="container my-4">
-        <?php
-            echo '<a href="data:application/pdf;base64,'.base64_encode($pdf_content).'" download="' . $filename . '">Télécharger le PDF</a>';
-        ?>
-
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Télécharger le PDF</h5>
+                <a href="data:application/pdf;base64,<?php echo base64_encode($pdf_content); ?>" 
+                    download="<?php echo $filename; ?>" 
+                    class="btn btn-primary">
+                    <i class="fas fa-download"></i> Télécharger
+                </a>
+            </div>
+        </div>
     </div>
-    
 </body>
