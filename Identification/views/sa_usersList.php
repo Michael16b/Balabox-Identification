@@ -6,30 +6,34 @@ include __ROOT__."/views/header.html";
 
 <div class="container my-4">
     <h1>Liste des groupes</h1>
-    <?php foreach($groups as $group) { ?>
-        <div class="card my-3">
-            <div class="card-header d-flex align-items-center justify-content-between"> 
-                <h2 class="mb-0"><?php echo $group['name']; ?></h2>
-                <div class="d-flex flex-wrap align-items-center justify-content-md-end">
+    <?php if (count($groups) == 0) { ?>
+        <p>Pas de classe</p>
+    <?php } else { ?>
+        <?php foreach($groups as $group) { ?>
+            <div class="card my-3">
+                <div class="card-header d-flex align-items-center justify-content-between"> 
+                    <h2 class="mb-0"><?php echo $group['name']; ?></h2>
+                    <div class="d-flex flex-wrap align-items-center justify-content-md-end">
 
-                    <form action="/sa_usersList" method="post" class="me-3 mb-3 mb-md-0">
-                        <input type="hidden" name="isDeleteGroup" value="<?php echo $group['name']; ?>" />
-                        <button type="submit" class="btn btn-danger align-items-center" style="width: 40px; height: 40px;"><i class="fas fa-trash-alt"></i></button>
-                    </form>
-                    <button type="button" id="deleteMemberbtn" class="btn btn-danger d-flex align-items-center justify-content-center me-3 mb-3 mb-md-0" data-groupname="<?php echo $group['name']; ?>" data-bs-toggle="modal" data-bs-target="#delete-member-modal-<?php echo $group['id']; ?>" style="width: 40px; height: 40px;"><i class="fas fa-user-times"></i></button> 
-                    <button type="button" id="updateGroupbtn" class="btn btn-primary d-flex align-items-center justify-content-center me-3 mb-3 mb-md-0" data-groupname="<?php echo $group['name']; ?>" data-bs-toggle="modal" data-bs-target="#update-group-modal-<?php echo $group['id']; ?>" style="width: 40px; height: 40px;"><i class="fas fa-edit"></i></button>
-                    <button type="button" class="btn btn-primary d-flex align-items-center justify-content-center me-3 mb-3 mb-md-0" data-groupname="<?php echo $group['name']; ?>" data-bs-toggle="modal" data-bs-target="#add-member-modal-<?php echo $group['id']; ?>" style="width: 40px; height: 40px;"><i class="fas fa-user-plus"></i></button>
+                        <form action="/sa_usersList" method="post" class="me-3 mb-3 mb-md-0">
+                            <input type="hidden" name="isDeleteGroup" value="<?php echo $group['name']; ?>" />
+                            <button type="submit" class="btn btn-danger align-items-center" style="width: 40px; height: 40px;"><i class="fas fa-trash-alt"></i></button>
+                        </form>
+                        <button type="button" id="deleteMemberbtn" class="btn btn-danger d-flex align-items-center justify-content-center me-3 mb-3 mb-md-0" data-groupname="<?php echo $group['name']; ?>" data-bs-toggle="modal" data-bs-target="#delete-member-modal-<?php echo $group['id']; ?>" style="width: 40px; height: 40px;"><i class="fas fa-user-times"></i></button> 
+                        <button type="button" id="updateGroupbtn" class="btn btn-primary d-flex align-items-center justify-content-center me-3 mb-3 mb-md-0" data-groupname="<?php echo $group['name']; ?>" data-bs-toggle="modal" data-bs-target="#update-group-modal-<?php echo $group['id']; ?>" style="width: 40px; height: 40px;"><i class="fas fa-edit"></i></button>
+                        <button type="button" class="btn btn-primary d-flex align-items-center justify-content-center me-3 mb-3 mb-md-0" data-groupname="<?php echo $group['name']; ?>" data-bs-toggle="modal" data-bs-target="#add-member-modal-<?php echo $group['id']; ?>" style="width: 40px; height: 40px;"><i class="fas fa-user-plus"></i></button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h3>Membres :</h3>
+                    <ul>
+                        <?php foreach($group['members'] as $member) { ?>
+                            <li><?php echo $member['lastname'] . ' ' . $member['firstname'] . ' (' . $member['username'] . ')'; ?></li>
+                        <?php } ?>
+                    </ul>
                 </div>
             </div>
-            <div class="card-body">
-                <h3>Membres :</h3>
-                <ul>
-                    <?php foreach($group['members'] as $member) { ?>
-                        <li><?php echo $member['lastname'] . ' ' . $member['firstname'] . ' (' . $member['username'] . ')'; ?></li>
-                    <?php } ?>
-                </ul>
-            </div>
-        </div>
+        <?php } ?>
     <?php } ?>    
 
         <!-- Add Member -->

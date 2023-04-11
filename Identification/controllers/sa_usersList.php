@@ -55,6 +55,9 @@ class SaUserList extends Controller{
 
     public function updateGroup($group, $newName, $newDescription) {
         $groupsDB = new GroupsDB();
+        if ($groupsDB->getGroup($newName) != null) {
+            $this->render('sa_error',['message' => "Le nom du groupe existe déjà"]);
+        }
         if ($newDescription == "" || $newDescription == null) {
            $groupsDB->updateGroups($group, $newName);
         } else { 
