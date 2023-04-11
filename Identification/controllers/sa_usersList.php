@@ -11,10 +11,10 @@ class SaUserList extends Controller{
             $user = new UserDB();
             $users = $user->getUsers();
             foreach ($users as $key => $user) {
-                if ($user['username'] == 'guest' || $user['username'] == 'moodleuser') {
-                    unset($users[$key]);
+                if ($user->username == 'guest' || $user->username == 'moodleuser') {
+                    unset($user->{$key});
                 }
-            }           
+            }            
             $this->render('sa_usersList',['users' => $users]);
         }
     }
