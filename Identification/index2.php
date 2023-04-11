@@ -37,7 +37,7 @@ ApplicationController::getInstance()->addRoute('sa_userCreate', CONTROLLERS_DIR.
 ApplicationController::getInstance()->addRoute('sa_confirm', CONTROLLERS_DIR.'/sa_confirm.php');
 ApplicationController::getInstance()->addRoute('sa_error', CONTROLLERS_DIR.'/sa_error.php');
 
-ApplicationController::getInstance()->addRoute('sa_usersList', CONTROLLERS_DIR.'/sa_usersList.php');
+ApplicationController::getInstance()->addRoute('sa_groupsList', CONTROLLERS_DIR.'/sa_groupsList.php');
 
 
 ApplicationController::getInstance()->addRoute('sa_download', CONTROLLERS_DIR.'/sa_download.php');
