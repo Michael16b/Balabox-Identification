@@ -74,12 +74,8 @@ class GroupsDB {
     public function deleteGroup(String $groupeName): void{
         global $DB;
         $members = $this->getMembers($groupeName);
+        $DB->delete_records('course', array('fullname' => $groupeName, 'shortname' => $groupeName));
         
-        $course = $DB->get_record('course', array('fullname' => $groupeName), '*', IGNORE_MULTIPLE);
-        if ($course) {
-            $DB->delete_records('course', array('id' => $course->id));
-        }
-
         foreach ($members as $member) {
             $this->deleteMember($groupeName, $member["username"]);
         }
