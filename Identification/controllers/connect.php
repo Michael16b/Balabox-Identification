@@ -14,17 +14,17 @@ class ConnectController extends Controller{
 				$this-> render('/sa_classCreate',[]);
 				break;
 			case 2:
-				$this-> render('/connect_info',[]);
-				break;
+				header('Location: https://balabox');
+				exit;
 			case 3:
-				$this-> render('/connect_info',[]);
-				break;
+				header('Location: https://balabox');
+				exit;
 			case 4:
-				$this-> render('/connect_info',[]);
-				break;
+				header('Location: https://balabox');
+				exit;
 			case 5:
-				$this-> render('/connect_info',[]);
-				break;
+				header('Location: https://balabox');
+				exit;
 		}
 	}
     public function post($request){
