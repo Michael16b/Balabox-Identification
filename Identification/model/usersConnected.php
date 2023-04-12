@@ -67,7 +67,7 @@ class UsersConnected{
             }
         }
         fclose($fileHandle);
-        return json_encode($list);
+        return $list;
     }
 
     /**
