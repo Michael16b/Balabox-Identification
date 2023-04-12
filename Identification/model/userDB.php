@@ -108,35 +108,18 @@ class UserDB {
         $DB->delete_records('user', array('username' => $username));
     }
 
-    public function updateUser(String $username, String $firstName, String $lastName, bool $password): array{
-
-        $user = $this->getRecord($username);
-        $updateUser = new stdClass();
-        $updateUser->firstname =  $firstName;
-        $updateUser->lastname = $lastName;
-        $updateUser->username = $username;
-
+    public function updateUser(String $username, String $firstName, String $lastName, bool $password) : array{
+        global $DB;
         if ($password != false) {
-            $updateUser->password = $this->RandomPassword();
-            var_dump($updateUser->password);
+            $user = $this->getRecord($username);
+            $user->firstname = $firstName;
+            $user->lastname = $lastName;
+            $DB->update_record('user', $user);
         } else {
-            $updateUser->password = $user->password;
+            $this->deleteUser($username);
+            $user =  $this->addUser($firstName, $lastName, $this->getUser_role($username));
+            return array($user[2], $lastName, $firstName, $user[0] , $user[1]);
         }
-        $updateUser->email = $firstName."." . $lastName . "@balabox.home" ;
-        $user->auth = 'manual';
-        $user->confirmed = 1;
-        $user->lang = 'fr';
-        $user->timecreated = time();
-        $user->timemodified = time();
-
-        
-        $role = $this->getUser_role($username);
-
-        $this->deleteUser($username);
-        $updateUser->id = user_create_user($user);
-        role_assign($role, $updateUser->id, context_system::instance());
-
-        return array($role,$username,$firstName, $lastName, $updateUser->password);
     }
 
 
