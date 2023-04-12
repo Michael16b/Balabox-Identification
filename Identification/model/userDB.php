@@ -75,8 +75,8 @@ class UserDB {
 
         if ($groupName != 'Aucun') {
             $groupsDB = new GroupsDB();
-            $groupsDB->getGroup($groupName);
-            $groupsDB->addMember($groupName, $user->username);
+            $group = $groupsDB->getGroup($groupName);
+            $groupsDB->addMember($group->id, $user->username);
         }
         
         return array($user->username, $password,$role);
