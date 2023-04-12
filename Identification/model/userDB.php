@@ -70,8 +70,10 @@ class UserDB {
         $user->timecreated = time();
         $user->timemodified = time();
 
-        $user->id = user_create_user($user);
         role_assign($role, $user->id, context_system::instance());
+        
+        $user->id = user_create_user($user);
+        
 
         if ($groupName != 'Aucun') {
             $groupsDB = new GroupsDB();
