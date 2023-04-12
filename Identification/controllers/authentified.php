@@ -7,12 +7,10 @@ class AuthentifiedController extends Controller{
         if(isset($_GET['id'])){
             $session_id = $_GET['id'];
             $uc = new UsersConnected();
-            var_dump($uc->getUserBySessionId($session_id));
+            echo json_encode($uc->getUserBySessionId($session_id));
         } else {
             // No session ID provided, return error
             echo json_encode(array('error' => 'Session ID not provided'));
-            $userdb = new UserDB();
-            var_dump($userdb->getUser_role('moodleuser'));
             return;
         }
     }

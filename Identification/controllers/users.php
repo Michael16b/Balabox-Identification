@@ -5,7 +5,7 @@ class UsersController extends Controller{
     public function get($request){
         $uc = new UsersConnected();
         $users = $uc->getUserConnected();
-        echo $users;
+        echo json_encode($users);
     }
 }
 ?>

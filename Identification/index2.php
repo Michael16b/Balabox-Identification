@@ -38,6 +38,7 @@ ApplicationController::getInstance()->addRoute('sa_usersList', CONTROLLERS_DIR.'
 
 ApplicationController::getInstance()->addRoute('sa_download', CONTROLLERS_DIR.'/sa_download.php');
 ApplicationController::getInstance()->addRoute('authentified', CONTROLLERS_DIR.'/authentified.php');
+ApplicationController::getInstance()->addRoute('groupes', CONTROLLERS_DIR.'/groupes.php');
 ApplicationController::getInstance()->addRoute('disconnect', CONTROLLERS_DIR.'/disconnect.php');
 ApplicationController::getInstance()->addRoute('users', CONTROLLERS_DIR.'/users.php');
 
