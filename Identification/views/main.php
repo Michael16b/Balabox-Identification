@@ -10,6 +10,11 @@
             <div class="col-md-6 offset-md-3">
                 <div class="card my-5">
                     <form action="/connect" method="post" class="card-body p-lg-5">
+                        <?php if(isset($_SESSION['message'])) { ?>
+                        <div class="alert alert-info" role="alert">
+                            <?php echo $_SESSION['message']; ?>
+                        </div>
+                        <?php unset($_SESSION['message']); } ?>
                         <div class="text-center mb-5">
                             <img src="../static/img/logo_balabox.png" class="img-fluid" width="200px" alt="profile">
                         </div>
