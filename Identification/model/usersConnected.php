@@ -59,8 +59,7 @@ class UsersConnected{
             }
             $logEntry = array(
                 'username' => $data[0],
-                'role' => $data[1],
-                'id' => $data[2]
+                'role' => $data[1]
             );
             if (!($logEntry['role'] == '1')) {
                 $list[] = $logEntry;
@@ -88,7 +87,6 @@ class UsersConnected{
                 $logEntry = array(
                     'username' => $data[0],
                     'role' => $data[1],
-                    'id' => $data[2],
                     'firstname' => $user->firstname,
                     'lastname' => $user->lastname
                 );
