@@ -12,8 +12,8 @@ include __ROOT__."/views/header.html";
         <?php foreach($groups as $group) { ?>
             <div class="card my-3">
                 <div class="card-header d-flex align-items-center justify-content-between"> 
-                    <h2 class="mb-0"><?php echo $group['name']; ?></h2>
-                    <div class="d-flex flex-wrap align-items-center justify-content-md-end">
+                    <h2 class="mb-0"><i class="fas fa-users me-2"></i><?php echo $group['name']; ?></h2>
+                    <div class="d-flex flex-wrap align-items-center justify-content-end">
 
                         <form method="post" class="me-3 mb-3 mb-md-0">
                             <input type="hidden" name="isDeleteGroup" value="<?php echo $group['name']; ?>" />
@@ -25,7 +25,16 @@ include __ROOT__."/views/header.html";
                     </div>
                 </div>
                 <div class="card-body">
-                    <h3>Membres :</h3>
+                <h3><i class="fas fa-users me-2"></i>
+                    <?php if (count($group['members']) == 0) {
+                        echo 'Aucun Membre';
+                    } else {
+                        echo count($group['members']) . ' Membre';
+                        if (count($group['members']) > 1) {
+                            echo 's';
+                        }
+                    } ?> :
+                </h3>
                     <ul>
                         <?php foreach($group['members'] as $member) { ?>
                             <li><?php echo $member['lastname'] . ' ' . $member['firstname'] . ' (' . $member['username'] . ')'; ?></li>
@@ -33,6 +42,7 @@ include __ROOT__."/views/header.html";
                     </ul>
                 </div>
             </div>
+
         <?php } ?>
     <?php } ?>    
 
