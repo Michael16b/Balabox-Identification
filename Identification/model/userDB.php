@@ -118,7 +118,8 @@ class UserDB {
             return array($username, $lastName, $firstName, $this->getUser_role($username));
         } else {
             $this->deleteUser($username);
-            $user =  $this->addUser($firstName, $lastName, $this->getUser_role($username));
+            $role = $this->getUser_role($username);
+            $user =  $this->addUser($firstName, $lastName, $role);
             return array($user[2], $lastName, $firstName, $user[0] , $user[1]);
         }
     }
