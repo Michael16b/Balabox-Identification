@@ -114,21 +114,20 @@ class UserDB {
         $DB->delete_records('user', array('username' => $username));
     }
 
-    public function updateUser(String $username, String $firstName, String $lastName, bool $password, String $role) : array{
+    public function updateUser(String $username, String $firstName, String $lastName, bool $password, int $role) : array{
         global $DB;
         if ($password == false) {
             $user = $this->getRecord($username);
             $user->firstname = $firstName;
             $user->lastname = $lastName;
             $DB->update_record('user', $user);
-            $this->addRolesSystemMembers($username, $role);
             return array($username, $lastName, $firstName, $role);
-
+            role_assign($role, $user->id, context_system::instance());
+            
         } else {
             $this->deleteUser($username);
-            
             $user =  $this->addUser($firstName, $lastName, $role);
-            return array($user[2], $lastName, $firstName, $user[0] , $user[1]);
+            return array($user[2], $lastName, $firstName, $user[0], $user[1]);
         }
     }
 
