@@ -62,7 +62,7 @@ include __ROOT__."/views/header.html";
                             </div>
 
                             <div class="mb-3">
-                                <label for="userGroup" class="form-label">Groupe</label>
+                                <label for="userGroup" class="form-label">Classe</label>
                                 <select class="form-select" aria-label="groupe de l'utilisateur" name="userGroup">
                                     <option selected value="Aucune">Aucune</option>
                                     <?php foreach ($groups as $group) { ?>

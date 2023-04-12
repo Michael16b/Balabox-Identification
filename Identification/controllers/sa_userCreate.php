@@ -114,9 +114,13 @@ class SaUserCreateController extends Controller{
                 } 
             }
         } elseif (isset($_POST['oneUserForm'])) {
-
+            if ($_REQUEST['newUserRole'] == 'Professeur') {
+                $role = 3;
+            } else {
+                $role = 4;
+            }
             // Traitement pour le formulaire 1 utilisateur
-			$user = $userdb->addUser($_REQUEST['newUserPrenom'], $_REQUEST['newUserNom'], $_REQUEST['newUserRole'], $_REQUEST['userGroup']);
+			$user = $userdb->addUser($_REQUEST['newUserPrenom'], $_REQUEST['newUserNom'], $role, $_REQUEST['userGroup']);
 
             
             $this->render('sa_add_user_valid',[$user[0], $user[1]]); //$_REQUEST['newUserRole']
