@@ -83,7 +83,8 @@ class UsersConnected{
                 break;
             }
             if ($data[2] == $session_id) {
-                return $data[0] . " " . $data[1] . " " . $data[2];
+                $user = new UserDB();
+                return $user->getRecord($data[0]);
                 //return 
             }
         }

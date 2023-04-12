@@ -7,10 +7,10 @@ class AuthentifiedController extends Controller{
         if(isset($_GET['id'])){
             $session_id = $_GET['id'];
             $uc = new UsersConnected();
-            echo $uc->getUserBySessionId($session_id);
+            echo json_encode($uc->getUserBySessionId($session_id));
         } else {
             // No session ID provided, return error
-            $this->render('sa_error',["message" => "Session ID not provided"]);
+            echo json_encode(array('error' => 'Session ID not provided'));
             return;
         }
     }
