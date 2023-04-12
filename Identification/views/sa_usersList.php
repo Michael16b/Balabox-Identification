@@ -18,7 +18,7 @@ include __ROOT__."/views/header.html";
                             <h5 class="card-title"><?php echo $user['username']; ?></h5>
                             <p class="card-text"><?php echo $user['firstname'] . ' ' . $user['lastname']; ?></p>
                             <div class="d-flex justify-content-end">
-                                <button class="btn btn-danger mx-2"><i class="fas fa-trash-alt"></i> Supprimer</button>
+                                <button type="button" id="deleteUserbtn-<?php echo $user['id']; ?>" class="btn btn-danger mx-2" data-groupname="<?php echo $user['username']; ?>" data-bs-toggle="modal" data-bs-target="#delete-user-modal-<?php echo $user['id']; ?>"><i class="fas fa-trash-alt"></i>Supprimer</button>
                                 <button type="button" id="updateUserbtn" class="btn btn-primary" data-groupname="<?php echo $user['username']; ?>" data-bs-toggle="modal" data-bs-target="#update-user-modal-<?php echo $group['id']; ?>"><i class="fas fa-edit"></i>Modifier</button>
                             </div>
                         </div>
@@ -27,6 +27,31 @@ include __ROOT__."/views/header.html";
             <?php } ?>
         </div>
     <?php } ?>
+
+
+        
+
+            <!-- Delete User -->
+            <div class="modal fade" id="delete-user-modal-<?php echo $user['id']; ?>" tabindex="-1" aria-labelledby="delete-user-modal-<?php echo $user['id']; ?>-label" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="delete-user-modal-<?php echo $group['id']; ?>-label">Supprimer l'utilisateur <span id="user-name-delete"></span></h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Êtes-vous sûr de vouloir supprimer cet utilisateur?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <form method="post">
+                                <input type="hidden" name="isDeleteUser" value="" id="user-delete-id">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+        </div>
 
         <!-- Update User -->
         <div class="modal fade" id="update-user-modal-<?php echo $group['id']; ?>" tabindex="-1" aria-labelledby="update-user-modal-<?php echo $group['id']; ?>-label" aria-hidden="true">
@@ -65,6 +90,7 @@ include __ROOT__."/views/header.html";
                 </div>
             </div>
         </div>
+
 </div>
 
 <a href="sa_userCreate" class="btn btn-primary btn-lg position-fixed" style="bottom: 20px; right: 20px;" role="button">+</a>
@@ -106,6 +132,22 @@ include __ROOT__."/views/header.html";
                         document.getElementById('lastname-update').value = user["lastname"];
                         document.getElementById('username').value = username;
                         document.getElementById('user').value = username;
+                    }
+                });
+            });
+        });
+
+        var deleteUserButton = document.querySelectorAll('[data-bs-toggle="modal"]');
+
+        deleteUserButton.forEach(function (button) {
+            button.addEventListener("click", function () {
+                username = this.getAttribute("data-groupname");
+                document.getElementById('user-name-delete').innerHTML = username;
+
+                Object.keys(users).forEach(function (key) {
+                    var user = users[key];
+                    if (user["username"] == username) {
+                        document.getElementById('user-delete-id').value = user["username"];
                     }
                 });
             });
