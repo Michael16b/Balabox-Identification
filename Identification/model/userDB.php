@@ -114,16 +114,17 @@ class UserDB {
         $DB->delete_records('user', array('username' => $username));
     }
 
-    public function updateUser(String $username, String $firstName, String $lastName, bool $password) : array{
+    public function updateUser(String $username, String $firstName, String $lastName, bool $password, $role) : array{
         global $DB;
         if ($password == false) {
             $user = $this->getRecord($username);
             $user->firstname = $firstName;
             $user->lastname = $lastName;
             $DB->update_record('user', $user);
-            return array($username, $lastName, $firstName, $this->getUser_role($username));
+            $this->addRolesSystemMembers($username, $role);
+            return array($username, $lastName, $firstName, $role);
+
         } else {
-            $role = $this->getUser_role($username);
             $this->deleteUser($username);
             
             $user =  $this->addUser($firstName, $lastName, $role);

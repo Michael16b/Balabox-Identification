@@ -77,6 +77,14 @@ include __ROOT__."/views/header.html";
                             <input type="text"  id="username" class="form-control" value="xdupont" disabled>
                         </div>
                         <div class="mb-3">
+                                <label for="newUserRole" class="form-label">Rôle</label>
+                                <select class="form-select" aria-label="rôle de l'utilisateur" name="newUserRole">
+                                    <option selected value="Eleve">Elève</option>
+                                    <option value="Professeur">Professeur</option>
+                                </select>
+                            </div>
+                            
+                        <div class="mb-3">
                             <label for="password" class="form-label">Voulez-vous changer le mot de passe ?</label>
                             <select class="form-select" aria-label="Modifier le mot de passe" name="newPassword">
                                         <option selected value="false">Non</option>
