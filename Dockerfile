@@ -69,10 +69,10 @@ RUN set -x && wget -O /tmp/identification-main.tar.gz "https://gitlab.com/balabo
     rm -rf /var/www/html/Identification
 
 # Supprimer le fichier logs.csv s'il existe déjà
-RUN rm -f /var/www/html/logs.csv
+#RUN rm -f /var/www/html/logs.csv
 
 # Recréer le fichier logs.csv vide
-RUN touch /var/www/html/logs.csv
+#RUN touch /var/www/html/logs.csv
 
 
 EXPOSE 4001
