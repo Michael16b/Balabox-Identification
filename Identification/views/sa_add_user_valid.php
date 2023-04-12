@@ -1,13 +1,11 @@
 <?php
 include __ROOT__."/views/header.html";
-
-
-if ($data[0] != null && $data[1] != null){
-    echo "<h1> Nom d'utilisateur : $data[0]</h1>";
-    echo "<h1> Mot de passe : $data[1]</h1>";
-    } else {
-        echo "Information non reconue";
-}
-
-include __ROOT__."/views/footer.html";
 ?>
+
+<body>
+    <div class="container">
+        <h1>Informations utilisateur</h1>
+        <p><i class="fa fa-user"></i> Nom d'utilisateur : <?php echo $data[0]; ?></p>
+        <p><i class="fa fa-lock"></i> Mot de passe : <?php echo $data[1]; ?></p>
+    </div>
+</body>
