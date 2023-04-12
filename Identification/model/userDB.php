@@ -70,9 +70,9 @@ class UserDB {
         $user->timecreated = time();
         $user->timemodified = time();
 
-        role_assign($role, $user->id, context_system::instance());
-        
+    
         $user->id = user_create_user($user);
+        role_assign($role, $user->id, context_system::instance());
         
 
         if ($groupName != 'Aucun') {
@@ -123,8 +123,10 @@ class UserDB {
             $user->firstname = $firstName;
             $user->lastname = $lastName;
             $DB->update_record('user', $user);
-            return array($username, $lastName, $firstName, $role);
+            
             role_assign($role, $user->id, context_system::instance());
+            return array($username, $lastName, $firstName, $role);
+            
             
         } else {
             $this->deleteUser($username);
