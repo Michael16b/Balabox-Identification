@@ -110,7 +110,7 @@ class UserDB {
 
     public function updateUser(String $username, String $firstName, String $lastName, bool $password) : array{
         global $DB;
-        if ($password != false) {
+        if ($password == false) {
             $user = $this->getRecord($username);
             $user->firstname = $firstName;
             $user->lastname = $lastName;
