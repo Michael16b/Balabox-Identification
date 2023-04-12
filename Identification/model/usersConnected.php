@@ -83,13 +83,21 @@ class UsersConnected{
                 break;
             }
             if ($data[2] == $session_id) {
-                $user = new UserDB();
-                return $user->getRecord($data[0]);
-                //return 
+                $userdb = new UserDB();
+                $user = $userdb->getRecord($data[0]);
+                $logEntry = array(
+                    'username' => $data[0],
+                    'role' => $data[1],
+                    'id' => $data[2],
+                    'firstname' => $user['firstname'],
+                    'lastname' => $user['lastname']
+                );
+                fclose($fileHandle);
+                return $logEntry;
             }
         }
         fclose($fileHandle);
-        return "False";
+        return False;
     }
 }
 ?>
