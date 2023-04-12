@@ -61,9 +61,7 @@ class UsersConnected{
                 'username' => $data[0],
                 'role' => $data[1]
             );
-            if (!($logEntry['role'] == '1')) {
-                $list[] = $logEntry;
-            }
+            $list[] = $logEntry;
         }
         fclose($fileHandle);
         return $list;
