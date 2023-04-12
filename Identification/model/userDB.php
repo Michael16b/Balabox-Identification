@@ -55,7 +55,7 @@ class UserDB {
         return $TMPusername;
     }
 
-    public function addUser(String $firstName, String $lastName, int $role = 4): array{
+    public function addUser(String $firstName, String $lastName, int $role = 4, String $groupName = 'Aucun'): array{
         $user = new stdClass();
         $user->firstname =  $firstName;
         $user->lastname = $lastName;
@@ -72,6 +72,12 @@ class UserDB {
 
         $user->id = user_create_user($user);
         role_assign($role, $user->id, context_system::instance());
+
+        if ($groupName != 'Aucun') {
+            $groupsDB = new GroupsDB();
+            $groupsDB->getGroup($groupName);
+            $groupsDB->addMember($groupName, $user->username);
+        }
         
         return array($user->username, $password,$role);
         }

@@ -8,7 +8,9 @@ class SaUserCreateController extends Controller{
         if($_SESSION['role'] != 1){
             $this->render('sa_error',['message' => "Vous n'avez pas de permission d'entrer dans cette page"]);
         }else{
-            $this->render('sa_userCreate',[]);
+            $groupsDB = new GroupsDB();
+            $groups = $groupsDB->getGroups();
+            $this->render('sa_userCreate',['groups' => $groups]);
         }
     }
 
@@ -114,7 +116,7 @@ class SaUserCreateController extends Controller{
         } elseif (isset($_POST['oneUserForm'])) {
 
             // Traitement pour le formulaire 1 utilisateur
-			$user = $userdb->addUser($_REQUEST['newUserPrenom'], $_REQUEST['newUserNom']);
+			$user = $userdb->addUser($_REQUEST['newUserPrenom'], $_REQUEST['newUserNom'], $_REQUEST['newUserRole'], $_REQUEST['userGroup']);
 
             
             $this->render('sa_add_user_valid',[$user[0], $user[1]]); //$_REQUEST['newUserRole']

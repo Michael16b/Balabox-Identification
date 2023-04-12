@@ -61,6 +61,16 @@ include __ROOT__."/views/header.html";
                                 </select>
                             </div>
 
+                            <div class="mb-3">
+                                <label for="userGroup" class="form-label">Groupe</label>
+                                <select class="form-select" aria-label="groupe de l'utilisateur" name="userGroup">
+                                    <option selected value="Aucune">Aucune</option>
+                                    <?php foreach ($groups as $group) { ?>
+                                        <option value="<?php echo $group['name']; ?>"><?php echo $group['name']; ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+
                             <div class="text-center my-5">
                                 <button type="submit" class="btn btn-primary">Confirmer</button>
                             </div>
