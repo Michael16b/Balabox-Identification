@@ -114,7 +114,7 @@ class UserDB {
         $DB->delete_records('user', array('username' => $username));
     }
 
-    public function updateUser(String $username, String $firstName, String $lastName, bool $password, $role) : array{
+    public function updateUser(String $username, String $firstName, String $lastName, bool $password, String $role) : array{
         global $DB;
         if ($password == false) {
             $user = $this->getRecord($username);
