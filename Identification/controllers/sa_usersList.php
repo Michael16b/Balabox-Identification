@@ -104,8 +104,10 @@ class SaUserList extends Controller{
 
     public function update($username, $newName,$newLastName, $newPassword) {
         $userDB = new UserDB();
-        if ($newPassword == 'Non') {
+        if ($newPassword == 'false') {
             $newPassword = false;
+        } else {
+            $newPassword = true;
         }
         $user = $userDB->updateUser($username, $newName, $newLastName, $newPassword);
         if ($user == false) {
