@@ -11,7 +11,8 @@ class AuthentifiedController extends Controller{
         } else {
             // No session ID provided, return error
             echo json_encode(array('error' => 'Session ID not provided'));
-            var_dump(getUser_role('moodleuser'));
+            $userdb = new UserDB();
+            var_dump($userdb->getUser_role('moodleuser'));
             return;
         }
     }
