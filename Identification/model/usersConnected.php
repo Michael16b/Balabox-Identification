@@ -89,8 +89,8 @@ class UsersConnected{
                     'username' => $data[0],
                     'role' => $data[1],
                     'id' => $data[2],
-                    'firstname' => $user['firstname'],
-                    'lastname' => $user['lastname']
+                    'firstname' => $user->firstname,
+                    'lastname' => $user->lastname
                 );
                 fclose($fileHandle);
                 return $logEntry;
