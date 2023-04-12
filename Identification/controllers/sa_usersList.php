@@ -6,8 +6,8 @@ require(__ROOT__.'/static/assets/FPDF/fpdf.php');
 class SaUserList extends Controller{
 
     public function filterUsers() {
-        $user = new UserDB();
-        $users = $user->getUsers();
+        $userDB = new UserDB();
+        $users = $userDB->getUsers();
 
         // Filter the users
 
@@ -15,7 +15,7 @@ class SaUserList extends Controller{
             if ($user->username == 'guest' || $user->username == 'moodleuser') {
                 unset($users[$key]);
             } else {
-                $user_roleID = $user->getUser_role($user->username);
+                $user_roleID = $userDB->getUser_role($user->username);
                 $user_role = '';
                 if ($user_roleID == 4) {
                     $user_role = 'Élève';
@@ -27,8 +27,8 @@ class SaUserList extends Controller{
         } 
         
         $columnsToKeep = ['username', 'firstname', 'lastname', 'role'];
-        $newUsers = array_map(function($user) use ($columnsToKeep) {
-            return array_intersect_key((array) $user, array_flip($columnsToKeep));
+        $newUsers = array_map(function($userDB) use ($columnsToKeep) {
+            return array_intersect_key((array) $userDB, array_flip($columnsToKeep));
         }, $users);
 
         return $newUsers;
