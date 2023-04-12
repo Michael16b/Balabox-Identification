@@ -9,8 +9,6 @@ class SaUserList extends Controller{
         $user = new UserDB();
         $users = $user->getUsers();
 
-        $role = $user->getUser_role("moodleuser");
-
         // Filter the users
 
         foreach ($users as $key => $user) {
