@@ -18,7 +18,7 @@ include __ROOT__."/views/header.html";
                             <h5 class="card-title"><?php echo $user['username']; ?></h5>
                             <p class="card-text"><?php echo $user['firstname'] . ' ' . $user['lastname']; ?></p>
                             <div class="d-flex justify-content-end">
-                                <button type="button" id="deleteUserbtn-<?php echo $user['id']; ?>" class="btn btn-danger mx-2" data-groupname="<?php echo $user['username']; ?>" data-bs-toggle="modal" data-bs-target="#delete-user-modal-<?php echo $user['id']; ?>"><i class="fas fa-trash-alt"></i>Supprimer</button>
+                                <button type="button" id="deleteUserbtn-<?php echo $user['id']; ?>" class="btn btn-danger mx-3" data-groupname="<?php echo $user['username']; ?>" data-bs-toggle="modal" data-bs-target="#delete-user-modal-<?php echo $user['id']; ?>"><i class="fas fa-trash-alt"></i>Supprimer</button>
                                 <button type="button" id="updateUserbtn" class="btn btn-primary" data-groupname="<?php echo $user['username']; ?>" data-bs-toggle="modal" data-bs-target="#update-user-modal-<?php echo $group['id']; ?>"><i class="fas fa-edit"></i>Modifier</button>
                             </div>
                         </div>
@@ -83,7 +83,7 @@ include __ROOT__."/views/header.html";
                                     <option value="Professeur">Professeur</option>
                                 </select>
                             </div>
-                            
+
                         <div class="mb-3">
                             <label for="password" class="form-label">Voulez-vous changer le mot de passe ?</label>
                             <select class="form-select" aria-label="Modifier le mot de passe" name="newPassword">
