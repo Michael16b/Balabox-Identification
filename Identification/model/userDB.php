@@ -115,6 +115,7 @@ class UserDB {
             $user->firstname = $firstName;
             $user->lastname = $lastName;
             $DB->update_record('user', $user);
+            return array($username, $lastName, $firstName, $this->getUser_role($username));
         } else {
             $this->deleteUser($username);
             $user =  $this->addUser($firstName, $lastName, $this->getUser_role($username));
