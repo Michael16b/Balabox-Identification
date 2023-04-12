@@ -10,7 +10,6 @@ class SaUserList extends Controller{
         $users = $user->getUsers();
 
         $role = $user->getUser_role("moodleuser");
-        var_dump($role);
 
         // Filter the users
 
