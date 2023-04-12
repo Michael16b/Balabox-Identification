@@ -1,4 +1,4 @@
-# Installationn de PHPUnit
+# Installation de PHPUnit - Test Automatisés
 
 ```bash
 chmod +x setup-phpunit.sh
@@ -10,5 +10,6 @@ chmod +x setup-phpunit.sh
 ```bash
 ./phpunit UserDBTest.php
 ./phpunit GroupDBTest.php
+./phpunit UsersConnectedTest.php
 ```
 
