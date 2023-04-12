@@ -109,17 +109,34 @@ class UserDB {
     }
 
     public function updateUser(String $username, String $firstName, String $lastName, bool $password): array{
-        global $DB;
-        $user = $DB->get_record('user', array('username' => $username));
-        $user->firstname = $firstName;
-        $user->lastname = $lastName;
-        $role = $this->getUser_role($username);
-        if ($password != false) {
-            $user->password = $this->RandomPassword();
-        }
-        $DB->update_record('user', $user);
 
-        return array($role,$username,$firstName, $lastName, $user->password);
+        $user = $this->getRecord($username);
+        $updateUser = new stdClass();
+        $updateUser->firstname =  $firstName;
+        $updateUser->lastname = $lastName;
+        $updateUser->username = $username;
+
+        if ($password != false) {
+            $updateUser->password = $this->RandomPassword();
+            var_dump($updateUser->password);
+        } else {
+            $updateUser->password = $user->password;
+        }
+        $updateUser->email = $firstName."." . $lastName . "@balabox.home" ;
+        $user->auth = 'manual';
+        $user->confirmed = 1;
+        $user->lang = 'fr';
+        $user->timecreated = time();
+        $user->timemodified = time();
+
+        
+        $role = $this->getUser_role($username);
+
+        $this->deleteUser($username);
+        $updateUser->id = user_create_user($user);
+        role_assign($role, $updateUser->id, context_system::instance());
+
+        return array($role,$username,$firstName, $lastName, $updateUser->password);
     }
 
 

@@ -45,6 +45,7 @@ class ConnectController extends Controller{
 			//recuperation de l'utilisateur
 			$userdb = new UserDB();
 			$user = $userdb->getRecord($request['username']);
+			var_dump($user);
 			$username = $request['username'];
 			$password = $request['password'];
 
@@ -66,16 +67,15 @@ class ConnectController extends Controller{
 					$this->connection($role);
 
 				}else{
-					$this-> render('/main',[]);
-					echo " mot de passe incorrect";
+					$this-> render('/sa_error',["message" => "Mot de passe incorrect"]);
+					
 				}
 			}
 			else{
-				$this-> render('/main',[]);
-				echo "utilisateur introuvable";
+				$this-> render('/sa_error',["message" => "Utilisateur inconnu"]);
 			}			
         }catch (Error $e){
-            echo $e;
+            $this->render('/sa_error',["message" => "Erreur de connexion"]);
 	    $this-> render('/error',['surname' => 'Error', 'password' => 'Error', 'idprof' => null]);
         }
     }
