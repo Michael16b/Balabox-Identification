@@ -87,9 +87,9 @@ class SaUserList extends Controller{
         $pdf->SetFont('Arial', '', 14); // définit la police de caractères sans gras
         $pdf->Cell($startX);
         $pdf->Cell($w[0],10,iconv('UTF-8', 'windows-1252',$role),'LR');
-        $pdf->Cell($w[1],10,iconv('UTF-8', 'windows-1252',$user[3]),'LR'); // Nom
+        $pdf->Cell($w[1],10,iconv('UTF-8', 'windows-1252',$user[1]),'LR'); // Nom
         $pdf->Cell($w[2],10,iconv('UTF-8', 'windows-1252',$user[2]),'LR'); // Prénom
-        $pdf->Cell($w[3],10,iconv('UTF-8', 'windows-1252',$user[1]),'LR'); // Nom d'utilisateur
+        $pdf->Cell($w[3],10,iconv('UTF-8', 'windows-1252',$user[3]),'LR'); // Nom d'utilisateur
         $pdf->Cell($w[4],10,iconv('UTF-8', 'windows-1252',$user[4]),'LR'); // Mot de passe
         $pdf->Ln();
 

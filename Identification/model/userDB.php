@@ -117,8 +117,9 @@ class UserDB {
             $DB->update_record('user', $user);
             return array($username, $lastName, $firstName, $this->getUser_role($username));
         } else {
-            $this->deleteUser($username);
             $role = $this->getUser_role($username);
+            $this->deleteUser($username);
+            
             $user =  $this->addUser($firstName, $lastName, $role);
             return array($user[2], $lastName, $firstName, $user[0] , $user[1]);
         }
