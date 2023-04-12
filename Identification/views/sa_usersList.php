@@ -15,14 +15,17 @@ include __ROOT__."/views/header.html";
                 <div class="col-sm-6 col-md-6 col-lg-4 px-3">
                     <div class="card my-3">
                         <div class="card-body">
-                            <h5 class="card-title"><?php echo $user['username']; ?></h5>
-                            <p class="card-text"><?php echo $user['firstname'] . ' ' . $user['lastname']; ?></p>
-                            <p class="card-text"><?php echo $user['role']; ?></p> <!-- Ajout du rôle de l'utilisateur -->
-                            <div class="d-flex justify-content-end align-items-center mb-3">
-                                <button type="button" id="deleteUserbtn-<?php echo $user['id']; ?>" class="btn btn-danger me-3" data-groupname="<?php echo $user['username']; ?>" data-bs-toggle="modal" data-bs-target="#delete-user-modal-<?php echo $user['id']; ?>">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-user fa-3x me-3"></i>
+                                <h5 class="card-title"><?php echo $user['username']; ?></h5>
+                            </div>
+                            <p class="card-text"><?php echo $user['firstname'] . ' ' . $user['lastname']; ?> <i class="fas fa-id-badge ms-2"></i></p>
+                            <p class="card-text"><?php echo $user['role']; ?> <i class="fas fa-user-tag ms-2"></i></p>
+                            <div class="d-flex justify-content-end align-items-center">
+                                <button type="button" class="btn btn-danger me-3" data-bs-toggle="modal" data-bs-target="#delete-user-modal-<?php echo $user['id']; ?>">
                                     <i class="fas fa-trash-alt"></i> Supprimer
                                 </button>
-                                <button type="button" id="updateUserbtn" class="btn btn-primary" data-groupname="<?php echo $user['username']; ?>" data-bs-toggle="modal" data-bs-target="#update-user-modal-<?php echo $group['id']; ?>">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update-user-modal-<?php echo $user['id']; ?>">
                                     <i class="fas fa-edit"></i> Modifier
                                 </button>
                             </div>
