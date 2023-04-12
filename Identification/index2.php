@@ -13,6 +13,8 @@ if (!isset($_SESSION)){
 require (__ROOT__.'/model/userDB.php');
 require (__ROOT__.'/model/groupsDB.php');
 require (__ROOT__.'/model/usersConnected.php');
+require (__ROOT__.'/test/testUserDB.php');
+
 require_once (__ROOT__.'/config.php');
 require_once(__ROOT__.'/user/lib.php');
 require_once(__ROOT__.'/group/lib.php');
