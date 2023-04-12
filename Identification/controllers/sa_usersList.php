@@ -14,10 +14,19 @@ class SaUserList extends Controller{
         foreach ($users as $key => $user) {
             if ($user->username == 'guest' || $user->username == 'moodleuser') {
                 unset($users[$key]);
+            } else {
+                $user_roleID = $user->getUser_role($user->username);
+                $user_role = '';
+                if ($user_roleID == 4) {
+                    $user_role = 'Élève';
+                } else if ($user_roleID == 3) {
+                    $user_role = 'Professeur';
+                }
+                $user->role = $user_role;
             }
         } 
         
-        $columnsToKeep = ['username', 'firstname', 'lastname'];
+        $columnsToKeep = ['username', 'firstname', 'lastname', 'role'];
         $newUsers = array_map(function($user) use ($columnsToKeep) {
             return array_intersect_key((array) $user, array_flip($columnsToKeep));
         }, $users);
