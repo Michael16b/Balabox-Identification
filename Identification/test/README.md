@@ -8,4 +8,7 @@ chmod +x setup-phpunit.sh
 # Exécution des tests
 
 ```bash
+./phpunit UserDBTest.php
+./phpunit GroupDBTest.php
+```
 
