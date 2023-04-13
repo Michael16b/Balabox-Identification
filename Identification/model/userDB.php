@@ -121,6 +121,10 @@ class UserDB {
         role_assign($role->id, $user->id, context_system::instance());
     }
     
+    /**
+     * Get the role of a user
+     * @param $username
+     */
     public function getUser_role(string $username) {
     	global $DB;
     	$user = $this->getRecord($username);
@@ -128,6 +132,10 @@ class UserDB {
     	return  $roles->roleid;
     }
 
+    /**
+     * Get the group of a user
+     * @param $username
+     */
     public function getGroupOfUser(String $username): String {
         global $DB;
         $user = $this->getRecord($username);
@@ -136,6 +144,10 @@ class UserDB {
     }
 
 
+    /**
+     * Delete a user
+     * @param $username
+     */
     public function deleteUser(String $username): void{
         global $DB;
         $groupsDB = new GroupsDB();
@@ -146,6 +158,10 @@ class UserDB {
         $DB->delete_records('user', array('username' => $username));
     }
 
+    /**
+     * Update a user
+     * @param $username
+     */
     public function updateUser(String $username, String $firstName, String $lastName, bool $password, int $role) : array{
         global $DB;
         if ($password == false) {
