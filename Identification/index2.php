@@ -20,6 +20,7 @@ require_once (__ROOT__.'/config.php');
 require_once(__ROOT__.'/user/lib.php');
 require_once(__ROOT__.'/group/lib.php');
 require_once(__ROOT__.'/course/lib.php');
+require_once(__ROOT__.'/lib/moodlelib.php');
 require_once (__ROOT__.'/config2.php');
 
 // ApplicationController
