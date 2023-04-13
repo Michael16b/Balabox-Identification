@@ -161,7 +161,9 @@ mauvaise utilisation de l'API
 
 exemple 2 :
 
-![]()
+![test2](images/user.png)
+
+L'utilisateur à cette session_id est connecté, on récupère ses informations
 
 exemple 3 : 
 
