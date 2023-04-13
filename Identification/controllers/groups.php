@@ -6,7 +6,7 @@ class GroupesController extends Controller{
         try{
             header("Access-Control-Allow-Origin: *");
             header('Access-Control-Allow-Methods: GET, POST');
-            header("Access-Control-Allow-Headers: X-Requested-With");
+            header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token , Authorization');
             header("Access-Control-Allow-Credentials: true");
             header("HTTP/1.1 200 OK");
             $groups = new GroupsDB();
@@ -14,7 +14,7 @@ class GroupesController extends Controller{
         }catch(Exception $e){
             header("Access-Control-Allow-Origin: *");
             header('Access-Control-Allow-Methods: GET, POST');
-            header("Access-Control-Allow-Headers: X-Requested-With");
+            header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token , Authorization');
             header("Access-Control-Allow-Credentials: true");
             header("HTTP/1.1 400 Bad Request");
 
