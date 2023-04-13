@@ -3,8 +3,11 @@ require(__ROOT__.'/controllers/Controller.php');
 
 class SaConfirmController extends Controller{
 
+    /**
+     * Get confirmation page
+     * @param $request
+     */
     public function get($request){
-        session_start();
         if($_SESSION['role'] != 1){
             $this->render('/',[]);
         }else{

@@ -3,6 +3,9 @@ class ApplicationController{
     private static $instance;
     private $routes;
 
+    /**
+     * Constructor of the class.
+     */
     private function __construct(){
         // Sets the controllers and the views of the application.
         $this->routes = [
@@ -22,12 +25,24 @@ class ApplicationController{
         return self::$instance;
     }
 
+    /**
+     * Returns true if the string $string starts with the string $startString.
+     * @param String $string
+     * @param String $startString
+     * @return boolean
+     */
     private function starts_with ($string, $startString)
     {
         $len = strlen($startString);
         return (substr($string, 0, $len) === $startString);
     }    
 
+    /**
+     * Returns true if the string $string ends with the string $endString.
+     * @param String $string
+     * @param String $endString
+     * @return boolean
+     */
     function ends_with($string, $endString)
     {
         $len = strlen($endString);
@@ -79,6 +94,10 @@ class ApplicationController{
         return $path;
     }
 
+    /**
+     * Returns the name of the class defined in the string $php_code.
+     * @param String $php_code
+     */
     private function get_php_classes($php_code) {
         $classes = array();
         $tokens = token_get_all($php_code);
@@ -95,6 +114,10 @@ class ApplicationController{
         return $classes;
     }
 
+    /**
+     * Returns the name of the class defined in the file $filepath.
+     * @param String $filepath
+     */
     private function file_get_php_classes($filepath) {
         $php_code = file_get_contents($filepath);
         $classes = $this->get_php_classes($php_code);

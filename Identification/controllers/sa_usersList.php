@@ -5,12 +5,14 @@ require(__ROOT__.'/static/assets/FPDF/fpdf.php');
 
 class SaUserList extends Controller{
 
+    /**
+     *Filter the users
+     */
     public function filterUsers() {
         $userDB = new UserDB();
         $users = $userDB->getUsers();
 
         // Filter the users
-
         foreach ($users as $key => $user) {
             if ($user->username == 'guest' || $user->username == 'moodleuser') {
                 unset($users[$key]);
@@ -25,7 +27,6 @@ class SaUserList extends Controller{
                 $user->role = $user_role;
             }
         } 
-        
         $columnsToKeep = ['username', 'firstname', 'lastname', 'role'];
         $newUsers = array_map(function($userDB) use ($columnsToKeep) {
             return array_intersect_key((array) $userDB, array_flip($columnsToKeep));
@@ -34,6 +35,10 @@ class SaUserList extends Controller{
         return $newUsers;
     }
 
+    /**
+     * Get the user list page
+     * @param $request
+     */
     public function get($request){
         if($_SESSION['role'] != 1){
             $this->render('sa_error',['message' => "Vous n'avez pas de permission d'entrer dans cette page"]);
@@ -43,6 +48,10 @@ class SaUserList extends Controller{
         }
     }
 
+    /**
+     * Delete the user
+     * @param $username
+     */
     public function delete($username) {
         $userDB = new UserDB();
         $userDB->deleteUser($username);
@@ -52,6 +61,10 @@ class SaUserList extends Controller{
         $this->render('sa_usersList',['users' => $newUsers]);
     }
 
+    /**
+     * Create a PDF file
+     * @param $user
+     */
     public function createPDF($user) {
         $pdf = new FPDF();
         $pdf->AddPage();
@@ -110,7 +123,14 @@ class SaUserList extends Controller{
         $this->render('sa_download', ['pdf_content' => $pdf_content, 'filename' => 'Compte de ' . $user[3] . ' ' . $user[2] . '.pdf']);
     }
     
-
+    /**
+     * Update the user
+     * @param $username
+     * @param $newName
+     * @param $newLastName
+     * @param $newPassword
+     * @param $newRole
+     */
     public function update($username, $newName,$newLastName, $newPassword, $newRole) {
         $userDB = new UserDB();
         if ($newPassword == 'false') {
@@ -137,8 +157,13 @@ class SaUserList extends Controller{
             }
             
         }
+    
     }
 
+    /**
+     * Filter the users
+     * @return array
+     */
     public function post($request){
         if(isset($_POST['isDeleteUser'])){
             $this->delete($_POST['isDeleteUser']);

@@ -4,6 +4,10 @@ require(__ROOT__.'/static/assets/FPDF/fpdf.php');
 
 class SaUserCreateController extends Controller{
 
+    /**
+     * Get the user creation page
+     * @param $request
+     */
     public function get($request){
         if($_SESSION['role'] != 1){
             $this->render('sa_error',['message' => "Vous n'avez pas de permission d'entrer dans cette page"]);
@@ -14,6 +18,10 @@ class SaUserCreateController extends Controller{
         }
     }
 
+    /**
+     * Post the user creation page
+     * @param $request
+     */
     public function post($request){
         $userdb = new UserDB();
 

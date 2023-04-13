@@ -5,6 +5,10 @@ require(__ROOT__.'/static/assets/FPDF/fpdf.php');
 
 class SaClassCreateController extends Controller{
 
+    /**
+     * Get the main page
+     * @param $request
+     */
     public function get($request){
         if($_SESSION['role'] != 1){
             $this->render('sa_error',['message' => "Vous n'avez pas de permission d'entrer dans cette page"]);
@@ -13,6 +17,10 @@ class SaClassCreateController extends Controller{
         }
     }
 
+    /**
+     * Create a class
+     * @param $request
+     */
     public function post($request){
         $file_name = '';
         $upload_dir = sys_get_temp_dir();

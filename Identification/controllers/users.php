@@ -2,6 +2,11 @@
 require(__ROOT__.'/controllers/Controller.php');
 
 class UsersController extends Controller{
+
+    /**
+     * Get all users
+     * @param $request
+     */
     public function get($request){
         try{
             header("HTTP/1.1 200 OK");

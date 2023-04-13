@@ -4,10 +4,17 @@ require_once(__ROOT__.'/controllers/Controller.php');
 
 class ConnectController extends Controller{
 
+	/**
+	 * Get the page to connect
+	 */
 	public function get($request){
 		$this-> render('/main',[]);
 	}
 
+	/**
+	 * Redirect to the right page according to the role
+	 * @param $role
+	 */	
 	public function connection($role){
 		switch ($role){		
 			case 1:
@@ -27,25 +34,16 @@ class ConnectController extends Controller{
 				exit;
 		}
 	}
+
+	/**
+	 * connect the user
+	 * @param $request
+	 */
     public function post($request){
         try{
-			// test //
-			/*
-			$role = 1;
-			$_SESSION['username'] = $request['username'];
-			$_SESSION['password'] = $request['password'];
-			$_SESSION['role'] = $role;
-
-			$uc = new UsersConnected();
-			$uc->newConnection($request['username'], $role);
-			$this-> render('/sa_classCreate',[]);
-			*/
-			//fin test //
-			
 			//recuperation de l'utilisateur
 			$userdb = new UserDB();
 			$user = $userdb->getRecord($request['username']);
-			var_dump($user);
 			$username = $request['username'];
 			$password = $request['password'];
 

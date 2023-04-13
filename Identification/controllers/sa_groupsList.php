@@ -4,6 +4,10 @@ require(__ROOT__.'/controllers/Controller.php');
 
 class SaUserList extends Controller{
 
+    /**
+     * Get the user list page
+     * @param $request
+     */
     public function get($request){
         if($_SESSION['role'] != 1){
             $this->render('sa_error',['message' => "Vous n'avez pas de permission d'entrer dans cette page"]);
@@ -32,6 +36,10 @@ class SaUserList extends Controller{
         }
     }
 
+    /**
+     * Post the user list page
+     * @param $request
+     */
     public function delete($group) {
         $groupsDB = new GroupsDB();
         $groupsDB->deleteGroup($group);
@@ -39,6 +47,11 @@ class SaUserList extends Controller{
         $this->render('sa_groupsList',['groups' => $groups ]);
     }
     
+    /**
+     * Add a member to a group
+     * @param $group
+     * @param $member
+     */
     public function addMember($group, $member) {
         $groupsDB = new GroupsDB();
         $groupInfo = $groupsDB->getGroup($group);
@@ -47,6 +60,11 @@ class SaUserList extends Controller{
         $this->render('sa_groupsList',['groups' => $groups]);
     }
 
+    /**
+     * Delete a member from a group
+     * @param $group
+     * @param $member
+     */
     public function deleteMember($group, $member) {
         $groupsDB = new GroupsDB();
         $groupsDB->deleteMember($group, $member);
@@ -54,6 +72,12 @@ class SaUserList extends Controller{
         $this->render('sa_groupsList',['groups' => $groups]);
     }
 
+    /**
+     * Update a group
+     * @param $oldName
+     * @param $newName
+     * @param $newDescription
+     */
     public function updateGroup($oldName, $newName, $newDescription) {
         $groupsDB = new GroupsDB();
         if ($groupsDB->getGroup($newName) != null && $newName != $oldName) {
@@ -69,6 +93,10 @@ class SaUserList extends Controller{
     }
     }
 
+    /**
+     * Post the user list page
+     * @param $request
+     */
     public function post($request){
         if(isset($_POST['isDeleteGroup'])){
             $this->delete($_POST['isDeleteGroup']);
@@ -92,8 +120,6 @@ class SaUserList extends Controller{
                                     ]);
         }
     }
-
-
 }
 
 ?>

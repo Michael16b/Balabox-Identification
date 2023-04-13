@@ -2,6 +2,11 @@
 require(__ROOT__.'/controllers/Controller.php');
 
 class AuthentifiedController extends Controller{
+
+    /**
+     * Get user data by session ID
+     * @param $request
+     */
     public function get($request){
         // Check if session ID provided in query parameter
         if(isset($_GET['id'])){
