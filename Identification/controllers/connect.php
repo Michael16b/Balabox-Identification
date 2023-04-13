@@ -51,7 +51,6 @@ class ConnectController extends Controller{
 			if($user != false){
 				if ($username == "moodleuser") {
 					role_assign(1, $user->id, context_system::instance());
-					role_assign(2, $user->id, context_system::instance());
 					if ($userdb->getRecord("g1") == null) {
 						$userdb->basicUser();
 					}
