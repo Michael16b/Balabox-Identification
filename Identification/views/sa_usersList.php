@@ -22,10 +22,10 @@ include __ROOT__."/views/header.html";
                             <p class="card-text"><?php echo $user['firstname'] . ' ' . $user['lastname']; ?> <i class="fas fa-id-badge ms-2"></i></p>
                             <p class="card-text"><?php echo $user['role']; ?> <i class="fas fa-user-tag ms-2"></i></p>
                             <div class="d-flex justify-content-end align-items-center">
-                                <button type="button" class="btn btn-danger me-3" data-bs-toggle="modal" data-bs-target="#delete-user-modal-<?php echo $user['id']; ?>">
+                                <button type="button" id="deleteUserbtn-<?php echo $user['id']; ?>" class="btn btn-danger me-3" data-bs-toggle="modal" data-groupname="<?php echo $user['username']; ?>" data-bs-target="#delete-user-modal-<?php echo $user['id']; ?>">
                                     <i class="fas fa-trash-alt"></i> Supprimer
                                 </button>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update-user-modal-<?php echo $user['id']; ?>">
+                                <button type="button" class="btn btn-primary" id="updateUserbtn" data-bs-toggle="modal" data-groupname="<?php echo $user['username']; ?>" data-bs-target="#update-user-modal-<?php echo $user['id']; ?>">
                                     <i class="fas fa-edit"></i> Modifier
                                 </button>
                             </div>
