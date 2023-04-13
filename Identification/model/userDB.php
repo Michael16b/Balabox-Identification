@@ -87,7 +87,6 @@ class UserDB {
         $user->username = $this->checkUserName(strtolower(substr($firstName,0,1) . preg_replace('/[^a-zA-Z]/', '', $lastName)));
         $user->password = $this->RandomPassword();
         $password = $user->password;
-        // password_hash($password, PASSWORD_DEFAULT);
         $user->email = $firstName."." . $lastName . "@balabox.home" ;
         $user->auth = 'manual';
         $user->confirmed = 1;
