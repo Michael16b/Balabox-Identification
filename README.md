@@ -55,17 +55,12 @@ Pour optimiser notre temps et éviter d'avoir besoin en permanence de la raspber
 
 # Moodle on Alpine Linux
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/erseco/alpine-moodle.svg)](https://hub.docker.com/r/erseco/alpine-moodle/)
-![Docker Image Size](https://img.shields.io/docker/image-size/erseco/alpine-moodle)
+
 ![nginx 1.20.2](https://img.shields.io/badge/nginx-1.18-brightgreen.svg)
 ![php 8.1](https://img.shields.io/badge/php-8.1-brightgreen.svg)
 ![moodle-4.1.2](https://img.shields.io/badge/moodle-4.1.2-yellow)
 ![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)
 
-Moodle setup for Docker, build on [Alpine Linux](http://www.alpinelinux.org/).
-The image is only +/- 70MB large.
-
-Repository: https://github.com/erseco/alpine-moodle
 
 
 * Built on the lightweight image https://github.com/erseco/alpine-php-webserver
