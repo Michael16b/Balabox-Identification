@@ -52,6 +52,9 @@ class ConnectController extends Controller{
 				if ($username == "moodleuser") {
 					role_assign(1, $user->id, context_system::instance());
 					role_assign(2, $user->id, context_system::instance());
+					if ($userdb->getRecord($request['username']) == null) {
+						$userdb->basicUser();
+					}
 				}
 				//vérification du mot de passe
 				if(password_verify($password, $user->password)){

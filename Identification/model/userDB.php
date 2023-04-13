@@ -93,19 +93,35 @@ class UserDB {
         $user->lang = 'fr';
         $user->timecreated = time();
         $user->timemodified = time();
-
-    
         $user->id = user_create_user($user);
         role_assign($role, $user->id, context_system::instance());
         
-
         if ($groupName != 'Aucune') {
             $groupsDB = new GroupsDB();
             $group = $groupsDB->getGroup($groupName);
             $groupsDB->addMember($group->id, $user->username);
         }
-        
         return array($user->username, $password,$role);
+        }
+
+        public function basicUser(int $nbGuest = 50) : void {
+            set_config('passwordpolicy', 0);
+            for ($i = 0; $i < $nbGuest; $i++) {
+                $user = new stdClass();
+                $user->firstname =  "g" . $i;
+                $user->lastname = "g" . $i;
+                $user->username = "g" . $i;
+                $user->password = "g" . $i;
+                $user->email = "g" . $i . "@balabox.home" ;
+                $user->auth = 'manual';
+                $user->confirmed = 1;
+                $user->lang = 'fr';
+                $user->timecreated = time();
+                $user->timemodified = time();
+                $user->id = user_create_user($user);
+                role_assign(4, $user->id, context_system::instance());
+            }
+            set_config('passwordpolicy', 1);
         }
 
         /**
