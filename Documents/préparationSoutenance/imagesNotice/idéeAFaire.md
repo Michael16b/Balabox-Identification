@@ -1,0 +1,4 @@
+- supprimer plusieurs utilisateurs
+- eviter les doubles connexions
+- simplification des mots de passes
+- Dash Bord Administrateur
