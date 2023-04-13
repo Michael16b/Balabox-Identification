@@ -2,22 +2,36 @@
 
 class UserDB {
 
+    /**
+     * Get the user with by the usrename
+     * @param $username
+     */
     public function getRecord(string $username){
         global $DB;
         return $DB->get_record('user', array('username' => $username));
     }
 
+    /**
+     * Get the user by id
+     * @param $id
+     */
     public function getUserById(int $id){
         global $DB;
         return $DB->get_record('user', array('id' => $id));
     }
 
+    /**
+     * Get the users
+     */
     public function getUsers(): array{
         global $DB;
         return $DB->get_records('user');
     }
 
 
+    /**
+     * create a random password
+     */
     public final function RandomPassword() {
         $uppercase = range('A', 'Z');
         $lowercase = range('a', 'z');
@@ -40,6 +54,10 @@ class UserDB {
         return str_shuffle($password);
     }
 
+    /**
+     * Check if the username is already used
+     * @param $username
+     */
     public function checkUserName(String $username) : String {
         global $DB;
         $user = $DB->get_record('user', array('username' => $username));
@@ -55,7 +73,14 @@ class UserDB {
         return $TMPusername;
     }
 
-    public function addUser(String $firstName, String $lastName, int $role = 4, String $groupName = 'Aucun'): array{
+    /**
+     * Add a user
+     * @param $firstName
+     * @param $lastName
+     * @param $role
+     * @param $groupName
+     */
+    public function addUser(String $firstName, String $lastName, int $role = 4, String $groupName = 'Aucune'): array{
         $user = new stdClass();
         $user->firstname =  $firstName;
         $user->lastname = $lastName;
@@ -75,7 +100,7 @@ class UserDB {
         role_assign($role, $user->id, context_system::instance());
         
 
-        if ($groupName != 'Aucun') {
+        if ($groupName != 'Aucune') {
             $groupsDB = new GroupsDB();
             $group = $groupsDB->getGroup($groupName);
             $groupsDB->addMember($group->id, $user->username);
@@ -84,6 +109,11 @@ class UserDB {
         return array($user->username, $password,$role);
         }
 
+        /**
+         * Add a role to a user
+         * @param $username
+         * @param $role
+         */
     public function addRolesSystemMembers(String $username, String $role): void{
         global $DB;
         $user = $DB->get_record('user', array('username' => $username));
