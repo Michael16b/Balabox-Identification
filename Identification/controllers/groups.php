@@ -8,9 +8,7 @@ class GroupesController extends Controller{
             $groups = new GroupsDB();
             echo json_encode($groups->getGroups());
         }catch(Exception $e){
-            header("Access-Control-Allow-Credentials: true");
             header("HTTP/1.1 400 Bad Request");
-
             echo json_encode(array('error' => $e->getMessage()));
         }
     }
