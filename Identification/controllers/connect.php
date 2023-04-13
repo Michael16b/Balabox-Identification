@@ -21,16 +21,16 @@ class ConnectController extends Controller{
 				$this-> render('/sa_classCreate',[]);
 				break;
 			case 2:
-				header('Location: https://balabox');
+				header('Location: http://balabox');
 				exit;
 			case 3:
-				header('Location: https://balabox');
+				header('Location: http://balabox');
 				exit;
 			case 4:
-				header('Location: https://balabox');
+				header('Location: http://balabox');
 				exit;
 			case 5:
-				header('Location: https://balabox');
+				header('Location: http://balabox');
 				exit;
 		}
 	}
