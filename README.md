@@ -123,3 +123,46 @@ Define the ENV variables in docker-compose.yml file
 | post_max_size               | 50M                  |                                                                          |
 | upload_max_filesize         | 50M                  |                                                                          |
 | max_input_vars              | 5000                 |                                                                          |
+
+
+## Pour se connecter
+
+![connection](images/connection.png)
+
+Le username et le mot de passe varient en fonction des paramètres (voir ci-dessus).
+
+# API REST
+
+## Pour récupérer la liste des utilisateurs connectés 
+
+> curl http://localhost:4001/users
+
+exemple 1 :
+
+![test1](images/nousers.png)
+
+il n'y a pas d'utilisateurs connectés
+
+exemple 2 :
+
+![test2](images/users.png)
+
+il y a des utilisateurs connectés
+
+## Vérifier si un utilisateur est connecté
+
+> curl http://localhost:4001/authentified?id= *session_id*
+
+exemple 1 :
+
+![test1](images/errorAuthentified.png)
+
+mauvaise utilisation de l'API
+
+exemple 2 :
+
+![]()
+
+exemple 3 : 
+
+![]()
