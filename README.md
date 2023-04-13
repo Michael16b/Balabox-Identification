@@ -133,21 +133,21 @@ Le username et le mot de passe varient en fonction des paramètres (voir ci-dess
 
 # API REST
 
-## Pour récupérer la liste des utilisateurs connectés 
+## Récupérer la liste des utilisateurs connectés 
 
 > curl http://localhost:4001/users
 
-exemple 1 :
+Exemple 1 :
 
 ![test1](images/nousers.png)
 
-il n'y a pas d'utilisateurs connectés
+Il n'y a pas d'utilisateurs connectés
 
-exemple 2 :
+Exemple 2 :
 
 ![test2](images/users.png)
 
-il y a des utilisateurs connectés
+Il y a des utilisateurs connectés
 
 ## Vérifier si un utilisateur est connecté
 
@@ -157,14 +157,37 @@ exemple 1 :
 
 ![test1](images/errorAuthentified.png)
 
-mauvaise utilisation de l'API
+Mauvaise utilisation de l'API
 
-exemple 2 :
+Exemple 2 :
 
 ![test2](images/user.png)
 
 L'utilisateur à cette session_id est connecté, on récupère ses informations
 
-exemple 3 : 
+Exemple 3 : 
 
-![]()
+![test3](images/false.png)
+
+L'utilisateur n'est pas connecté
+
+
+## Récupérer le session_id ?
+
+![image](images/recupID.png)
+
+Il est récupérable également en javascript grâce à ce code javascript :
+
+## Récupérer les groupes
+
+Exemple 1 :
+
+![test1](images/noGroups.png)
+
+Il n'y a pas de groupes
+
+Exemple 2 :
+
+![test2](images/groups.png)
+
+On obtient un tableau de groupes
