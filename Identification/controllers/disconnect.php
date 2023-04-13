@@ -9,7 +9,8 @@ class UnconnectController extends Controller{
      */
     public function get($request){
         $id = session_id();
-        checkAlreadyConnect($id);
+        $uc = new UsersConnected();
+        $uc->checkAlreadyConnect($id);
         session_destroy();
         $this-> render('/main',["message" => "Vous êtes déconnecté"]);
     }
