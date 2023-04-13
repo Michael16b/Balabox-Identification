@@ -141,11 +141,12 @@ class SaUserList extends Controller{
         if ($newRole == "Eleve") {
             $newRole = 4;
         } else if ($newRole == "Professeur Editeur") {
-            $newRole = 3;
-        } else if ($newRole == "Professeur") {
             $newRole = 2;
+        } else if ($newRole == "Professeur") {
+            $newRole = 3;
         }
         $user = $userDB->updateUser($username, $newName, $newLastName, $newPassword, $newRole);
+        var_dump($user);
         if ($user == false) {
             $this->render('sa_error',['message' => "Erreur de mise à jour de l'utilisateur"]);
         } else {

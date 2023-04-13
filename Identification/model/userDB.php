@@ -120,6 +120,12 @@ class UserDB {
         $role = $DB->get_record('role', array('shortname' => $role));
         role_assign($role->id, $user->id, context_system::instance());
     }
+
+    public function deleteRole(String $username) : void {
+        global $DB;
+        $user = $this->getRecord($username);
+        $DB->delete_records('role_assignments', array('userid' => $user->id));
+    }
     
     /**
      * Get the role of a user
@@ -155,6 +161,7 @@ class UserDB {
         if ($group != false) {
             $groupsDB->deleteMember($group["name"], $username);
         }
+        $this->deleteRole($username);
         $DB->delete_records('user', array('username' => $username));
     }
 
@@ -169,14 +176,15 @@ class UserDB {
             $user->firstname = $firstName;
             $user->lastname = $lastName;
             $DB->update_record('user', $user);
-            
+
+            $this->deleteRole($username);
             role_assign($role, $user->id, context_system::instance());
             return array($username, $lastName, $firstName, $role);
-            
-            
         } else {
+            $groupsDB = new GroupsDB();
+            $group = $groupsDB->getGroupByUser($username);
             $this->deleteUser($username);
-            $user =  $this->addUser($firstName, $lastName, $role);
+            $user =  $this->addUser($firstName, $lastName, $role, $group["name"]);
             return array($user[2], $lastName, $firstName, $user[0], $user[1]);
         }
     }
