@@ -40,7 +40,7 @@ class SaUserList extends Controller{
      * @param $request
      */
     public function get($request){
-        if($_SESSION['role'] != 1){
+        if($_SESSION['role'] == 4){
             $this->render('sa_error',['message' => "Vous n'avez pas de permission d'entrer dans cette page"]);
         }else{
             $newUsers = $this->filterUsers();
